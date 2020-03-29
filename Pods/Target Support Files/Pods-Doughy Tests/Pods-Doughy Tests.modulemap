@@ -1,0 +1,6 @@
+framework module Pods_Doughy_Tests {
+  umbrella header "Pods-Doughy Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
