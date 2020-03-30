@@ -45,6 +45,16 @@
 		BBD2642824313A9E00DF8987 /* TemperatureRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2642724313A9E00DF8987 /* TemperatureRow.swift */; };
 		BBD2642A24313B6E00DF8987 /* TemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2642924313B6E00DF8987 /* TemperatureFormatter.swift */; };
 		BBD2642D2431487700DF8987 /* CreateRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2642C2431487700DF8987 /* CreateRecipeViewController.swift */; };
+		BBD2642F24314CBE00DF8987 /* RecipeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2642E24314CBE00DF8987 /* RecipeBuilder.swift */; };
+		BBD2643124314CD500DF8987 /* CreateRecipeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643024314CD500DF8987 /* CreateRecipeNavigationController.swift */; };
+		BBD2643324314D6500DF8987 /* DismissViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643224314D6500DF8987 /* DismissViewHelper.swift */; };
+		BBD264352431520500DF8987 /* RecipePredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264342431520500DF8987 /* RecipePredicates.swift */; };
+		BBD264372431536000DF8987 /* AddFlourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264362431536000DF8987 /* AddFlourViewController.swift */; };
+		BBD264392431536D00DF8987 /* AddNonFlourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */; };
+		BBD2643B2431574200DF8987 /* IngredientsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643A2431574200DF8987 /* IngredientsBuilder.swift */; };
+		BBD2643D24315E2900DF8987 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */; };
+		BBD2643F2431619D00DF8987 /* AddInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643E2431619D00DF8987 /* AddInstructionsViewController.swift */; };
+		BBD264432431815600DF8987 /* PreviewRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +116,16 @@
 		BBD2642724313A9E00DF8987 /* TemperatureRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureRow.swift; sourceTree = "<group>"; };
 		BBD2642924313B6E00DF8987 /* TemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatter.swift; sourceTree = "<group>"; };
 		BBD2642C2431487700DF8987 /* CreateRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeViewController.swift; sourceTree = "<group>"; };
+		BBD2642E24314CBE00DF8987 /* RecipeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBuilder.swift; sourceTree = "<group>"; };
+		BBD2643024314CD500DF8987 /* CreateRecipeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeNavigationController.swift; sourceTree = "<group>"; };
+		BBD2643224314D6500DF8987 /* DismissViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissViewHelper.swift; sourceTree = "<group>"; };
+		BBD264342431520500DF8987 /* RecipePredicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePredicates.swift; sourceTree = "<group>"; };
+		BBD264362431536000DF8987 /* AddFlourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlourViewController.swift; sourceTree = "<group>"; };
+		BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNonFlourViewController.swift; sourceTree = "<group>"; };
+		BBD2643A2431574200DF8987 /* IngredientsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsBuilder.swift; sourceTree = "<group>"; };
+		BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
+		BBD2643E2431619D00DF8987 /* AddInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstructionsViewController.swift; sourceTree = "<group>"; };
+		BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRecipeViewController.swift; sourceTree = "<group>"; };
 		EE5570DB89FC86B023456613 /* Pods-Recipe HelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe HelperTests.release.xcconfig"; path = "Target Support Files/Pods-Recipe HelperTests/Pods-Recipe HelperTests.release.xcconfig"; sourceTree = "<group>"; };
 		F2CE067B34D508A070A10DF1 /* Pods-Doughy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Doughy.debug.xcconfig"; path = "Target Support Files/Pods-Doughy/Pods-Doughy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +225,8 @@
 			children = (
 				BB30DEFE2425E1B700BFD472 /* Measurements.swift */,
 				BB30DF0A2425ECFB00BFD472 /* RecipeCollection.swift */,
+				BBD2642E24314CBE00DF8987 /* RecipeBuilder.swift */,
+				BBD2643A2431574200DF8987 /* IngredientsBuilder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +262,8 @@
 				BBD264212431241500DF8987 /* PercentFormatter.swift */,
 				BBD2642324312FDD00DF8987 /* WeightFormatter.swift */,
 				BBD2642924313B6E00DF8987 /* TemperatureFormatter.swift */,
+				BBD2643224314D6500DF8987 /* DismissViewHelper.swift */,
+				BBD264342431520500DF8987 /* RecipePredicates.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -284,8 +308,8 @@
 		BB61521624274DC3006CB854 /* Calculate */ = {
 			isa = PBXGroup;
 			children = (
-				BB61521524274DB2006CB854 /* Show Recipe */,
 				BB30DED32425B83E00BFD472 /* CalculatorViewController.swift */,
+				BB61521524274DB2006CB854 /* Show Recipe */,
 			);
 			path = Calculate;
 			sourceTree = "<group>";
@@ -293,7 +317,13 @@
 		BBD2642B2431484500DF8987 /* Create Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				BBD2643024314CD500DF8987 /* CreateRecipeNavigationController.swift */,
 				BBD2642C2431487700DF8987 /* CreateRecipeViewController.swift */,
+				BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */,
+				BBD264362431536000DF8987 /* AddFlourViewController.swift */,
+				BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */,
+				BBD2643E2431619D00DF8987 /* AddInstructionsViewController.swift */,
+				BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */,
 			);
 			path = "Create Recipe";
 			sourceTree = "<group>";
@@ -467,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD2641E2430820E00DF8987 /* IngredientWithPrefermentListCell.swift in Sources */,
+				BBD264352431520500DF8987 /* RecipePredicates.swift in Sources */,
 				BB30DED42425B83E00BFD472 /* CalculatorViewController.swift in Sources */,
 				BBC6847C24305A5000CE2157 /* PrefermentListCell.swift in Sources */,
 				BB30DEDA2425B83E00BFD472 /* Doughy.xcdatamodeld in Sources */,
@@ -478,6 +509,7 @@
 				BB30DEFA2425C05B00BFD472 /* PercentRow.swift in Sources */,
 				BB4AA1A0242821FB002BB9A8 /* InstructionListCell.swift in Sources */,
 				BB30DEFF2425E1B700BFD472 /* Measurements.swift in Sources */,
+				BBD2643F2431619D00DF8987 /* AddInstructionsViewController.swift in Sources */,
 				BBD2642D2431487700DF8987 /* CreateRecipeViewController.swift in Sources */,
 				BB61521424274B50006CB854 /* ShowCalculatedRecipeViewController.swift in Sources */,
 				BB30DF092425EC3000BFD472 /* Settings.swift in Sources */,
@@ -490,13 +522,21 @@
 				BB4AA1A224282A66002BB9A8 /* IngredientListCell.swift in Sources */,
 				BB30DF062425EC0E00BFD472 /* RecipeViewModel.swift in Sources */,
 				BBD264222431241500DF8987 /* PercentFormatter.swift in Sources */,
+				BBD264392431536D00DF8987 /* AddNonFlourViewController.swift in Sources */,
 				BB06F1732425F5F0001A03AD /* ObjectFactory.swift in Sources */,
 				BB30DF0B2425ECFB00BFD472 /* RecipeCollection.swift in Sources */,
+				BBD2642F24314CBE00DF8987 /* RecipeBuilder.swift in Sources */,
 				BBD2641C2430704000DF8987 /* IngredientCell.swift in Sources */,
 				BBD2642A24313B6E00DF8987 /* TemperatureFormatter.swift in Sources */,
+				BBD2643D24315E2900DF8987 /* AddIngredientViewController.swift in Sources */,
+				BBD264432431815600DF8987 /* PreviewRecipeViewController.swift in Sources */,
+				BBD2643124314CD500DF8987 /* CreateRecipeNavigationController.swift in Sources */,
+				BBD264372431536000DF8987 /* AddFlourViewController.swift in Sources */,
+				BBD2643324314D6500DF8987 /* DismissViewHelper.swift in Sources */,
 				BB30DED02425B83E00BFD472 /* AppDelegate.swift in Sources */,
 				BBD2642824313A9E00DF8987 /* TemperatureRow.swift in Sources */,
 				BB30DED22425B83E00BFD472 /* SceneDelegate.swift in Sources */,
+				BBD2643B2431574200DF8987 /* IngredientsBuilder.swift in Sources */,
 				BB30DEF72425BD2900BFD472 /* RecipeWriter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

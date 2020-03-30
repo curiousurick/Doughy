@@ -203,9 +203,6 @@ fileprivate class InstructionCellFactoryStrategy: CellFactoryStrategy {
     }
     
     func getHeight(tableView: UITableView, recipe: CalculatedRecipe) -> CGFloat {
-        let instructions = recipe.instructions?.array as! [Instruction]
-        return CGFloat(InstructionListCell.cellHeightWithText(instructions: instructions,
-                                                                       tableView: tableView,
-                                                                       reuserID: cellTag))
+        return UITableView.automaticDimension
     }
 }

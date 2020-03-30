@@ -12,7 +12,7 @@ private var sizingCell : InstructionListCell?
 
 class InstructionListCell: UITableViewCell {
 
-    @IBOutlet weak var instructionView: InstructionTextView!
+    @IBOutlet weak var instructionView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,32 +35,33 @@ class InstructionListCell: UITableViewCell {
         return value
     }
     
-    static func cellHeightWithText(instructions: [Instruction],
-                                   tableView: UITableView,
-                                   reuserID: String) -> Double {
-        if (sizingCell == nil) {
-            sizingCell = tableView.dequeueReusableCell(withIdentifier: reuserID) as? InstructionListCell
-            sizingCell?.instructionView.isScrollEnabled = false
-        }
-        sizingCell?.configureWithText(instructions: instructions)
-        sizingCell?.setNeedsLayout()
-        sizingCell?.layoutIfNeeded()
-        sizingCell?.instructionView.preferredWidth = Double(sizingCell!.instructionView.bounds.size.width)
-      
-        let size = sizingCell?.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        print("TextViewSize:\(sizingCell!.instructionView.intrinsicContentSize)\n")
-        print("cellSize:\(size!)\n\n")
-       
-        return Double(size!.height)
-    }
+//    static func cellHeightWithText(instructions: [Instruction],
+//                                   tableView: UITableView,
+//                                   reuserID: String) -> Double {
+//        if (sizingCell == nil) {
+//            sizingCell = tableView.dequeueReusableCell(withIdentifier: reuserID) as? InstructionListCell
+//            sizingCell?.instructionView.isScrollEnabled = false
+//        }
+//        sizingCell?.configureWithText(instructions: instructions)
+//        sizingCell?.setNeedsLayout()
+//        sizingCell?.layoutIfNeeded()
+//        let instructionViewWidth = sizingCell!.instructionView.bounds.size.width
+//        sizingCell?.instructionView.preferredWidth = Double(instructionViewWidth)
+//
+//        let size = sizingCell?.contentView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
+//        print("TextViewSize:\(sizingCell!.instructionView.intrinsicContentSize)\n")
+//        print("cellSize:\(size!)\n\n")
+//
+//        return Double(size!.height)
+//    }
 }
 
-class InstructionTextView: UITextView {
-
-    var preferredWidth = 10.0;
-    override var intrinsicContentSize: CGSize {
-        let preferredSize = CGSize(width: CGFloat(preferredWidth), height: 0.0)
-        return sizeThatFits(preferredSize)
-    }
-
-}
+//class InstructionTextView: UITextView {
+//
+//    var preferredWidth = 10.0;
+//    override var intrinsicContentSize: CGSize {
+//        let preferredSize = CGSize(width: CGFloat(preferredWidth), height: 0.0)
+//        return sizeThatFits(preferredSize)
+//    }
+//
+//}

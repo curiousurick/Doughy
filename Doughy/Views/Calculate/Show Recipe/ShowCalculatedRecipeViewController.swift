@@ -48,6 +48,13 @@ class ShowCalculatedRecipeViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellFactory.getCell(tableView: tableView, indexPath: indexPath, recipe: calculatedRecipe)
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell is InstructionListCell {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
+    }
 }
 
 enum DoughType {

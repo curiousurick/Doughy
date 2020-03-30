@@ -53,12 +53,38 @@ class DefaultRecipeFactory: NSObject {
         neopolitan.addToIngredients(salt)
         neopolitan.addToIngredients(yeast)
         
-        neopolitan.addToInstructions(objectFactory.createInstruction(step: "Mix"))
-        neopolitan.addToInstructions(objectFactory.createInstruction(step: "Fold"))
-        neopolitan.addToInstructions(objectFactory.createInstruction(step: "Rise"))
-        neopolitan.addToInstructions(objectFactory.createInstruction(step: "Proof"))
-        neopolitan.addToInstructions(objectFactory.createInstruction(step: "Bake"))
-        neopolitan.addToInstructions(objectFactory.createInstruction(step: "Eat"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+                "Add water to the mixing bowl. Without water you probably won't have a very good pizza."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Add salt to the water and stir until combined. Salt makes the pizza not taste like shit"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Add yeast to the water and stir until combined. Without yeast, it'll have texture like cardboard. You really don't want that"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Mix with a dough hook until combined. Just combine it. Don't overwork at this step because you need to let it hydrate. I'm still not sure why this is helpful"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Autolyse the dough for 30 minutes. Again, no idea what this step does."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Mix with dough hook for 2 minutes. Only 2 more minutes. Resting and folding is going to be what adds the strength for this recipe."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Rest in rising bucked for 2 hours. After 15 minutes, fold, and fold one more time after 20 more minutes."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Divide the dough and tighten each ball by taking your hands and use your pinkies to pull the ball toward you. Turn it 90º and repeat until the seam on the bottom is tightly closed."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Refrigerate for 1-3 days. The second day is ideal. But honestly the next day is fine. The 3rd day will also taste good. Try any of them and compare!"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Cook on a baking steel which has been preheated to 500º or more for 1 hour. You should be able to cook in about 5 minutes. May take closer to 8. Don't be afraid to get burn marks though. They taste really good."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Refrigerate for 1-3 days. The second day is ideal. But honestly the next day is fine. The 3rd day will also taste good. Try any of them and compare!"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Cook on a baking steel which has been preheated to 500º or more for 1 hour. You should be able to cook in about 5 minutes. May take closer to 8. Don't be afraid to get burn marks though. They taste really good."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Refrigerate for 1-3 days. The second day is ideal. But honestly the next day is fine. The 3rd day will also taste good. Try any of them and compare!"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Cook on a baking steel which has been preheated to 500º or more for 1 hour. You should be able to cook in about 5 minutes. May take closer to 8. Don't be afraid to get burn marks though. They taste really good."))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Refrigerate for 1-3 days. The second day is ideal. But honestly the next day is fine. The 3rd day will also taste good. Try any of them and compare!"))
+        neopolitan.addToInstructions(objectFactory.createInstruction(step:
+            "Cook on a baking steel which has been preheated to 500º or more for 1 hour. You should be able to cook in about 5 minutes. May take closer to 8. Don't be afraid to get burn marks though. They taste really good."))
         
         return neopolitan
     }
