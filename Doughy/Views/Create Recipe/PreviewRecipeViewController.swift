@@ -10,6 +10,8 @@ import UIKit
 
 fileprivate let saveMessage = "You have successfully written a recipe."
 fileprivate let updateMessage = "You have successfully updated the recipe."
+fileprivate let saveMessageError = "Failed to save the recipe"
+fileprivate let updateMessageError = "Failed to update the recipe"
 fileprivate let saveUnwindSegue = "unwindAfterSave"
 fileprivate let updateUnwindSegue = "unwindAfterUpdate"
 
@@ -19,6 +21,7 @@ class PreviewRecipeViewController: ShowCalculatedRecipeViewController {
     private var recipeNav: CreateRecipeNavigationController!
     
     var recipe: Recipe!
+    var recipeBuilder: RecipeBuilder!
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -37,7 +40,13 @@ class PreviewRecipeViewController: ShowCalculatedRecipeViewController {
     
     @IBAction func save(sender: UIBarButtonItem) {
         print("Save button clicked")
-        recipeWriter.writeRecipe(recipe: self.recipe)
+        if self.recipeNav.editingRecipe {
+            self.updateRecipe()
+        }
+        else {
+            self.saveRecipe()
+        }
+        NotificationCenter.default.post(name: .recipeUpdated, object: nil)
         let message = self.recipeNav.editingRecipe ? updateMessage : saveMessage
         let alert = UIAlertController(title: "Success!", message: message, preferredStyle: .alert)
         let okaction = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
@@ -46,5 +55,31 @@ class PreviewRecipeViewController: ShowCalculatedRecipeViewController {
         })
         alert.addAction(okaction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func updateRecipe() {
+        let existingName = recipeBuilder.existingName ?? recipe.name
+        let existingCollection = recipeBuilder.existingCollection ?? recipe.collection
+        do {
+            try recipeWriter.updateRecipe(recipe: recipe, existingName: existingName, existingCollection: existingCollection)
+        }
+        catch {
+            let error = AlertViewHelper.createErrorAlert(title: "Oh no! 😭", message: updateMessageError) { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            self.present(error, animated: true, completion: nil)
+        }
+    }
+    
+    private func saveRecipe() {
+        do {
+            try recipeWriter.writeRecipe(recipe: self.recipe)
+        }
+        catch {
+            let error = AlertViewHelper.createErrorAlert(title: "Oh no! 😭", message: saveMessageError) { (action) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            self.present(error, animated: true, completion: nil)
+        }
     }
 }

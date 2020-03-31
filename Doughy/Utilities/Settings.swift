@@ -56,7 +56,7 @@ extension Settings {
         
         if !userDefaults.bool(forKey: hasInitializedDefaultsKey) {
             defaultRecipeFactory.create().forEach {
-                recipeWriter.writeRecipe(recipe: $0)
+                try! recipeWriter.writeRecipe(recipe: $0)
             }
             userDefaults.set(true, forKey: hasInitializedDefaultsKey)
         }

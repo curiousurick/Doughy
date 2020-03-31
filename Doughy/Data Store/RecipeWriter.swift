@@ -20,13 +20,13 @@ class RecipeWriter: NSObject {
     
     private override init() { }
     
-    func writeRecipe(recipe: Recipe) {
+    func writeRecipe(recipe: Recipe) throws {
         print("Writing Recipe \(recipe)")
         
         // Update if there exists a recipe by this name already
         if recipeReader.getRecipe(collection: recipe.collection, name: recipe.name) != nil {
             print("Attempted to write a recipe when one exists in the collection with this name")
-            return
+            throw RecipeWritingError.recipeExistsDuringWrite
         }
         
         let _ = recipeConverter.convertToCoreData(recipe: recipe)
@@ -35,17 +35,17 @@ class RecipeWriter: NSObject {
             try self.coreDataGateway.managedObjectConext.save()
         }
         catch {
-            print(error)
+            throw RecipeWritingError.couldNotSave
         }
     }
     
-    func updateRecipe(recipe: Recipe) {
+    func updateRecipe(recipe: Recipe, existingName: String, existingCollection: String) throws {
         print("Updating Recipe \(recipe)")
-        
+
         // Update if there exists a recipe by this name already
-        guard let existingRecipe = recipeReader.getRecipe(collection: recipe.collection, name: recipe.name) else {
+        guard let existingRecipe = recipeReader.getRecipe(collection: existingCollection, name: existingName) else {
             print("Attempted to update a recipe when none exists in the collection with this name")
-            return
+            throw RecipeWritingError.noRecipeToUpdate
         }
         
         let _ = recipeConverter.overWriteCoreData(recipe: recipe, existing: existingRecipe)
@@ -54,26 +54,49 @@ class RecipeWriter: NSObject {
             try self.coreDataGateway.managedObjectConext.save()
         }
         catch {
-            print(error)
+            throw RecipeWritingError.couldNotSave
         }
     }
     
-    func deleteRecipe(recipe: Recipe) {
+    func deleteRecipe(recipe: Recipe) throws {
         print("Deleting Recipe \(recipe)")
         
         guard let coreDataRecipe = recipeReader.getRecipe(collection: recipe.collection, name: recipe.name) else {
             print("Cannot delete recipe. Recipe not found in core data")
-            return
+            throw RecipeWritingError.noRecipeToDelete
         }
         
         self.coreDataGateway.managedObjectConext.delete(coreDataRecipe)
+        let ingredients = coreDataRecipe.ingredients!.array as! [XCIngredient]
+        ingredients.forEach {
+            self.coreDataGateway.managedObjectConext.delete($0)
+        }
+        let instructions = coreDataRecipe.instructions!.array as! [XCInstruction]
+        instructions.forEach {
+            self.coreDataGateway.managedObjectConext.delete($0)
+        }
+        if let preferment = coreDataRecipe.preferment {
+            let prefIngredients = preferment.ingredients!.array as! [XCIngredient]
+            prefIngredients.forEach {
+                self.coreDataGateway.managedObjectConext.delete($0)
+            }
+            self.coreDataGateway.managedObjectConext.delete(preferment)
+        }
         
         do {
             try self.coreDataGateway.managedObjectConext.save()
         }
         catch {
-            print(error)
+            print("Failed to delete recipe due to error \(error)")
+            throw RecipeWritingError.couldNotSave
         }
     }
 
+}
+
+enum RecipeWritingError: Error {
+    case recipeExistsDuringWrite
+    case noRecipeToUpdate
+    case noRecipeToDelete
+    case couldNotSave
 }

@@ -47,7 +47,7 @@
 		BBD2642D2431487700DF8987 /* CreateRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2642C2431487700DF8987 /* CreateRecipeViewController.swift */; };
 		BBD2642F24314CBE00DF8987 /* RecipeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2642E24314CBE00DF8987 /* RecipeBuilder.swift */; };
 		BBD2643124314CD500DF8987 /* CreateRecipeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643024314CD500DF8987 /* CreateRecipeNavigationController.swift */; };
-		BBD2643324314D6500DF8987 /* DismissViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643224314D6500DF8987 /* DismissViewHelper.swift */; };
+		BBD2643324314D6500DF8987 /* AlertViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643224314D6500DF8987 /* AlertViewHelper.swift */; };
 		BBD264352431520500DF8987 /* RecipePredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264342431520500DF8987 /* RecipePredicates.swift */; };
 		BBD264372431536000DF8987 /* AddFlourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264362431536000DF8987 /* AddFlourViewController.swift */; };
 		BBD264392431536D00DF8987 /* AddNonFlourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */; };
@@ -69,6 +69,7 @@
 		BBD264662432EFA400DF8987 /* CalculatedIngredientConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264652432EFA400DF8987 /* CalculatedIngredientConverter.swift */; };
 		BBD264682432F08200DF8987 /* CalculatedPrefermentConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264672432F08200DF8987 /* CalculatedPrefermentConverter.swift */; };
 		BBD2646A2432F1E400DF8987 /* CalculatedRecipeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264692432F1E400DF8987 /* CalculatedRecipeConverter.swift */; };
+		BBD2646D24330E0800DF8987 /* DoughyNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2646C24330E0800DF8987 /* DoughyNotifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +133,7 @@
 		BBD2642C2431487700DF8987 /* CreateRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeViewController.swift; sourceTree = "<group>"; };
 		BBD2642E24314CBE00DF8987 /* RecipeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBuilder.swift; sourceTree = "<group>"; };
 		BBD2643024314CD500DF8987 /* CreateRecipeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeNavigationController.swift; sourceTree = "<group>"; };
-		BBD2643224314D6500DF8987 /* DismissViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissViewHelper.swift; sourceTree = "<group>"; };
+		BBD2643224314D6500DF8987 /* AlertViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewHelper.swift; sourceTree = "<group>"; };
 		BBD264342431520500DF8987 /* RecipePredicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePredicates.swift; sourceTree = "<group>"; };
 		BBD264362431536000DF8987 /* AddFlourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlourViewController.swift; sourceTree = "<group>"; };
 		BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNonFlourViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 		BBD264652432EFA400DF8987 /* CalculatedIngredientConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedIngredientConverter.swift; sourceTree = "<group>"; };
 		BBD264672432F08200DF8987 /* CalculatedPrefermentConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedPrefermentConverter.swift; sourceTree = "<group>"; };
 		BBD264692432F1E400DF8987 /* CalculatedRecipeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeConverter.swift; sourceTree = "<group>"; };
+		BBD2646C24330E0800DF8987 /* DoughyNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughyNotifications.swift; sourceTree = "<group>"; };
 		EE5570DB89FC86B023456613 /* Pods-Recipe HelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe HelperTests.release.xcconfig"; path = "Target Support Files/Pods-Recipe HelperTests/Pods-Recipe HelperTests.release.xcconfig"; sourceTree = "<group>"; };
 		F2CE067B34D508A070A10DF1 /* Pods-Doughy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Doughy.debug.xcconfig"; path = "Target Support Files/Pods-Doughy/Pods-Doughy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,6 +227,7 @@
 		BB30DECE2425B83D00BFD472 /* Doughy */ = {
 			isa = PBXGroup;
 			children = (
+				BBD2646B24330DFC00DF8987 /* Notifications */,
 				BB30DF022425EBCF00BFD472 /* Views */,
 				BB30DEFB2425D23E00BFD472 /* Utilities */,
 				BB30DEF82425C04D00BFD472 /* Custom Rows */,
@@ -291,7 +294,7 @@
 				BBD264212431241500DF8987 /* PercentFormatter.swift */,
 				BBD2642324312FDD00DF8987 /* WeightFormatter.swift */,
 				BBD2642924313B6E00DF8987 /* TemperatureFormatter.swift */,
-				BBD2643224314D6500DF8987 /* DismissViewHelper.swift */,
+				BBD2643224314D6500DF8987 /* AlertViewHelper.swift */,
 				BBD264342431520500DF8987 /* RecipePredicates.swift */,
 			);
 			path = Utilities;
@@ -384,6 +387,14 @@
 				BBD264692432F1E400DF8987 /* CalculatedRecipeConverter.swift */,
 			);
 			path = Converters;
+			sourceTree = "<group>";
+		};
+		BBD2646B24330DFC00DF8987 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				BBD2646C24330E0800DF8987 /* DoughyNotifications.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,6 +604,7 @@
 				BBD264552432E82300DF8987 /* Instruction.swift in Sources */,
 				BBD2642F24314CBE00DF8987 /* RecipeBuilder.swift in Sources */,
 				BBD264662432EFA400DF8987 /* CalculatedIngredientConverter.swift in Sources */,
+				BBD2646D24330E0800DF8987 /* DoughyNotifications.swift in Sources */,
 				BBD2645C2432E90700DF8987 /* RecipeConverter.swift in Sources */,
 				BBD264642432EB5700DF8987 /* PrefermentConverter.swift in Sources */,
 				BBD2641C2430704000DF8987 /* IngredientCell.swift in Sources */,
@@ -603,7 +615,7 @@
 				BBD264432431815600DF8987 /* PreviewRecipeViewController.swift in Sources */,
 				BBD2643124314CD500DF8987 /* CreateRecipeNavigationController.swift in Sources */,
 				BBD264372431536000DF8987 /* AddFlourViewController.swift in Sources */,
-				BBD2643324314D6500DF8987 /* DismissViewHelper.swift in Sources */,
+				BBD2643324314D6500DF8987 /* AlertViewHelper.swift in Sources */,
 				BB30DED02425B83E00BFD472 /* AppDelegate.swift in Sources */,
 				BBD2642824313A9E00DF8987 /* TemperatureRow.swift in Sources */,
 				BBD2646A2432F1E400DF8987 /* CalculatedRecipeConverter.swift in Sources */,

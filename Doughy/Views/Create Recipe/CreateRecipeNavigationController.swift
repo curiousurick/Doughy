@@ -37,7 +37,7 @@ class CreateRecipeNavigationController: UINavigationController, UIAdaptivePresen
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-        let alert = DismissViewHelper.createDismissAlert { (action) in
+        let alert = AlertViewHelper.createDismissAlert { (action) in
             self.dismiss(animated: true, completion: nil)
         }
         self.present(alert, animated: true, completion: nil)

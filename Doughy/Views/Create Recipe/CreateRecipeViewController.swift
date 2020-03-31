@@ -41,7 +41,6 @@ class CreateRecipeViewController: FormViewController {
             section <<< NameRow() { row in
                 row.placeholder = "Name"
                 row.value = self.recipeBuilder.name
-                row.disabled = Condition(booleanLiteral: row.value != nil)
             }.onChange({ row in
                 self.recipeBuilder.name = row.value
                 self.toggleNextButton()
@@ -64,8 +63,6 @@ class CreateRecipeViewController: FormViewController {
                     row.value = row.options[1]
                 }
                 self.recipeBuilder.collection = row.value as? String
-                self.toggleNextButton()
-                
             }.onChange({ (row) in
                 if let value = row.value {
                     self.recipeBuilder.collection = value
@@ -90,11 +87,13 @@ class CreateRecipeViewController: FormViewController {
             
             section <<< WeightRow(weightRowId) { row in
                 row.placeholder = "Default weight"
+                row.value = self.recipeBuilder.defaultWeight
             }.onChange({ row in
                 self.recipeBuilder.defaultWeight = row.value
                 self.toggleNextButton()
             })
         }
+        self.toggleNextButton()
     }
     
     @IBAction func nextButtonClicked(sender: UIBarButtonItem) {
@@ -114,7 +113,7 @@ class CreateRecipeViewController: FormViewController {
             self.dismiss(animated: true, completion: nil)
             return
         }
-        let alert = DismissViewHelper.createDismissAlert { (action) in
+        let alert = AlertViewHelper.createDismissAlert { (action) in
             self.dismiss(animated: true, completion: nil)
         }
         self.present(alert, animated: true, completion: nil)

@@ -27,17 +27,23 @@ class AllRecipesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.contentInset.top = topInset
         tableView.rowHeight = UITableView.automaticDimension
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshRecipes), name: .recipeUpdated, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func refreshRecipes(_ notification: Notification) {
+        viewModel.updateData()
+        self.tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showRecipeMenuSegueId {
             let mainViewController = segue.destination as! CalculatorViewController
             mainViewController.recipe = viewModel.recipeForRow(section: selectedRecipeIndex!.0, row: selectedRecipeIndex!.1)
-        }
-        else if segue.identifier == "CreateRecipeSegue" {
-//            let nc = segue.destination as! UINavigationController
-//            let createRecipeVC = nc.topViewController as! CreateRecipeViewController
-//            createRecipeVC.presentationController?.delegate = createRecipeVC
         }
     }
     
@@ -113,15 +119,21 @@ extension AllRecipesTableViewController: RecipeDetailTableViewDelegate {
         self.viewModel.updateData()
         // Deselect because when we delete the collection from table, next collection is expanded height without displaying contents.
         self.tableView.deselectRow(at: IndexPath(row: section, section: 0), animated: true)
-        tableView.beginUpdates()
-        tableView.deleteRows(at: [IndexPath(row: section, section: 0)], with: .automatic)
-        tableView.endUpdates()
+        let indexSet = IndexSet(arrayLiteral: 0)
+        self.tableView.reloadSections(indexSet, with: .automatic)
     }
     
     func recipeCell(recipeCell: RecipeDetailCell, didRemove row: Int, for section: Int) {
         viewModel.updateData()
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
+    }
+    
+    func recipeCell(recipeCell: RecipeDetailCell, failedToRemove recipe: Recipe, row: Int, for section: Int) {
+        let title = "Error"
+        let message = "Could not delete the recipe"
+        let alert = AlertViewHelper.createErrorAlert(title: title, message: message, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

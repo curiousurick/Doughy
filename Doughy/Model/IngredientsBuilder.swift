@@ -13,6 +13,14 @@ class IngredientsBuilder: NSObject {
     
     var isFlour: Bool
     
+    init(ingredients: [Ingredient], isFlour: Bool) {
+        self.isFlour = isFlour
+        super.init()
+        ingredients.filter { $0.isFlour == isFlour }.forEach {
+            self.addBuilder(builder: IngredientBuilder(ingredient: $0))
+        }
+    }
+    
     init(isFlour: Bool) {
         self.isFlour = isFlour
     }
@@ -60,6 +68,13 @@ class IngredientBuilder: NSObject {
     
     init(isFlour: Bool) {
         self.isFlour = isFlour
+    }
+    
+    init(ingredient: Ingredient) {
+        self.name = ingredient.name
+        self.percent = ingredient.defaultPercentage
+        self.temperature = ingredient.temperature
+        self.isFlour = ingredient.isFlour
     }
     
     func isReady() -> Bool {

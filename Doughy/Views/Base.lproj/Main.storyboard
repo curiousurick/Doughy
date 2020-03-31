@@ -18,9 +18,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Od6-AS-gFV"/>
+                    <navigationItem key="navigationItem" id="Od6-AS-gFV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Bkm-Kh-vSU">
+                            <connections>
+                                <action selector="editButtonClickedWithSender:" destination="BYZ-38-t0r" id="SqA-zJ-GVN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="vfT-kx-gLL" kind="show" identifier="ShowCalculatedRecipe" id="xLw-nu-6vV"/>
+                        <segue destination="c9q-n8-YTh" kind="presentation" identifier="EditRecipeSegue" id="3Eh-kK-k0v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1279,6 +1286,7 @@
                     <connections>
                         <outlet property="saveButton" destination="9dz-1A-7nE" id="Fxh-ML-GZ4"/>
                         <segue destination="ILe-db-yHQ" kind="unwind" identifier="unwindAfterSave" unwindAction="unwindToMainView:" id="D3l-1S-Nag"/>
+                        <segue destination="ILe-db-yHQ" kind="unwind" identifier="unwindAfterUpdate" unwindAction="unwindToMenuFromUpdate:" id="N4Y-zQ-nUu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnW-EX-Ob1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1287,6 +1295,9 @@
             <point key="canvasLocation" x="5822" y="838"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="3Eh-kK-k0v"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Settings" width="32" height="32"/>
     </resources>

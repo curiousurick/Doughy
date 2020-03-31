@@ -28,9 +28,46 @@ class CalculatorViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = recipe.name
         
+        self.reloadRecipe()
+    }
+
+    @IBAction func editButtonClicked(sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "EditRecipeSegue", sender: sender)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowCalculatedRecipe" {
+            let vc = segue.destination as! ShowCalculatedRecipeViewController
+            vc.calculatedRecipe = self.calculatedRecipe
+        }
+        else if segue.identifier == "EditRecipeSegue" {
+            let nc = segue.destination as! CreateRecipeNavigationController
+            let recipeBuilder = RecipeBuilder(recipe: recipe)
+            nc.recipeBuilder = recipeBuilder
+        }
+    }
+
+    @IBAction func unwindToMenuFromUpdate(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source as! PreviewRecipeViewController
+        let updatedRecipe = sourceViewController.recipe
+        self.recipe = updatedRecipe
+        self.title = updatedRecipe?.name
+        self.reloadRecipe()
+    }
+
+    private func displayCalculationError(mixName: String, name: String, value: Double) {
+        let badWeight = WeightFormatter.shared.format(weight: NSNumber(floatLiteral: value))
+        let message = "Calculated \(mixName) \(name) weight is \(badWeight). Please adjust input."
+        let alert = UIAlertController(title: "Calculation Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func reloadRecipe() {
+        self.form.removeAll()
         form +++ Section("Recipe Quantity") { section in
             section <<< IntRow(unitCountTag) { row in
                 row.title = "Number of Doughs"
@@ -175,22 +212,6 @@ class CalculatorViewController: FormViewController {
         catch { fatalError("Unexpected Error thrown by calculator") }
         
         self.performSegue(withIdentifier: "ShowCalculatedRecipe", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowCalculatedRecipe" {
-            let vc = segue.destination as! ShowCalculatedRecipeViewController
-            vc.calculatedRecipe = self.calculatedRecipe
-        }
-    }
-    
-    private func displayCalculationError(mixName: String, name: String, value: Double) {
-        let badWeight = WeightFormatter.shared.format(weight: NSNumber(floatLiteral: value))
-        let message = "Calculated \(mixName) \(name) weight is \(badWeight). Please adjust input."
-        let alert = UIAlertController(title: "Calculation Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
 }
 

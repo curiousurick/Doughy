@@ -102,6 +102,7 @@ class AddInstructionsViewController: FormViewController {
             let vc = segue.destination as! PreviewRecipeViewController
             vc.calculatedRecipe = self.calculatedRecipe
             vc.recipe = self.recipe
+            vc.recipeBuilder = self.recipeBuilder
         }
     }
     

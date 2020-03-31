@@ -12,6 +12,7 @@ protocol RecipeDetailTableViewDelegate {
     
     func recipeCell(recipeCell: RecipeDetailCell, didSelect row: Int, for section: Int)
     func recipeCell(recipeCell: RecipeDetailCell, didRemove row: Int, for section: Int)
+    func recipeCell(recipeCell: RecipeDetailCell, failedToRemove recipe: Recipe, row: Int, for section: Int)
     func recipeCell(recipeCell: RecipeDetailCell, didRunOutOfRecipesIn section: Int)
     
 }
@@ -81,14 +82,21 @@ extension RecipeDetailCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDelete = details![indexPath.row]
-            recipeWriter.deleteRecipe(recipe: toDelete)
+            do {
+                try recipeWriter.deleteRecipe(recipe: toDelete)
+            } catch {
+                self.delegate?.recipeCell(recipeCell: self, failedToRemove: toDelete, row: indexPath.row, for: section)
+                return
+            }
             details!.remove(at: indexPath.row)
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
-            self.delegate?.recipeCell(recipeCell: self, didRemove: indexPath.row, for: section)
             if details!.isEmpty {
                 self.delegate?.recipeCell(recipeCell: self, didRunOutOfRecipesIn: section)
+            }
+            else {
+                self.delegate?.recipeCell(recipeCell: self, didRemove: indexPath.row, for: section)
             }
         }
     }

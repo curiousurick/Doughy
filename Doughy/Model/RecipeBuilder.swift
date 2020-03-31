@@ -11,6 +11,8 @@ import UIKit
 class RecipeBuilder: NSObject {
     
     private(set) var isModified: Bool = false
+    private(set) var existingName: String?
+    private(set) var existingCollection: String?
     
     var name: String? {
         didSet {
@@ -44,6 +46,20 @@ class RecipeBuilder: NSObject {
         }
     }
     
+    override init() { }
+
+    init(recipe: Recipe) {
+        self.existingName = recipe.name
+        self.name = recipe.name
+        self.existingCollection = recipe.collection
+        self.collection = recipe.collection
+        self.defaultWeight = recipe.defaultWeight
+        self.instructions = recipe.instructions
+        let ingredients = recipe.ingredients
+        self.flourBuilder = IngredientsBuilder(ingredients: ingredients, isFlour: true)
+        self.ingredientsBuilder = IngredientsBuilder(ingredients: ingredients, isFlour: false)
+    }
+
     func isReadyToAddIngredients() -> Bool {
         return name != nil && collection != nil && defaultWeight != nil
     }
