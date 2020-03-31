@@ -71,7 +71,7 @@ class AddInstructionsViewController: FormViewController {
         var instructions = [Instruction]()
         let textRows = form.rows.filter { $0 is TextAreaRow } as! [TextAreaRow]
         for row in textRows {
-            let instruction = objectFactory.createInstruction(step: row.value ?? "")
+            let instruction = Instruction(step: row.value ?? "")
             instructions.append(instruction)
         }
 

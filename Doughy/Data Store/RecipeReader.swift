@@ -17,8 +17,8 @@ class RecipeReader: NSObject {
     
     private override init() { }
     
-    func getRecipes() -> [Recipe] {
-        let fetchRequest = NSFetchRequest<Recipe>(entityName: "Recipe")
+    func getRecipes() -> [XCRecipe] {
+        let fetchRequest = NSFetchRequest<XCRecipe>(entityName: "XCRecipe")
         
         do {
             return try self.coreDataGateway.managedObjectConext.fetch(fetchRequest)
@@ -29,8 +29,23 @@ class RecipeReader: NSObject {
         return []
     }
     
-    func getRecipes(collection: String) -> [Recipe] {
-        let fetchRequest = NSFetchRequest<Recipe>(entityName: "Recipe")
+    func getRecipe(collection: String, name: String) -> XCRecipe? {
+        let fetchRequest = NSFetchRequest<XCRecipe>(entityName: "XCRecipe")
+        fetchRequest.predicate = NSPredicate(format: "collection == %@", collection)
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        
+        do {
+            let results = try self.coreDataGateway.managedObjectConext.fetch(fetchRequest)
+            return results.isEmpty ? nil : results[0]
+        }
+        catch {
+            print("No recipe found for name \(name) collection \(collection)")
+        }
+        return nil
+    }
+    
+    func getRecipes(collection: String) -> [XCRecipe] {
+        let fetchRequest = NSFetchRequest<XCRecipe>(entityName: "XCRecipe")
         fetchRequest.predicate = NSPredicate(format: "collection == %@", collection)
         
         do {

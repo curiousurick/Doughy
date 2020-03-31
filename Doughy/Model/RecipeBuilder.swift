@@ -49,32 +49,28 @@ class RecipeBuilder: NSObject {
     }
     
     func build() throws -> Recipe {
-        let recipe = ObjectFactory.shared.createRecipe()
         guard let collection = collection else {
             throw RecipeBuilderError.missingCollection
         }
-        recipe.collection = collection
         guard let name = name else {
             throw RecipeBuilderError.missingName
         }
-        recipe.name = name
         guard let defaultWeight = defaultWeight else {
             throw RecipeBuilderError.missingDefaultWeight
         }
-        recipe.defaultWeight = NSNumber(floatLiteral: defaultWeight)
         guard let instructions = instructions else {
             throw RecipeBuilderError.missingInstructions
         }
-        instructions.forEach { recipe.addToInstructions($0) }
         guard let flourBuilder = flourBuilder else {
             throw RecipeBuilderError.invalidIngredients
         }
-        try flourBuilder.build().forEach { recipe.addToIngredients($0) }
+        var ingredients = [Ingredient]()
+        ingredients.append(contentsOf: try flourBuilder.build())
         guard let ingredientsBuilder = ingredientsBuilder else {
             throw RecipeBuilderError.invalidIngredients
         }
-        try ingredientsBuilder.build().forEach { recipe.addToIngredients($0) }
-        return recipe
+        ingredients.append(contentsOf: try ingredientsBuilder.build())
+        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: nil, instructions: instructions)
     }
 }
 

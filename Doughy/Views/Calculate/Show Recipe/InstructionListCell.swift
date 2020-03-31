@@ -27,7 +27,7 @@ class InstructionListCell: UITableViewCell {
         var value = ""
         for (index, element) in instructions.enumerated() {
             value += "\(index + 1). "
-            value += element.step!
+            value += element.step
             if element != instructions.last {
                 value += "\n\n"
             }

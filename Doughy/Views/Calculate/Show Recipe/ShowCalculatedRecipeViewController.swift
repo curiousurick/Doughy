@@ -28,7 +28,7 @@ class ShowCalculatedRecipeViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         let baseCount = doughType == .preferment ? 2 : 1
-        let hasInstructions = calculatedRecipe.instructions != nil
+        let hasInstructions = !calculatedRecipe.instructions.isEmpty
         return hasInstructions ? baseCount + 1 : baseCount
     }
     

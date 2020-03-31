@@ -17,52 +17,39 @@ class ObjectFactory: NSObject {
     
     private override init() { }
     
-    func createRecipe() -> Recipe {
-        let entity = NSEntityDescription.entity(forEntityName: "Recipe", in: self.coreDataGateway.managedObjectConext)
-        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! Recipe
+    func createRecipe() -> XCRecipe {
+        let entity = NSEntityDescription.entity(forEntityName: "XCRecipe", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCRecipe
     }
     
-    func createPreferment() -> Preferment {
-        let entity = NSEntityDescription.entity(forEntityName: "Preferment", in: self.coreDataGateway.managedObjectConext)
-        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! Preferment
+    func createPreferment() -> XCPreferment {
+        let entity = NSEntityDescription.entity(forEntityName: "XCPreferment", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCPreferment
     }
     
-    func createIngredient() -> Ingredient {
-        let entity = NSEntityDescription.entity(forEntityName: "Ingredient", in: self.coreDataGateway.managedObjectConext)
-        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! Ingredient
+    func createIngredient() -> XCIngredient {
+        let entity = NSEntityDescription.entity(forEntityName: "XCIngredient", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCIngredient
     }
     
-    func createCalculatedRecipe(recipe: Recipe, totalWeight: Double) -> CalculatedRecipe {
-        let entity = NSEntityDescription.entity(forEntityName: "CalculatedRecipe", in: self.coreDataGateway.managedObjectConext)
-        let item = NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! CalculatedRecipe
-        item.name = recipe.name
-        item.instructions = recipe.instructions
-        item.weight = NSNumber(floatLiteral: totalWeight)
-        return item
+    func createCalculatedRecipe() -> XCCalculatedRecipe {
+        let entity = NSEntityDescription.entity(forEntityName: "XCCalculatedRecipe", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCCalculatedRecipe
     }
     
-    func createCalculatedPreferment(preferment: MeasuredPreferment) -> CalculatedPreferment {
-        let entity = NSEntityDescription.entity(forEntityName: "CalculatedPreferment", in: self.coreDataGateway.managedObjectConext)
-        let item = NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! CalculatedPreferment
-        item.name = preferment.name
-        item.flourPercentage = NSNumber(floatLiteral: preferment.flourPercentage)
-        return item
+    func createCalculatedPreferment() -> XCCalculatedPreferment {
+        let entity = NSEntityDescription.entity(forEntityName: "XCCalculatedPreferment", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCCalculatedPreferment
     }
     
-    func createCalculatedIngredient(ingredient: Ingredient) -> CalculatedIngredient {
-        let entity = NSEntityDescription.entity(forEntityName: "CalculatedIngredient", in: self.coreDataGateway.managedObjectConext)
-        let item = NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! CalculatedIngredient
-        item.isFlour = ingredient.isFlour
-        item.name = ingredient.name
-        item.temperature = ingredient.temperature
-        return item
+    func createCalculatedIngredient() -> XCCalculatedIngredient {
+        let entity = NSEntityDescription.entity(forEntityName: "XCCalculatedIngredient", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCCalculatedIngredient
     }
     
-    func createInstruction(step: String) -> Instruction {
-        let entity = NSEntityDescription.entity(forEntityName: "Instruction", in: self.coreDataGateway.managedObjectConext)
-        let item = NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! Instruction
-        item.step = step
-        return item
+    func createInstruction() -> XCInstruction {
+        let entity = NSEntityDescription.entity(forEntityName: "XCInstruction", in: self.coreDataGateway.managedObjectConext)
+        return NSManagedObject(entity: entity!, insertInto: self.coreDataGateway.managedObjectConext) as! XCInstruction
     }
 
 }

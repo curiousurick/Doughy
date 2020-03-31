@@ -38,7 +38,7 @@ class CalculatorViewController: FormViewController {
             }
             section <<< WeightRow(singleUnitWeightTag) { row in
                 row.title = "Single Dough Weight"
-                row.placeholder = self.weightFormatter.format(weight: self.recipe.defaultWeight!)
+                row.placeholder = self.weightFormatter.format(weight: NSNumber(floatLiteral: self.recipe.defaultWeight))
             }
             if self.recipe.preferment != nil {
                 section <<< SwitchRow(prefermentPercentSwitchTag) { row in
@@ -62,18 +62,18 @@ class CalculatorViewController: FormViewController {
                 section.hidden = Condition.function([prefermentPercentSwitchTag], { (form) -> Bool in
                     return !(form.rowBy(tag: prefermentPercentSwitchTag) as! SwitchRow).value!
                 })
-                section <<< PercentRow("preferment_total_scalable.\(preferment.name!)") { row in
-                    row.title = "\(preferment.name!) Flour Of Total"
-                    let defaultPercent = preferment.flourPercentage!
-                    let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
+                section <<< PercentRow("preferment_total_scalable.\(preferment.name)") { row in
+                    row.title = "\(preferment.name) Flour Of Total"
+                    let defaultPercent = preferment.flourPercentage
+                    let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
                     row.placeholder = "Default: \(placeholderPercent)"
                 }
-                let ingredients = preferment.ingredients?.array as! [Ingredient]
+                let ingredients = preferment.ingredients
                 for ingredient in ingredients {
-                    section <<< PercentRow("preferment_scalable.\(ingredient.name!)") { row in
-                        row.title = "\(ingredient.name!)"
-                        let defaultPercent = ingredient.defaultPercentage!
-                        let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
+                    section <<< PercentRow("preferment_scalable.\(ingredient.name)") { row in
+                        row.title = "\(ingredient.name)"
+                        let defaultPercent = ingredient.defaultPercentage
+                        let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
                         if ingredient.isFlour {
                             row.disabled = Condition(booleanLiteral: true)
                             row.placeholder = "\(placeholderPercent)"
@@ -90,12 +90,12 @@ class CalculatorViewController: FormViewController {
             section.hidden = Condition.function([doughPercentSwitchTag], { (form) -> Bool in
                 return !(form.rowBy(tag: doughPercentSwitchTag) as! SwitchRow).value!
             })
-            let ingredients = self.recipe.ingredients?.array as! [Ingredient]
+            let ingredients = self.recipe.ingredients
             for ingredient in ingredients {
-                section <<< PercentRow("scalable.\(ingredient.name!)") { row in
-                    row.title = "\(ingredient.name!)"
-                    let defaultPercent = ingredient.defaultPercentage!
-                    let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
+                section <<< PercentRow("scalable.\(ingredient.name)") { row in
+                    row.title = "\(ingredient.name)"
+                    let defaultPercent = ingredient.defaultPercentage
+                    let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
                     if ingredient.isFlour {
                         row.disabled = Condition(booleanLiteral: true)
                         row.placeholder = "\(placeholderPercent)"
@@ -111,12 +111,12 @@ class CalculatorViewController: FormViewController {
             section.hidden = Condition.function([tempSwitchTag], { (form) -> Bool in
                 return !(form.rowBy(tag: tempSwitchTag) as! SwitchRow).value!
             })
-            let ingredients = self.recipe.ingredients?.array as! [Ingredient]
+            let ingredients = self.recipe.ingredients
             for ingredient in ingredients {
                 if let temp = ingredient.temperature {
-                    section <<< TemperatureRow("temps.\(ingredient.name!)") { row in
-                        row.title = "\(ingredient.name!)"
-                        row.placeholder = self.tempFormatter.format(temperature: temp)
+                    section <<< TemperatureRow("temps.\(ingredient.name)") { row in
+                        row.title = "\(ingredient.name)"
+                        row.placeholder = self.tempFormatter.format(temperature: NSNumber(floatLiteral: temp))
                     }
                 }
             }
@@ -132,29 +132,29 @@ class CalculatorViewController: FormViewController {
     
     func updateIngredients() {
         let doughCount = (form.rowBy(tag: unitCountTag) as! IntRow).value ?? 1
-        let defaultWeight = recipe.defaultWeight!.doubleValue
+        let defaultWeight = recipe.defaultWeight
         let singleDoughWeight = (form.rowBy(tag: singleUnitWeightTag) as! WeightRow).value ?? defaultWeight
         let totalWeight = singleDoughWeight * Double(doughCount)
         
         var measuredIngredients = [MeasuredIngredient]()
-        let ingredients = recipe.ingredients?.array as! [Ingredient]
+        let ingredients = recipe.ingredients
         for ingredient in ingredients {
-            let row = form.rowBy(tag: "scalable.\(ingredient.name!)") as! PercentRow
-            let percent = row.value ?? ingredient.defaultPercentage!.doubleValue
+            let row = form.rowBy(tag: "scalable.\(ingredient.name)") as! PercentRow
+            let percent = row.value ?? ingredient.defaultPercentage
             measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent))
         }
         var measuredPreferment: MeasuredPreferment?
         if let preferment = recipe.preferment {
             var measuredFermentIngredients = [MeasuredIngredient]()
-            let fermentIngredients = preferment.ingredients!.array as! [Ingredient]
+            let fermentIngredients = preferment.ingredients
             for ingredient in fermentIngredients {
-                let row = form.rowBy(tag: "preferment_scalable.\(ingredient.name!)") as! PercentRow
-                let percent = row.value ?? ingredient.defaultPercentage!.doubleValue
+                let row = form.rowBy(tag: "preferment_scalable.\(ingredient.name)") as! PercentRow
+                let percent = row.value ?? ingredient.defaultPercentage
                 measuredFermentIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent))
             }
-            let fermentPercent = (form.rowBy(tag: "preferment_total_scalable.\(preferment.name!)") as! PercentRow).value ?? preferment.flourPercentage!.doubleValue
+            let fermentPercent = (form.rowBy(tag: "preferment_total_scalable.\(preferment.name)") as! PercentRow).value ?? preferment.flourPercentage
             measuredPreferment = MeasuredPreferment(ingredients: measuredFermentIngredients,
-                                                    name: preferment.name!,
+                                                    name: preferment.name,
                                                     flourPercentage: fermentPercent)
         }
         

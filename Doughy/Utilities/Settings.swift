@@ -12,6 +12,7 @@ fileprivate let hasInitializedDefaultsKey = "hasInitializedDefaultsKey"
 
 class Settings: NSObject {
     
+    private let recipeConverter = RecipeConverter.shared
     private let recipeReader = RecipeReader.shared
     private let recipeWriter = RecipeWriter.shared
     private let defaultRecipeFactory = DefaultRecipeFactory.shared
@@ -28,16 +29,18 @@ class Settings: NSObject {
     }
     
     func refreshRecipes() -> [RecipeCollection] {
-        let recipes = recipeReader.getRecipes()
+        let recipes = recipeReader.getRecipes().map {
+            recipeConverter.convertToExternal(recipe: $0)
+        }
         var collectionsMap = [String : RecipeCollection]()
         for recipe in recipes {
-            if let collection = collectionsMap[recipe.collection!] {
+            if let collection = collectionsMap[recipe.collection] {
                 collection.recipes.append(recipe)
             }
             else {
-                let newCollection = RecipeCollection(name: recipe.collection!)
+                let newCollection = RecipeCollection(name: recipe.collection)
                 newCollection.recipes.append(recipe)
-                collectionsMap[recipe.collection!] = newCollection
+                collectionsMap[recipe.collection] = newCollection
             }
         }
         let collections = collectionsMap.values.sorted { (a, b) -> Bool in

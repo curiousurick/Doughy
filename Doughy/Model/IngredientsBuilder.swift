@@ -67,17 +67,12 @@ class IngredientBuilder: NSObject {
     }
     
     func build() throws -> Ingredient {
-        let ingredient = ObjectFactory.shared.createIngredient()
         guard let name = name else {
             throw RecipeBuilderError.invalidIngredients
         }
-        ingredient.name = name
         guard let defaultPercentage = percent else {
             throw RecipeBuilderError.invalidIngredients
         }
-        ingredient.defaultPercentage = NSNumber(floatLiteral: defaultPercentage)
-        ingredient.temperature = temperature != nil ? NSNumber(floatLiteral: temperature!) : nil
-        ingredient.isFlour = isFlour
-        return ingredient
+        return Ingredient(name: name, isFlour: isFlour, defaultPercentage: defaultPercentage, temperature: temperature)
     }
 }

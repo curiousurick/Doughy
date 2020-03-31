@@ -55,6 +55,20 @@
 		BBD2643D24315E2900DF8987 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */; };
 		BBD2643F2431619D00DF8987 /* AddInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2643E2431619D00DF8987 /* AddInstructionsViewController.swift */; };
 		BBD264432431815600DF8987 /* PreviewRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */; };
+		BBD2644E2432E70500DF8987 /* CalculatedIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2644C2432E70500DF8987 /* CalculatedIngredient.swift */; };
+		BBD2644F2432E70500DF8987 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2644D2432E70500DF8987 /* Ingredient.swift */; };
+		BBD264512432E7A200DF8987 /* CalculatedPreferment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264502432E7A200DF8987 /* CalculatedPreferment.swift */; };
+		BBD264532432E7FF00DF8987 /* CalculatedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264522432E7FF00DF8987 /* CalculatedRecipe.swift */; };
+		BBD264552432E82300DF8987 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264542432E82300DF8987 /* Instruction.swift */; };
+		BBD264572432E86400DF8987 /* Preferment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264562432E86400DF8987 /* Preferment.swift */; };
+		BBD264592432E8A400DF8987 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264582432E8A400DF8987 /* Recipe.swift */; };
+		BBD2645C2432E90700DF8987 /* RecipeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2645B2432E90700DF8987 /* RecipeConverter.swift */; };
+		BBD264602432EADA00DF8987 /* IngredientConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD2645F2432EADA00DF8987 /* IngredientConverter.swift */; };
+		BBD264622432EB4F00DF8987 /* InstructionConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264612432EB4F00DF8987 /* InstructionConverter.swift */; };
+		BBD264642432EB5700DF8987 /* PrefermentConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264632432EB5700DF8987 /* PrefermentConverter.swift */; };
+		BBD264662432EFA400DF8987 /* CalculatedIngredientConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264652432EFA400DF8987 /* CalculatedIngredientConverter.swift */; };
+		BBD264682432F08200DF8987 /* CalculatedPrefermentConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264672432F08200DF8987 /* CalculatedPrefermentConverter.swift */; };
+		BBD2646A2432F1E400DF8987 /* CalculatedRecipeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD264692432F1E400DF8987 /* CalculatedRecipeConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +140,20 @@
 		BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		BBD2643E2431619D00DF8987 /* AddInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstructionsViewController.swift; sourceTree = "<group>"; };
 		BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRecipeViewController.swift; sourceTree = "<group>"; };
+		BBD2644C2432E70500DF8987 /* CalculatedIngredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedIngredient.swift; sourceTree = "<group>"; };
+		BBD2644D2432E70500DF8987 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		BBD264502432E7A200DF8987 /* CalculatedPreferment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedPreferment.swift; sourceTree = "<group>"; };
+		BBD264522432E7FF00DF8987 /* CalculatedRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipe.swift; sourceTree = "<group>"; };
+		BBD264542432E82300DF8987 /* Instruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		BBD264562432E86400DF8987 /* Preferment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferment.swift; sourceTree = "<group>"; };
+		BBD264582432E8A400DF8987 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		BBD2645B2432E90700DF8987 /* RecipeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeConverter.swift; sourceTree = "<group>"; };
+		BBD2645F2432EADA00DF8987 /* IngredientConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientConverter.swift; sourceTree = "<group>"; };
+		BBD264612432EB4F00DF8987 /* InstructionConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionConverter.swift; sourceTree = "<group>"; };
+		BBD264632432EB5700DF8987 /* PrefermentConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefermentConverter.swift; sourceTree = "<group>"; };
+		BBD264652432EFA400DF8987 /* CalculatedIngredientConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedIngredientConverter.swift; sourceTree = "<group>"; };
+		BBD264672432F08200DF8987 /* CalculatedPrefermentConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedPrefermentConverter.swift; sourceTree = "<group>"; };
+		BBD264692432F1E400DF8987 /* CalculatedRecipeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeConverter.swift; sourceTree = "<group>"; };
 		EE5570DB89FC86B023456613 /* Pods-Recipe HelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe HelperTests.release.xcconfig"; path = "Target Support Files/Pods-Recipe HelperTests/Pods-Recipe HelperTests.release.xcconfig"; sourceTree = "<group>"; };
 		F2CE067B34D508A070A10DF1 /* Pods-Doughy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Doughy.debug.xcconfig"; path = "Target Support Files/Pods-Doughy/Pods-Doughy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,8 +251,9 @@
 		BB30DEF42425BB5800BFD472 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BBD2645A2432E8FD00DF8987 /* Converters */,
+				BBD2644B2432E70500DF8987 /* Recipes */,
 				BB30DEFE2425E1B700BFD472 /* Measurements.swift */,
-				BB30DF0A2425ECFB00BFD472 /* RecipeCollection.swift */,
 				BBD2642E24314CBE00DF8987 /* RecipeBuilder.swift */,
 				BBD2643A2431574200DF8987 /* IngredientsBuilder.swift */,
 			);
@@ -326,6 +355,35 @@
 				BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */,
 			);
 			path = "Create Recipe";
+			sourceTree = "<group>";
+		};
+		BBD2644B2432E70500DF8987 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				BBD264542432E82300DF8987 /* Instruction.swift */,
+				BBD2644D2432E70500DF8987 /* Ingredient.swift */,
+				BBD264562432E86400DF8987 /* Preferment.swift */,
+				BBD264582432E8A400DF8987 /* Recipe.swift */,
+				BB30DF0A2425ECFB00BFD472 /* RecipeCollection.swift */,
+				BBD2644C2432E70500DF8987 /* CalculatedIngredient.swift */,
+				BBD264502432E7A200DF8987 /* CalculatedPreferment.swift */,
+				BBD264522432E7FF00DF8987 /* CalculatedRecipe.swift */,
+			);
+			path = Recipes;
+			sourceTree = "<group>";
+		};
+		BBD2645A2432E8FD00DF8987 /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				BBD2645F2432EADA00DF8987 /* IngredientConverter.swift */,
+				BBD264612432EB4F00DF8987 /* InstructionConverter.swift */,
+				BBD264632432EB5700DF8987 /* PrefermentConverter.swift */,
+				BBD2645B2432E90700DF8987 /* RecipeConverter.swift */,
+				BBD264652432EFA400DF8987 /* CalculatedIngredientConverter.swift */,
+				BBD264672432F08200DF8987 /* CalculatedPrefermentConverter.swift */,
+				BBD264692432F1E400DF8987 /* CalculatedRecipeConverter.swift */,
+			);
+			path = Converters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,11 +557,14 @@
 				BBD2641E2430820E00DF8987 /* IngredientWithPrefermentListCell.swift in Sources */,
 				BBD264352431520500DF8987 /* RecipePredicates.swift in Sources */,
 				BB30DED42425B83E00BFD472 /* CalculatorViewController.swift in Sources */,
+				BBD264572432E86400DF8987 /* Preferment.swift in Sources */,
 				BBC6847C24305A5000CE2157 /* PrefermentListCell.swift in Sources */,
 				BB30DEDA2425B83E00BFD472 /* Doughy.xcdatamodeld in Sources */,
 				BBD2641A24306F9300DF8987 /* PrefermentCell.swift in Sources */,
+				BBD264602432EADA00DF8987 /* IngredientConverter.swift in Sources */,
 				BB30DF012425EBA000BFD472 /* AllRecipesTableViewController.swift in Sources */,
 				BB6152122425FD06006CB854 /* DefaultRecipeFactory.swift in Sources */,
+				BBD264682432F08200DF8987 /* CalculatedPrefermentConverter.swift in Sources */,
 				BB30DEFD2425D24900BFD472 /* Calculator.swift in Sources */,
 				BBD264202430822D00DF8987 /* IngredientWithPrefermentCellTableViewCell.swift in Sources */,
 				BB30DEFA2425C05B00BFD472 /* PercentRow.swift in Sources */,
@@ -511,22 +572,32 @@
 				BB30DEFF2425E1B700BFD472 /* Measurements.swift in Sources */,
 				BBD2643F2431619D00DF8987 /* AddInstructionsViewController.swift in Sources */,
 				BBD2642D2431487700DF8987 /* CreateRecipeViewController.swift in Sources */,
+				BBD264532432E7FF00DF8987 /* CalculatedRecipe.swift in Sources */,
 				BB61521424274B50006CB854 /* ShowCalculatedRecipeViewController.swift in Sources */,
 				BB30DF092425EC3000BFD472 /* Settings.swift in Sources */,
 				BB4AA19E24275659002BB9A8 /* CalculatedRecipeCellFactory.swift in Sources */,
+				BBD264512432E7A200DF8987 /* CalculatedPreferment.swift in Sources */,
 				BBD26426243139C600DF8987 /* WeightRow.swift in Sources */,
 				BB06F1752425F681001A03AD /* CoreDataGateway.swift in Sources */,
+				BBD264592432E8A400DF8987 /* Recipe.swift in Sources */,
 				BBD2642424312FDD00DF8987 /* WeightFormatter.swift in Sources */,
 				BB06F1772425FAE6001A03AD /* RecipeReader.swift in Sources */,
 				BB30DF042425EBE900BFD472 /* RecipeDetailCell.swift in Sources */,
 				BB4AA1A224282A66002BB9A8 /* IngredientListCell.swift in Sources */,
 				BB30DF062425EC0E00BFD472 /* RecipeViewModel.swift in Sources */,
+				BBD2644E2432E70500DF8987 /* CalculatedIngredient.swift in Sources */,
 				BBD264222431241500DF8987 /* PercentFormatter.swift in Sources */,
 				BBD264392431536D00DF8987 /* AddNonFlourViewController.swift in Sources */,
 				BB06F1732425F5F0001A03AD /* ObjectFactory.swift in Sources */,
 				BB30DF0B2425ECFB00BFD472 /* RecipeCollection.swift in Sources */,
+				BBD264552432E82300DF8987 /* Instruction.swift in Sources */,
 				BBD2642F24314CBE00DF8987 /* RecipeBuilder.swift in Sources */,
+				BBD264662432EFA400DF8987 /* CalculatedIngredientConverter.swift in Sources */,
+				BBD2645C2432E90700DF8987 /* RecipeConverter.swift in Sources */,
+				BBD264642432EB5700DF8987 /* PrefermentConverter.swift in Sources */,
 				BBD2641C2430704000DF8987 /* IngredientCell.swift in Sources */,
+				BBD264622432EB4F00DF8987 /* InstructionConverter.swift in Sources */,
+				BBD2644F2432E70500DF8987 /* Ingredient.swift in Sources */,
 				BBD2642A24313B6E00DF8987 /* TemperatureFormatter.swift in Sources */,
 				BBD2643D24315E2900DF8987 /* AddIngredientViewController.swift in Sources */,
 				BBD264432431815600DF8987 /* PreviewRecipeViewController.swift in Sources */,
@@ -535,6 +606,7 @@
 				BBD2643324314D6500DF8987 /* DismissViewHelper.swift in Sources */,
 				BB30DED02425B83E00BFD472 /* AppDelegate.swift in Sources */,
 				BBD2642824313A9E00DF8987 /* TemperatureRow.swift in Sources */,
+				BBD2646A2432F1E400DF8987 /* CalculatedRecipeConverter.swift in Sources */,
 				BB30DED22425B83E00BFD472 /* SceneDelegate.swift in Sources */,
 				BBD2643B2431574200DF8987 /* IngredientsBuilder.swift in Sources */,
 				BB30DEF72425BD2900BFD472 /* RecipeWriter.swift in Sources */,

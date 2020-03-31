@@ -37,16 +37,16 @@ class PrefermentListCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipe.preferment?.ingredients?.count ?? 0
+        return recipe.preferment!.ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrefermentCell") as! PrefermentCell
         
-        let ingredient = recipe.preferment!.ingredients![indexPath.row] as! CalculatedIngredient
+        let ingredient = recipe.preferment!.ingredients[indexPath.row]
         cell.nameLabel.text = ingredient.name
-        let weight = ingredient.weight!
-        cell.weightLabel.text = weightFormatter.format(weight: weight)
+        let weight = ingredient.weight
+        cell.weightLabel.text = weightFormatter.format(weight: NSNumber(floatLiteral: weight))
         return cell
     }
 

@@ -79,12 +79,12 @@ fileprivate class PrefermentCellFactoryStrategy: CellFactoryStrategy {
     }
     
     func getHeader(recipe: CalculatedRecipe) -> String {
-        let preferment = recipe.preferment!.name!
+        let preferment = recipe.preferment!.name
         return "\(preferment) Ingredients"
     }
     
     func getHeight(tableView: UITableView, recipe: CalculatedRecipe) -> CGFloat {
-        let ingredientCounts = Double(recipe.preferment!.ingredients!.count)
+        let ingredientCounts = Double(recipe.preferment!.ingredients.count)
         // Height of rows is 30
         // Height of headline is 17
         // Distance from headline to table is 8
@@ -120,7 +120,7 @@ fileprivate class IngredientCellFactoryStrategy: CellFactoryStrategy {
     }
     
     func getHeight(tableView: UITableView, recipe: CalculatedRecipe) -> CGFloat {
-        let ingredientCounts = Double(recipe.ingredients!.count)
+        let ingredientCounts = Double(recipe.ingredients.count)
         let prefermentCount = recipe.preferment == nil ? 0.0 : 1.0
         // Height of rows is 30 (Multiply by ingredients. Also add 1 row for preferment
         // Height of headline is 17
@@ -160,7 +160,7 @@ fileprivate class IngredientWithPrefermentCellFactoryStrategy: CellFactoryStrate
     }
     
     func getHeight(tableView: UITableView, recipe: CalculatedRecipe) -> CGFloat {
-        let ingredientCounts = Double(recipe.ingredients!.count)
+        let ingredientCounts = Double(recipe.ingredients.count)
         let prefermentCount = recipe.preferment == nil ? 0.0 : 1.0
         // Height of rows is 30 (Multiply by ingredients. Also add 1 row for preferment
         // Height of headline is 17
@@ -192,7 +192,7 @@ fileprivate class InstructionCellFactoryStrategy: CellFactoryStrategy {
     func getCell(tableView: UITableView, indexPath: IndexPath, recipe: CalculatedRecipe) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellTag) as! InstructionListCell
         
-        let instructions = recipe.instructions?.array as! [Instruction]
+        let instructions = recipe.instructions
         cell.configureWithText(instructions: instructions)
         
         return cell

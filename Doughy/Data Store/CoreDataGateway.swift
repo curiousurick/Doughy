@@ -13,12 +13,12 @@ class CoreDataGateway: NSObject, NSFetchedResultsControllerDelegate {
     
     static let shared = CoreDataGateway()
 
-    fileprivate lazy var dataController: NSFetchedResultsController<Recipe> = {
+    fileprivate lazy var dataController: NSFetchedResultsController<XCRecipe> = {
         // Create Fetch Request
-        let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        let fetchRequest: NSFetchRequest<XCRecipe> = XCRecipe.fetchRequest()
         
         // Create Fetched Results Controller
-        let sorters = [NSSortDescriptor(key: "baseName", ascending: true)]
+        let sorters = [NSSortDescriptor(key: "name", ascending: true)]
         fetchRequest.sortDescriptors = sorters
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         

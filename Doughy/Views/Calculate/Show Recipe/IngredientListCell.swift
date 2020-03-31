@@ -38,16 +38,16 @@ class IngredientListCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (recipe.ingredients?.count ?? 0)
+        return (recipe.ingredients.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell") as! IngredientCell
         
-        let ingredient = recipe.ingredients![indexPath.row] as! CalculatedIngredient
+        let ingredient = recipe.ingredients[indexPath.row]
         cell.nameLabel.text = ingredient.name
-        let weight = ingredient.weight!
-        let percent = ingredient.totalPercentage!
+        let weight = NSNumber(floatLiteral: ingredient.weight)
+        let percent = NSNumber(floatLiteral: ingredient.totalPercentage)
         cell.weightLabel.text = weightFormatter.format(weight: weight)
         cell.percentageLabel.text = percentFormatter.format(percent: percent)
         return cell
