@@ -11,15 +11,17 @@ import UIKit
 class CalculatedRecipe: NSObject {
     
     let name: String
+    let collection: String
     let weight: Double
     let ingredients: [CalculatedIngredient]
     let preferment: CalculatedPreferment?
     let instructions: [Instruction]
     
-    init(name: String, weight: Double,
+    init(name: String, collection: String, weight: Double,
          ingredients: [CalculatedIngredient], preferment: CalculatedPreferment?,
          instructions: [Instruction]) {
         self.name = name
+        self.collection = collection
         self.weight = weight
         self.ingredients = ingredients
         self.preferment = preferment

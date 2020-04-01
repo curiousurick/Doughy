@@ -13,11 +13,18 @@ class PrefermentListCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     private let weightFormatter = WeightFormatter.shared
     
     @IBOutlet weak var tableView: UITableView!
+    var prefermentCellNib: UINib!
     
     var recipe: CalculatedRecipe!
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.prefermentCellNib = UINib(nibName: "PrefermentCell", bundle: nil)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        tableView.register(self.prefermentCellNib, forCellReuseIdentifier: "PrefermentCell")
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

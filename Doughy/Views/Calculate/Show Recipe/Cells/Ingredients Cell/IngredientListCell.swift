@@ -14,11 +14,19 @@ class IngredientListCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     private let percentFormatter = PercentFormatter.shared
     
     @IBOutlet weak var tableView: UITableView!
+    var ingredientCellNib: UINib!
     
     var recipe: CalculatedRecipe!
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.ingredientCellNib = UINib(nibName: "IngredientCell", bundle: nil)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        tableView.register(self.ingredientCellNib, forCellReuseIdentifier: "IngredientCell")
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

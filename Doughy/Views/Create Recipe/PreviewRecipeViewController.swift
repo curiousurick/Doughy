@@ -15,7 +15,7 @@ fileprivate let updateMessageError = "Failed to update the recipe"
 fileprivate let saveUnwindSegue = "unwindAfterSave"
 fileprivate let updateUnwindSegue = "unwindAfterUpdate"
 
-class PreviewRecipeViewController: ShowCalculatedRecipeViewController {
+class PreviewRecipeViewController: ShowCalculatedRecipeBaseViewController {
     
     private let recipeWriter = RecipeWriter.shared
     private var recipeNav: CreateRecipeNavigationController!
@@ -23,10 +23,13 @@ class PreviewRecipeViewController: ShowCalculatedRecipeViewController {
     var recipe: Recipe!
     var recipeBuilder: RecipeBuilder!
 
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    var saveButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        saveButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveButtonClicked))
+        self.navigationItem.rightBarButtonItem = saveButton
         
         self.recipeNav = self.navigationController as? CreateRecipeNavigationController
         if self.recipeNav.editingRecipe {
@@ -38,7 +41,7 @@ class PreviewRecipeViewController: ShowCalculatedRecipeViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func save(sender: UIBarButtonItem) {
+    @objc func saveButtonClicked() {
         print("Save button clicked")
         if self.recipeNav.editingRecipe {
             self.updateRecipe()

@@ -106,8 +106,9 @@ class CalculatorViewController: FormViewController {
                     row.placeholder = "Default: \(placeholderPercent)"
                 }
                 let ingredients = preferment.ingredients
-                for ingredient in ingredients {
-                    section <<< PercentRow("preferment_scalable.\(ingredient.name)") { row in
+                for index in 0..<ingredients.count {
+                    let ingredient = ingredients[index]
+                    section <<< PercentRow("preferment_scalable.\(index)") { row in
                         row.title = "\(ingredient.name)"
                         let defaultPercent = ingredient.defaultPercentage
                         let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
@@ -120,6 +121,9 @@ class CalculatorViewController: FormViewController {
                         }
                     }
                 }
+                for ingredient in ingredients {
+                    
+                }
             }
         }
         
@@ -128,8 +132,9 @@ class CalculatorViewController: FormViewController {
                 return !(form.rowBy(tag: doughPercentSwitchTag) as! SwitchRow).value!
             })
             let ingredients = self.recipe.ingredients
-            for ingredient in ingredients {
-                section <<< PercentRow("scalable.\(ingredient.name)") { row in
+            for index in 0..<ingredients.count {
+                let ingredient = ingredients[index]
+                section <<< PercentRow("scalable.\(index)") { row in
                     row.title = "\(ingredient.name)"
                     let defaultPercent = ingredient.defaultPercentage
                     let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
@@ -149,9 +154,10 @@ class CalculatorViewController: FormViewController {
                 return !(form.rowBy(tag: tempSwitchTag) as! SwitchRow).value!
             })
             let ingredients = self.recipe.ingredients
-            for ingredient in ingredients {
+            for index in 0..<ingredients.count {
+                let ingredient = ingredients[index]
                 if let temp = ingredient.temperature {
-                    section <<< TemperatureRow("temps.\(ingredient.name)") { row in
+                    section <<< TemperatureRow("temps.\(index)") { row in
                         row.title = "\(ingredient.name)"
                         row.placeholder = self.tempFormatter.format(temperature: NSNumber(floatLiteral: temp))
                     }
@@ -175,8 +181,9 @@ class CalculatorViewController: FormViewController {
         
         var measuredIngredients = [MeasuredIngredient]()
         let ingredients = recipe.ingredients
-        for ingredient in ingredients {
-            let row = form.rowBy(tag: "scalable.\(ingredient.name)") as! PercentRow
+        for index in 0..<ingredients.count {
+            let ingredient = ingredients[index]
+            let row = form.rowBy(tag: "scalable.\(index)") as! PercentRow
             let percent = row.value ?? ingredient.defaultPercentage
             measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent))
         }
@@ -184,8 +191,9 @@ class CalculatorViewController: FormViewController {
         if let preferment = recipe.preferment {
             var measuredFermentIngredients = [MeasuredIngredient]()
             let fermentIngredients = preferment.ingredients
-            for ingredient in fermentIngredients {
-                let row = form.rowBy(tag: "preferment_scalable.\(ingredient.name)") as! PercentRow
+            for index in 0..<fermentIngredients.count {
+                let ingredient = fermentIngredients[index]
+                let row = form.rowBy(tag: "preferment_scalable.\(index)") as! PercentRow
                 let percent = row.value ?? ingredient.defaultPercentage
                 measuredFermentIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent))
             }

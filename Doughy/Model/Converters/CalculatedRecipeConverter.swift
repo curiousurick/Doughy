@@ -23,6 +23,7 @@ class CalculatedRecipeConverter: NSObject {
         let coreData = objectFactory.createCalculatedRecipe()
         
         coreData.name = recipe.name
+        coreData.collection = recipe.collection
         coreData.weight = NSNumber(floatLiteral: recipe.weight)
         recipe.ingredients.forEach {
             coreData.addToIngredients(ingredientConverter.convertToCoreData(ingredient: $0))
@@ -40,6 +41,7 @@ class CalculatedRecipeConverter: NSObject {
     
     func convertToExternal(recipe: XCCalculatedRecipe) -> CalculatedRecipe {
         let name = recipe.name!
+        let collection = recipe.collection!
         let weight = recipe.weight!.doubleValue
         let ingredients = (recipe.ingredients!.array as! [XCCalculatedIngredient]).map {
             ingredientConverter.convertToExternal(ingredient: $0)
@@ -53,7 +55,7 @@ class CalculatedRecipeConverter: NSObject {
         }
         
         
-        return CalculatedRecipe(name: name, weight: weight, ingredients: ingredients, preferment: preferment, instructions: instructions)
+        return CalculatedRecipe(name: name, collection: collection, weight: weight, ingredients: ingredients, preferment: preferment, instructions: instructions)
         
     }
 }

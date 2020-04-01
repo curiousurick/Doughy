@@ -14,13 +14,23 @@ class IngredientWithPrefermentListCell: UITableViewCell, UITableViewDataSource, 
     private let percentFormatter = PercentFormatter.shared
     
     @IBOutlet weak var tableView: UITableView!
+    var ingredientWithPrefermentCellNib: UINib!
     
     var recipe: CalculatedRecipe!
     
     let numberFormatter = NumberFormatter()
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.ingredientWithPrefermentCellNib = UINib(nibName: "IngredientWithPrefermentCell",
+        bundle: nil)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        tableView.register(self.ingredientWithPrefermentCellNib,
+                           forCellReuseIdentifier: "IngredientWithPrefermentCell")
         
         numberFormatter.minimumFractionDigits = 0
         numberFormatter.maximumFractionDigits = 2

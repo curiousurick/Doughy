@@ -18,6 +18,7 @@
         <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="XCCalculatedRecipe" inverseName="preferment" inverseEntity="XCCalculatedRecipe"/>
     </entity>
     <entity name="XCCalculatedRecipe" representedClassName="XCCalculatedRecipe" syncable="YES" codeGenerationType="class">
+        <attribute name="collection" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="weight" attributeType="Double" usesScalarValueType="NO"/>
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="XCCalculatedIngredient" inverseName="recipe" inverseEntity="XCCalculatedIngredient"/>
@@ -54,7 +55,7 @@
     <elements>
         <element name="XCCalculatedIngredient" positionX="-36" positionY="63" width="128" height="163"/>
         <element name="XCCalculatedPreferment" positionX="-45" positionY="72" width="128" height="118"/>
-        <element name="XCCalculatedRecipe" positionX="-45" positionY="54" width="128" height="118"/>
+        <element name="XCCalculatedRecipe" positionX="-45" positionY="54" width="128" height="133"/>
         <element name="XCIngredient" positionX="-54" positionY="9" width="128" height="133"/>
         <element name="XCInstruction" positionX="-45" positionY="72" width="128" height="88"/>
         <element name="XCPreferment" positionX="-54" positionY="63" width="128" height="103"/>

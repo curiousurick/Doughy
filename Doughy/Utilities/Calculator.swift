@@ -71,7 +71,7 @@ class Calculator: NSObject {
             }
         }
         
-        let calculatedRecipe = CalculatedRecipe(name: recipe.name, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
+        let calculatedRecipe = CalculatedRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
         
         try validateCalculation(calculatedRecipe: calculatedRecipe)
         
@@ -137,7 +137,7 @@ class Calculator: NSObject {
             }
         }
         
-        let calculatedRecipe = CalculatedRecipe(name: recipe.name, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
+        let calculatedRecipe = CalculatedRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
         
         try validateCalculation(calculatedRecipe: calculatedRecipe)
         
