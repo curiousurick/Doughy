@@ -27,5 +27,21 @@ class Recipe: NSObject {
         self.preferment = preferment
         self.instructions = instructions
     }
+    
+    func containsVariableTemps() -> Bool {
+        for ingredient in ingredients {
+            if ingredient.temperature != nil {
+                return true
+            }
+        }
+        if let preferment = preferment {
+            for ingredient in preferment.ingredients {
+                if ingredient.temperature != nil {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
 }

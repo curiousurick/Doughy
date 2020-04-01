@@ -77,11 +77,10 @@ class CalculatorViewController: FormViewController {
                 row.title = "Single Dough Weight"
                 row.placeholder = self.weightFormatter.format(weight: NSNumber(floatLiteral: self.recipe.defaultWeight))
             }
-            if self.recipe.preferment != nil {
-                section <<< SwitchRow(prefermentPercentSwitchTag) { row in
-                    row.title = "Adjust Preferment"
-                    row.value = false
-                }
+            section <<< SwitchRow(prefermentPercentSwitchTag) { row in
+                row.title = "Adjust Preferment"
+                row.value = false
+                row.hidden = Condition(booleanLiteral: self.recipe.preferment == nil)
             }
             
             section <<< SwitchRow(doughPercentSwitchTag) { row in
@@ -91,6 +90,7 @@ class CalculatorViewController: FormViewController {
             section <<< SwitchRow(tempSwitchTag) { row in
                 row.title = "Adjust Temperature"
                 row.value = false
+                row.hidden = Condition(booleanLiteral: !self.recipe.containsVariableTemps())
             }
         }
         if let preferment = self.recipe.preferment {
@@ -120,9 +120,6 @@ class CalculatorViewController: FormViewController {
                             row.placeholder = "Default: \(placeholderPercent)"
                         }
                     }
-                }
-                for ingredient in ingredients {
-                    
                 }
             }
         }
