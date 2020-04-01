@@ -32,6 +32,8 @@ class AddInstructionsViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.isEditing = true
+        
         form +++ MultivaluedSection(multivaluedOptions: [.Reorder, .Insert, .Delete], header: "Add Instructions") { section in
             section.showInsertIconInAddButton = false
             section.addButtonProvider = { section in
@@ -59,12 +61,6 @@ class AddInstructionsViewController: FormViewController {
             $0.textAreaHeight = .dynamic(initialTextViewHeight: 20)
             $0.value = instruction?.step
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Set to false so delete button is not visible
-        self.tableView.isEditing = false
     }
     
     @IBAction func previewButtonClicked(button: UIBarButtonItem) {

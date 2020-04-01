@@ -10,7 +10,7 @@ import UIKit
 
 class Instruction: NSObject {
     
-    let step: String
+    var step: String
     
     init(step: String) {
         self.step = step

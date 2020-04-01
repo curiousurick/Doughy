@@ -756,6 +756,7 @@
                     <connections>
                         <outlet property="nextButton" destination="ZxJ-Jg-O73" id="uHZ-dQ-bdK"/>
                         <segue destination="g6j-6c-uXY" kind="show" identifier="AddInstructionsSegue" id="jF2-ts-7DX"/>
+                        <segue destination="j9q-yB-MUo" kind="show" identifier="AddInstructionsSegueAlt" id="cGl-if-4rT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XD-RQ-Qcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -787,6 +788,80 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSI-pu-hxa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5033" y="838"/>
+        </scene>
+        <!--Add Instructions Alt View Controller-->
+        <scene sceneID="Dig-Lh-eMS">
+            <objects>
+                <tableViewController id="j9q-yB-MUo" customClass="AddInstructionsAltViewController" customModule="Doughy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Ecq-Hs-oTA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="TextViewCell" id="vIf-Wt-go1" customClass="TextViewTableViewCell" customModule="Doughy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vIf-Wt-go1" id="d15-uH-eYa">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fvo-Jh-Mr2">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Fvo-Jh-Mr2" firstAttribute="leading" secondItem="d15-uH-eYa" secondAttribute="leading" constant="20" id="09P-ip-xxe"/>
+                                        <constraint firstItem="Fvo-Jh-Mr2" firstAttribute="top" secondItem="d15-uH-eYa" secondAttribute="top" id="KLF-Sb-Jwi"/>
+                                        <constraint firstAttribute="trailing" secondItem="Fvo-Jh-Mr2" secondAttribute="trailing" constant="20" id="jW8-Fv-gD7"/>
+                                        <constraint firstAttribute="bottom" secondItem="Fvo-Jh-Mr2" secondAttribute="bottom" constant="-0.5" id="nrL-Nc-9yF"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textView" destination="Fvo-Jh-Mr2" id="vsn-8D-3ZH"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddInstructionCell" rowHeight="44" id="hE3-aj-8hU" customClass="AddStepCell" customModule="Doughy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hE3-aj-8hU" id="UFf-Dc-Ni5">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0b-pv-Haq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="Tgq-es-PuV"/>
+                                            </constraints>
+                                            <state key="normal" title="Add Step"/>
+                                            <connections>
+                                                <action selector="addStepButtonClickedWithSender:" destination="hE3-aj-8hU" eventType="touchUpInside" id="q91-qV-rS6"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="z0b-pv-Haq" firstAttribute="leading" secondItem="UFf-Dc-Ni5" secondAttribute="leading" id="2ev-TQ-L3T"/>
+                                        <constraint firstAttribute="trailing" secondItem="z0b-pv-Haq" secondAttribute="trailing" id="PvJ-gL-uWv"/>
+                                        <constraint firstAttribute="bottom" secondItem="z0b-pv-Haq" secondAttribute="bottom" id="gqY-tY-0qs"/>
+                                        <constraint firstItem="z0b-pv-Haq" firstAttribute="top" secondItem="UFf-Dc-Ni5" secondAttribute="top" id="vsg-yl-Tjy"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="j9q-yB-MUo" id="WVr-kc-HgW"/>
+                            <outlet property="delegate" destination="j9q-yB-MUo" id="Ylx-bH-eMh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Mwe-Qm-v1N"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DL9-Of-6pB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5031.884057971015" y="1526.7857142857142"/>
         </scene>
         <!--Preview Recipe View Controller-->
         <scene sceneID="Yi4-D0-meO">
