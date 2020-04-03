@@ -17,16 +17,16 @@ class AddNonFlourViewController: AddIngredientViewController {
         get { return "Percent (compared to total flour)" }
     }
     
+    override var viewTitle: String {
+        get { return "Add Remaining Ingredients" }
+    }
+    
     @IBOutlet weak var nextButton: UIBarButtonItem!
 
     override func initializeBuilders() {
         if recipeBuilder.ingredientBuilders.isEmpty {
             recipeBuilder.addIngredient(ingredientBuilder: IngredientBuilder())
         }
-    }
-    
-    override func getTitle() -> String {
-        return "Add Remaining Ingredients"
     }
     
     override func getBuilders() -> [IngredientBuilderBase] {

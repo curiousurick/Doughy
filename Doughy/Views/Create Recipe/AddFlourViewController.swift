@@ -15,14 +15,18 @@ class AddFlourViewController: AddIngredientViewController {
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
+    override var addAnotherIngredientTitle: String {
+        get { return "Add another flour" }
+    }
+    
+    override var viewTitle: String {
+        get { return "Add Flours" }
+    }
+    
     override func initializeBuilders() {
         if recipeBuilder.flourBuilders.isEmpty {
             recipeBuilder.addFlour(flourBuilder: FlourBuilder())
         }
-    }
-    
-    override func getTitle() -> String {
-        return "Add Flours"
     }
     
     override func getBuilders() -> [IngredientBuilderBase] {

@@ -16,18 +16,25 @@ class AddIngredientViewController: FormViewController {
     var percentRowTitle: String {
         get { return "Percent (of total flour)" }
     }
+    var addAnotherIngredientTitle: String {
+        get { return "Add another ingredient" }
+    }
+    
+    var viewTitle: String {
+        get { fatalError("not implemented") }
+    }
     
     var recipeBuilder: RecipeBuilder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = getTitle()
+        self.title = viewTitle
         
         initializeBuilders()
         
         form +++ Section() { section in
             section <<< ButtonRow() { row in
-                row.title = "Add another ingredient"
+                row.title = self.addAnotherIngredientTitle
             }.onCellSelection({ (cell, row) in
                 self.form +++ self.createIngredientSection(builder: nil)
             })
@@ -146,10 +153,6 @@ class AddIngredientViewController: FormViewController {
     }
     
     func initializeBuilders() {
-        fatalError("not implemented")
-    }
-    
-    func getTitle() -> String {
         fatalError("not implemented")
     }
     
