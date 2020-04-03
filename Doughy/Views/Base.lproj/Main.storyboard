@@ -202,7 +202,7 @@
                                 <action selector="cancelButtonClickedWithSender:" destination="cL1-Dp-YLz" id="cib-vb-Zxq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="1cH-zn-JkE">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="1cH-zn-JkE">
                             <connections>
                                 <action selector="nextButtonClickedWithSender:" destination="cL1-Dp-YLz" id="STb-tj-RAT"/>
                             </connections>
@@ -228,7 +228,7 @@
                         <viewLayoutGuide key="safeArea" id="A6p-MY-8J0"/>
                     </view>
                     <navigationItem key="navigationItem" id="9mh-Br-FgQ">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="dzX-YU-ugx">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="dzX-YU-ugx">
                             <connections>
                                 <action selector="nextButtonClickedWithSender:" destination="IsK-cy-R8Y" id="pBv-jc-iTn"/>
                             </connections>
@@ -272,7 +272,7 @@
                         <viewLayoutGuide key="safeArea" id="uvD-xP-6gX"/>
                     </view>
                     <navigationItem key="navigationItem" id="Rhj-Sh-8II">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="ZxJ-Jg-O73">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="ZxJ-Jg-O73">
                             <connections>
                                 <action selector="nextButtonClickedWithSender:" destination="WWQ-xc-aDi" id="Xjk-7k-CjK"/>
                             </connections>

@@ -24,7 +24,6 @@ class AddIngredientViewController: FormViewController {
                 row.title = "Add another ingredient"
             }.onCellSelection({ (cell, row) in
                 self.form +++ self.createIngredientSection(builder: nil)
-                self.toggleNextButton()
             })
         }
         
@@ -37,7 +36,6 @@ class AddIngredientViewController: FormViewController {
             ingredientBuilders.forEach {
                 self.form +++ self.createIngredientSection(builder: $0)
             }
-            self.toggleNextButton()
         }
     }
     
@@ -52,7 +50,6 @@ class AddIngredientViewController: FormViewController {
             }.onChange({ (row) in
                 let section = row.section as! AddIngredientSection
                 section.builder.name = row.value
-                self.toggleNextButton()
             })
             section <<< self.createPercentRow(builder: newBuilder)
             section <<< TemperatureRow() { row in
@@ -61,7 +58,6 @@ class AddIngredientViewController: FormViewController {
             }.onChange({ (row) in
                 let section = row.section as! AddIngredientSection
                 section.builder.temperature = row.value
-                self.toggleNextButton()
             })
             // Only allow switching to weight for non flour.
             // It's mathematically impossible to calculate
@@ -89,7 +85,6 @@ class AddIngredientViewController: FormViewController {
                 let section = row.section as! AddIngredientSection
                 self.removeBuilder(builder: section.builder)
                 self.form.removeAll { $0 == section }
-                self.toggleNextButton()
             })
         }
     }
@@ -101,7 +96,6 @@ class AddIngredientViewController: FormViewController {
         }.onChange({ (row) in
             let section = row.section as! AddIngredientSection
             section.builder.percent = row.value
-            self.toggleNextButton()
         })
     }
     
@@ -114,7 +108,6 @@ class AddIngredientViewController: FormViewController {
             let section = row.section as! AddIngredientSection
             let builder = section.builder as! IngredientBuilder
             builder.weight = row.value
-            self.toggleNextButton()
         })
     }
     
@@ -159,7 +152,7 @@ class AddIngredientViewController: FormViewController {
         fatalError("not implemented")
     }
     
-    func toggleNextButton() {
+    func isReady() -> Bool {
         fatalError("not implemented")
     }
 

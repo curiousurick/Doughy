@@ -81,7 +81,8 @@ class AddInstructionsViewController: FormViewController {
             let recipeError = error as! RecipeBuilderError
             let message = errorMessageMap[recipeError]!
             let title = "Error creating recipe"
-            self.showErrorMessage(title: title, message: message)
+            let alert = AlertViewHelper.createErrorAlert(title: title, message: message, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
         catch where error is CalculationError {
             fatalError("Error calculating recipe should never happen in recipe creation")
@@ -100,12 +101,5 @@ class AddInstructionsViewController: FormViewController {
             vc.recipe = self.recipe
             vc.recipeBuilder = self.recipeBuilder
         }
-    }
-    
-    func showErrorMessage(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
 }

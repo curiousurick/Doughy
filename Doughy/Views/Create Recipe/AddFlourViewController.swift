@@ -9,6 +9,8 @@
 import UIKit
 import Eureka
 
+fileprivate let errorMessage = "Please fill out flour details and get total to 100%"
+
 class AddFlourViewController: AddIngredientViewController {
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
@@ -37,11 +39,18 @@ class AddFlourViewController: AddIngredientViewController {
         self.recipeBuilder.removeFlour(flourBuilder: flourBuilder)
     }
     
-    override func toggleNextButton() {
-        self.nextButton.isEnabled = self.recipeBuilder.isFlourReady()
+    override func isReady() -> Bool {
+        return self.recipeBuilder.isFlourReady()
     }
     
     @IBAction func nextButtonClicked(sender: UIBarButtonItem) {
+        guard isReady() else {
+            let alert = AlertViewHelper.createErrorAlert(title: "Error",
+                                                         message: errorMessage,
+                                                         completion: nil)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         self.performSegue(withIdentifier: "MoveToRestOfIngredientsSegue", sender: sender)
     }
     

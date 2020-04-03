@@ -16,6 +16,7 @@ fileprivate let percentOrWeightSwitcherRowId = "percentOrWeightSwitcherRowId"
 fileprivate let weightSwitcherId = "weightSwitcherId"
 fileprivate let weightRowId = "weightRowId"
 
+fileprivate let errorMessage = "Please fill out the flour details and try again."
 
 class CreateRecipeViewController: FormViewController {
     
@@ -33,8 +34,6 @@ class CreateRecipeViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         self.title = "Details"
         
         form +++ Section("Recipe Details") { section in
@@ -43,7 +42,6 @@ class CreateRecipeViewController: FormViewController {
                 row.value = self.recipeBuilder.name
             }.onChange({ row in
                 self.recipeBuilder.name = row.value
-                self.toggleNextButton()
             })
             section <<< PickerInlineRow<String?>(collectionPickerRowId) { row in
                 row.title = "Recipe Collection"
@@ -73,7 +71,6 @@ class CreateRecipeViewController: FormViewController {
                         self.recipeBuilder.collection = newCollectionValue
                     }
                 }
-                self.toggleNextButton()
             })
             section <<< NameRow(newCollectionNameRowId) { row in
                 row.placeholder = "Collection Name"
@@ -82,7 +79,6 @@ class CreateRecipeViewController: FormViewController {
                 })
             }.onChange({ row in
                 self.recipeBuilder.collection = row.value
-                self.toggleNextButton()
             })
             
             section <<< WeightRow(weightRowId) { row in
@@ -90,13 +86,16 @@ class CreateRecipeViewController: FormViewController {
                 row.value = self.recipeBuilder.defaultWeight
             }.onChange({ row in
                 self.recipeBuilder.defaultWeight = row.value
-                self.toggleNextButton()
             })
         }
-        self.toggleNextButton()
     }
     
     @IBAction func nextButtonClicked(sender: UIBarButtonItem) {
+        guard isReady() else {
+            let alert = AlertViewHelper.createErrorAlert(title: "Error", message: errorMessage, completion: nil)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         if let name = recipeBuilder.name, recipePredicates.isRecipeNameTaken(name: name), !self.editingRecipe {
             let nameTakenAlert = UIAlertController(title: "Sorry, that name is taken", message: "Please choose a different recipe name", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
@@ -119,8 +118,8 @@ class CreateRecipeViewController: FormViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func toggleNextButton() {
-        self.nextButton.isEnabled = self.recipeBuilder.isReadyToAddIngredients()
+    func isReady() -> Bool {
+        return self.recipeBuilder.isReadyToAddIngredients()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

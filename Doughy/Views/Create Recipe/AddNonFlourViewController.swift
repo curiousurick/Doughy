@@ -9,6 +9,8 @@
 import UIKit
 import Eureka
 
+fileprivate let errorMessage = "Please fill out the ingredient details and try again."
+
 class AddNonFlourViewController: AddIngredientViewController {
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
@@ -37,11 +39,18 @@ class AddNonFlourViewController: AddIngredientViewController {
         self.recipeBuilder.removeIngredient(ingredientBuilder: ingredientBuilder)
     }
     
-    override func toggleNextButton() {
-        self.nextButton.isEnabled = self.recipeBuilder.isIngredientsReady()
+    override func isReady() -> Bool {
+        return self.recipeBuilder.isIngredientsReady()
     }
     
     @IBAction func nextButtonClicked(sender: UIBarButtonItem) {
+        guard isReady() else {
+            let alert = AlertViewHelper.createErrorAlert(title: "Error",
+                                                         message: errorMessage,
+                                                         completion: nil)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         self.performSegue(withIdentifier: "AddInstructionsSegue", sender: sender)
     }
     
