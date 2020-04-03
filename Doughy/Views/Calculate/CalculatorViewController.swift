@@ -78,17 +78,17 @@ class CalculatorViewController: FormViewController {
                 row.placeholder = self.weightFormatter.format(weight: NSNumber(floatLiteral: self.recipe.defaultWeight))
             }
             section <<< SwitchRow(prefermentPercentSwitchTag) { row in
-                row.title = "Adjust Preferment"
+                row.title = "Adjust Preferment Ingredients"
                 row.value = false
                 row.hidden = Condition(booleanLiteral: self.recipe.preferment == nil)
             }
             
             section <<< SwitchRow(doughPercentSwitchTag) { row in
-                row.title = "Adjust Dough"
+                row.title = "Adjust Dough Ingredients"
                 row.value = false
             }
             section <<< SwitchRow(tempSwitchTag) { row in
-                row.title = "Adjust Temperature"
+                row.title = "Adjust Ingredient Temperatures"
                 row.value = false
                 row.hidden = Condition(booleanLiteral: !self.recipe.containsVariableTemps())
             }
