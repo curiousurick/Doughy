@@ -35,16 +35,8 @@ class RecipeBuilder: NSObject {
         }
     }
     
-    var flourBuilder: IngredientsBuilder? {
-        didSet {
-            isModified = true
-        }
-    }
-    var ingredientsBuilder: IngredientsBuilder? {
-        didSet {
-            isModified = true
-        }
-    }
+    private(set) var flourBuilders: [FlourBuilder] = []
+    private(set) var ingredientBuilders: [IngredientBuilder] = []
     
     override init() { }
 
@@ -56,12 +48,12 @@ class RecipeBuilder: NSObject {
         self.defaultWeight = recipe.defaultWeight
         self.instructions = recipe.instructions
         let ingredients = recipe.ingredients
-        self.flourBuilder = IngredientsBuilder(ingredients: ingredients, isFlour: true)
-        self.ingredientsBuilder = IngredientsBuilder(ingredients: ingredients, isFlour: false)
-    }
-
-    func isReadyToAddIngredients() -> Bool {
-        return name != nil && collection != nil && defaultWeight != nil
+        self.flourBuilders = ingredients
+            .filter { $0.isFlour }
+            .map { FlourBuilder(ingredient: $0) }
+        self.ingredientBuilders = ingredients
+            .filter { !$0.isFlour }
+            .map { IngredientBuilder(ingredient: $0) }
     }
     
     func build() throws -> Recipe {
@@ -77,16 +69,85 @@ class RecipeBuilder: NSObject {
         guard let instructions = instructions else {
             throw RecipeBuilderError.missingInstructions
         }
-        guard let flourBuilder = flourBuilder else {
+        guard !flourBuilders.isEmpty else {
             throw RecipeBuilderError.invalidIngredients
         }
         var ingredients = [Ingredient]()
-        ingredients.append(contentsOf: try flourBuilder.build())
-        guard let ingredientsBuilder = ingredientsBuilder else {
+        let flours = try flourBuilders.map { try $0.build() }
+        ingredients.append(contentsOf: flours)
+        
+        guard !ingredientBuilders.isEmpty else {
             throw RecipeBuilderError.invalidIngredients
         }
-        ingredients.append(contentsOf: try ingredientsBuilder.build())
+        let flourWeight = calculateDefaultFlourWeight(defaultWeight: defaultWeight, ingredientBuilders: ingredientBuilders)
+        let remainingIngredients = try ingredientBuilders.map { try $0.build(totalFlourWeight: flourWeight) }
+        ingredients.append(contentsOf: remainingIngredients)
         return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: nil, instructions: instructions)
+    }
+    
+    private func calculateDefaultFlourWeight(defaultWeight: Double, ingredientBuilders: [IngredientBuilder]) -> Double {
+        let totalUnknownWeight = ingredientBuilders
+            .filter { $0.mode == .weight }
+            .map { $0.weight ?? 0 }
+            .reduce(0, +)
+        let totalKnownPercent = ingredientBuilders
+            .filter { $0.mode == .percent }
+            .map { $0.percent ?? 0 }
+            // Start at 100 because flour equals 100
+            .reduce(100, +)
+        let totalKnownWeight = defaultWeight - totalUnknownWeight
+        return (100 / totalKnownPercent) * totalKnownWeight
+    }
+}
+
+/// Extension to add support for adding and removing ingredient builders.
+extension RecipeBuilder {
+    
+    func addFlour(flourBuilder: FlourBuilder) {
+        self.flourBuilders.append(flourBuilder)
+        self.isModified = true
+    }
+    
+    func addIngredient(ingredientBuilder: IngredientBuilder) {
+        self.ingredientBuilders.append(ingredientBuilder)
+        self.isModified = true
+    }
+    
+    func removeFlour(flourBuilder: FlourBuilder) {
+        self.flourBuilders.removeAll { $0 == flourBuilder }
+        self.isModified = true
+    }
+    
+    func removeIngredient(ingredientBuilder: IngredientBuilder) {
+        self.ingredientBuilders.removeAll { $0 == ingredientBuilder }
+        self.isModified = true
+    }
+}
+
+/// Readiness predicate methods for RecipeBuilder
+extension RecipeBuilder {
+    func isReadyToAddIngredients() -> Bool {
+        return name != nil && collection != nil && defaultWeight != nil
+    }
+    
+    func isFlourReady() -> Bool {
+        var totalPercent = 0.0
+        for flour in flourBuilders {
+            if !flour.isReady() {
+                return false
+            }
+            totalPercent += flour.percent!
+        }
+        return totalPercent == 100
+    }
+    
+    func isIngredientsReady() -> Bool {
+        for ingredient in ingredientBuilders {
+            if !ingredient.isReady() {
+                return false
+            }
+        }
+        return true
     }
 }
 

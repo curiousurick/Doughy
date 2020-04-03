@@ -14,8 +14,8 @@ class AddFlourViewController: AddIngredientViewController {
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
     override func initializeBuilders() {
-        if recipeBuilder.flourBuilder == nil {
-            recipeBuilder.flourBuilder = IngredientsBuilder(isFlour: true)
+        if recipeBuilder.flourBuilders.isEmpty {
+            recipeBuilder.addFlour(flourBuilder: FlourBuilder())
         }
     }
     
@@ -23,22 +23,22 @@ class AddFlourViewController: AddIngredientViewController {
         return "Add Flours"
     }
     
-    override func getBuilders() -> IngredientsBuilder? {
-        return recipeBuilder.flourBuilder
+    override func getBuilders() -> [IngredientBuilderBase] {
+        return recipeBuilder.flourBuilders
     }
     
-    override func addBuilder() -> IngredientBuilder {
-        let builder = IngredientBuilder(isFlour: true)
-        recipeBuilder.flourBuilder!.addBuilder(builder: builder)
-        return builder
+    override func addBuilder() -> IngredientBuilderBase {
+        recipeBuilder.addFlour(flourBuilder: FlourBuilder())
+        return recipeBuilder.flourBuilders.last!
     }
     
-    override func removeBuilder(builder: IngredientBuilder) {
-        self.recipeBuilder.flourBuilder?.removeBuilder(builder: builder)
+    override func removeBuilder(builder: IngredientBuilderBase) {
+        let flourBuilder = builder as! FlourBuilder
+        self.recipeBuilder.removeFlour(flourBuilder: flourBuilder)
     }
     
     override func toggleNextButton() {
-        self.nextButton.isEnabled = self.recipeBuilder.flourBuilder!.isReady()
+        self.nextButton.isEnabled = self.recipeBuilder.isFlourReady()
     }
     
     @IBAction func nextButtonClicked(sender: UIBarButtonItem) {

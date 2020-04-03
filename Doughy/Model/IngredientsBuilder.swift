@@ -8,76 +8,87 @@
 
 import UIKit
 
-class IngredientsBuilder: NSObject {
-    private(set) var builders = [IngredientBuilder]()
-    
-    var isFlour: Bool
-    
-    init(ingredients: [Ingredient], isFlour: Bool) {
-        self.isFlour = isFlour
-        super.init()
-        ingredients.filter { $0.isFlour == isFlour }.forEach {
-            self.addBuilder(builder: IngredientBuilder(ingredient: $0))
-        }
-    }
-    
-    init(isFlour: Bool) {
-        self.isFlour = isFlour
-    }
-    
-    func addBuilder() {
-        let builder = IngredientBuilder(isFlour: self.isFlour)
-        builders.append(builder)
-    }
-    
-    func addBuilder(builder: IngredientBuilder) {
-        builders.append(builder)
-    }
-    
-    func removeBuilder(builder: IngredientBuilder) {
-        builders.removeAll { $0 == builder }
-    }
-    
-    func isReady() -> Bool {
-        for builder in builders {
-            if !builder.isReady() {
-                return false
-            }
-        }
-        if isFlour {
-            let totalPercent = builders.map { $0.percent ?? 0 }
-                .reduce(0, +)
-            return totalPercent == 100
-        }
-        
-        return true
-    }
-    
-    func build() throws -> [Ingredient] {
-        var ingredients = [Ingredient]()
-        try builders.forEach { ingredients.append(try $0.build()) }
-        return ingredients
-    }
-}
-
-class IngredientBuilder: NSObject {
+class IngredientBuilderBase: NSObject {
     var name: String?
     var percent: Double?
     var temperature: Double?
-    var isFlour: Bool
     
-    init(isFlour: Bool) {
-        self.isFlour = isFlour
+    func isReady() -> Bool {
+        fatalError()
     }
+}
+
+enum IngredientMeasurementMode {
+    case percent, weight
+}
+
+class IngredientBuilder: IngredientBuilderBase {
+    var weight: Double?
+    var mode: IngredientMeasurementMode = .percent
+    
+    override init() { }
     
     init(ingredient: Ingredient) {
+        super.init()
         self.name = ingredient.name
         self.percent = ingredient.defaultPercentage
         self.temperature = ingredient.temperature
-        self.isFlour = ingredient.isFlour
     }
     
-    func isReady() -> Bool {
+    override func isReady() -> Bool {
+        let measurementReady = mode == .percent
+            ? percent != nil
+            : weight != nil
+        return name != nil && measurementReady
+    }
+    
+    func build(totalFlourWeight: Double) throws -> Ingredient {
+        guard let name = name else {
+            throw RecipeBuilderError.invalidIngredients
+        }
+        
+        if mode == .percent {
+            guard let defaultPercentage = percent else {
+                throw RecipeBuilderError.invalidIngredients
+            }
+            return Ingredient(name: name,
+                              isFlour: false,
+                              defaultPercentage: defaultPercentage,
+                              temperature: temperature)
+        }
+        else {
+            guard let weight = weight else {
+                throw RecipeBuilderError.invalidIngredients
+            }
+            let defaultPercent = (weight / totalFlourWeight) * 100
+            return Ingredient(name: name,
+                              isFlour: false,
+                              defaultPercentage: defaultPercent,
+                              temperature: temperature)
+        }
+    }
+    
+    static func == (lhs: IngredientBuilder, rhs: IngredientBuilder) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.percent == rhs.percent &&
+            lhs.weight == rhs.weight &&
+            lhs.mode == rhs.mode &&
+            lhs.temperature == rhs.temperature
+    }
+}
+
+class FlourBuilder: IngredientBuilderBase {
+    
+    override init() { }
+    
+    init(ingredient: Ingredient) {
+        super.init()
+        self.name = ingredient.name
+        self.percent = ingredient.defaultPercentage
+        self.temperature = ingredient.temperature
+    }
+    
+    override func isReady() -> Bool {
         return name != nil && percent != nil
     }
     
@@ -88,6 +99,15 @@ class IngredientBuilder: NSObject {
         guard let defaultPercentage = percent else {
             throw RecipeBuilderError.invalidIngredients
         }
-        return Ingredient(name: name, isFlour: isFlour, defaultPercentage: defaultPercentage, temperature: temperature)
+        return Ingredient(name: name,
+                          isFlour: true,
+                          defaultPercentage: defaultPercentage,
+                          temperature: temperature)
+    }
+    
+    static func == (lhs: FlourBuilder, rhs: FlourBuilder) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.percent == rhs.percent &&
+            lhs.temperature == rhs.temperature
     }
 }
