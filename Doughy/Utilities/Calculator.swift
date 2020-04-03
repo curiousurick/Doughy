@@ -25,7 +25,7 @@ class Calculator: NSObject {
         ingredients.forEach { ingredient in
             let actualPercent = ingredient.percent / totalPercent
             let weight = actualPercent * totalWeight
-            let calcIngredient = CalculatedIngredient(name: ingredient.ingredient.name, isFlour: ingredient.ingredient.isFlour, percentage: ingredient.percent, totalPercentage: ingredient.percent, temperature: ingredient.ingredient.temperature, weight: weight)
+            let calcIngredient = CalculatedIngredient(name: ingredient.ingredient.name, isFlour: ingredient.ingredient.isFlour, percentage: ingredient.percent, totalPercentage: ingredient.percent, temperature: ingredient.temperature, weight: weight)
             doughIngredients.append(calcIngredient)
         }
         
@@ -45,7 +45,7 @@ class Calculator: NSObject {
             for prefIngredient in prefermentIngredients {
                 let actualPercent = prefIngredient.percent / prefermentTotalPercent
                 let weight = actualPercent * prefermentWeight
-                let ingredient = CalculatedIngredient(name: prefIngredient.ingredient.name, isFlour: prefIngredient.ingredient.isFlour, percentage: prefIngredient.percent, totalPercentage: prefIngredient.percent, temperature: prefIngredient.ingredient.temperature, weight: weight)
+                let ingredient = CalculatedIngredient(name: prefIngredient.ingredient.name, isFlour: prefIngredient.ingredient.isFlour, percentage: prefIngredient.percent, totalPercentage: prefIngredient.percent, temperature: prefIngredient.temperature, weight: weight)
                 calculatedPrefIngredients.append(ingredient)
             }
             calculatedPreferment = CalculatedPreferment(name: preferment.name, flourPercentage: preferment.flourPercentage, weight: prefermentWeight, ingredients: calculatedPrefIngredients)

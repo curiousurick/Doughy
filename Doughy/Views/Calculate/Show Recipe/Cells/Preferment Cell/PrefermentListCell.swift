@@ -51,7 +51,13 @@ class PrefermentListCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrefermentCell") as! PrefermentCell
         
         let ingredient = recipe.preferment!.ingredients[indexPath.row]
-        cell.nameLabel.text = ingredient.name
+        let name = ingredient.name
+        if let temp = ingredient.temperature {
+            cell.nameLabel.text = "\(name) (\(temp)º)"
+        }
+        else {
+            cell.nameLabel.text = name
+        }
         let weight = ingredient.weight
         cell.weightLabel.text = weightFormatter.format(weight: NSNumber(floatLiteral: weight))
         return cell

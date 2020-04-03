@@ -150,6 +150,18 @@ class CalculatorViewController: FormViewController {
             section.hidden = Condition.function([tempSwitchTag], { (form) -> Bool in
                 return !(form.rowBy(tag: tempSwitchTag) as! SwitchRow).value!
             })
+            if let preferment = self.recipe.preferment {
+                let prefermentIngredients = preferment.ingredients
+                for index in 0..<prefermentIngredients.count {
+                    let ingredient = prefermentIngredients[index]
+                    if let temp = ingredient.temperature {
+                        section <<< TemperatureRow("preferment_temps.\(index)") { row in
+                            row.title = "\(preferment.name) \(ingredient.name)"
+                            row.placeholder = self.tempFormatter.format(temperature: NSNumber(floatLiteral: temp))
+                        }
+                    }
+                }
+            }
             let ingredients = self.recipe.ingredients
             for index in 0..<ingredients.count {
                 let ingredient = ingredients[index]
@@ -182,7 +194,9 @@ class CalculatorViewController: FormViewController {
             let ingredient = ingredients[index]
             let row = form.rowBy(tag: "scalable.\(index)") as! PercentRow
             let percent = row.value ?? ingredient.defaultPercentage
-            measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent))
+            let tempRow = form.rowBy(tag: "temps.\(index)") as? TemperatureRow
+            let temp = tempRow?.value ?? ingredient.temperature
+            measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temp))
         }
         var measuredPreferment: MeasuredPreferment?
         if let preferment = recipe.preferment {
@@ -192,7 +206,9 @@ class CalculatorViewController: FormViewController {
                 let ingredient = fermentIngredients[index]
                 let row = form.rowBy(tag: "preferment_scalable.\(index)") as! PercentRow
                 let percent = row.value ?? ingredient.defaultPercentage
-                measuredFermentIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent))
+                let tempRow = form.rowBy(tag: "preferment_temps.\(index)") as? TemperatureRow
+                let temp = tempRow?.value ?? ingredient.temperature
+                measuredFermentIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temp))
             }
             let fermentPercent = (form.rowBy(tag: "preferment_total_scalable.\(preferment.name)") as! PercentRow).value ?? preferment.flourPercentage
             measuredPreferment = MeasuredPreferment(ingredients: measuredFermentIngredients,

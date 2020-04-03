@@ -73,7 +73,13 @@ class IngredientWithPrefermentListCell: UITableViewCell, UITableViewDataSource, 
             return cell
         }
         let ingredient = recipe.ingredients[indexPath.row]
-        cell.nameLabel.text = ingredient.name
+        let name = ingredient.name
+        if let temp = ingredient.temperature {
+            cell.nameLabel.text = "\(name) (\(temp)º)"
+        }
+        else {
+            cell.nameLabel.text = name
+        }
         let totalWeight = ingredient.weight
         let matchingPreferment = prefermentIngredients
             .first { $0.name == ingredient.name }

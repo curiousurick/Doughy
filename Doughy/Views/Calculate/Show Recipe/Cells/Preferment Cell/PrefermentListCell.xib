@@ -65,6 +65,9 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <connections>
+                <outlet property="tableView" destination="IGc-zH-l7B" id="Pe6-JL-l5W"/>
+            </connections>
             <point key="canvasLocation" x="139" y="-336"/>
         </tableViewCell>
     </objects>

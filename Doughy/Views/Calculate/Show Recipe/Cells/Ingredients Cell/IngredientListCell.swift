@@ -53,7 +53,13 @@ class IngredientListCell: UITableViewCell, UITableViewDataSource, UITableViewDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell") as! IngredientCell
         
         let ingredient = recipe.ingredients[indexPath.row]
-        cell.nameLabel.text = ingredient.name
+        let name = ingredient.name
+        if let temp = ingredient.temperature {
+            cell.nameLabel.text = "\(name) (\(temp)º)"
+        }
+        else {
+            cell.nameLabel.text = name
+        }
         let weight = NSNumber(floatLiteral: ingredient.weight)
         let percent = NSNumber(floatLiteral: ingredient.totalPercentage)
         cell.weightLabel.text = weightFormatter.format(weight: weight)
