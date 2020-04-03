@@ -9,7 +9,8 @@
 import UIKit
 
 class CalculatedIngredientConverter: NSObject {
-    let objectFactory = ObjectFactory.shared
+    private let objectFactory = ObjectFactory.shared
+    private let settings = Settings.shared
     
     static let shared = CalculatedIngredientConverter()
     
@@ -23,7 +24,7 @@ class CalculatedIngredientConverter: NSObject {
         coreData.totalPercentage = NSNumber(floatLiteral: ingredient.totalPercentage)
         coreData.isFlour = ingredient.isFlour
         if let temperature = ingredient.temperature {
-            coreData.temperature = NSNumber(floatLiteral: temperature)
+            coreData.temperature = NSNumber(floatLiteral: temperature.value)
         }
         coreData.weight = NSNumber(floatLiteral: ingredient.weight)
         
@@ -35,7 +36,10 @@ class CalculatedIngredientConverter: NSObject {
         let percentage = ingredient.percentage!.doubleValue
         let totalPercentage = ingredient.totalPercentage!.doubleValue
         let isFlour = ingredient.isFlour
-        let temperature = ingredient.temperature?.doubleValue
+        var temperature: Temperature? = nil
+        if let temp = ingredient.temperature?.doubleValue {
+            temperature = Temperature(value: temp, measurement: settings.preferredTemp())
+        }
         let weight = ingredient.weight!.doubleValue
         
         return CalculatedIngredient(name: name, isFlour: isFlour, percentage: percentage, totalPercentage: totalPercentage, temperature: temperature, weight: weight)

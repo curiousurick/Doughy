@@ -11,9 +11,9 @@ import UIKit
 class MeasuredIngredient {
     let ingredient: Ingredient
     let percent: Double
-    let temperature: Double?
+    let temperature: Temperature?
     
-    init(ingredient: Ingredient, percent: Double, temperature: Double?) {
+    init(ingredient: Ingredient, percent: Double, temperature: Temperature?) {
         self.ingredient = ingredient
         self.percent = percent
         self.temperature = temperature

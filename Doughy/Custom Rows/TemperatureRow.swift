@@ -9,12 +9,16 @@
 import UIKit
 import Eureka
 
-fileprivate let degree = "º"
 fileprivate let percentLength = 1
 
 public class _TemperatureRow: FieldRow<TemperatureCell> {
     
     var limit: Range<Double>!
+    var measurement: Temperature.Measurement? {
+        didSet {
+            cell.measurement = measurement
+        }
+    }
     
     public required init(tag: String?) {
         super.init(tag: tag)
@@ -35,6 +39,7 @@ public class TemperatureCell: _FieldCell<Double>, CellType {
     
     var limit: Range<Double>?
     var lastValue: Double!
+    var measurement: Temperature.Measurement?
     
     required public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -62,7 +67,7 @@ public class TemperatureCell: _FieldCell<Double>, CellType {
     }
     
     public override func textFieldDidChange(_ textField: UITextField) {
-        if textField.text == degree || textField.text == "-" {
+        if textField.text == degree() || textField.text == "-" {
             textField.text = ""
             row.value = nil
             return
@@ -83,7 +88,7 @@ public class TemperatureCell: _FieldCell<Double>, CellType {
     
     public override func textFieldDidBeginEditing(_ textField: UITextField) {
         super.textFieldDidBeginEditing(textField)
-        textField.text = textField.text?.replacingOccurrences(of: degree, with: "")
+        textField.text = textField.text?.replacingOccurrences(of: degree(), with: "")
         guard var text = textField.text else { return }
         if let doubleValue = Double(text) {
             if (text.contains(".") && floor(doubleValue) == doubleValue) {
@@ -104,10 +109,10 @@ public class TemperatureCell: _FieldCell<Double>, CellType {
     
     fileprivate func appendPercentIfNecessary() {
         guard var text = textField.text, text != ""
-            && text != degree
+            && text != degree()
             && !textField.isFirstResponder
             else { return }
-        text += degree
+        text += degree()
         textField.text = text
     }
     
@@ -123,5 +128,10 @@ public class TemperatureCell: _FieldCell<Double>, CellType {
             }
         }
         return false
+    }
+    
+    private func degree() -> String {
+        let preferred = measurement?.shortValue ?? Temperature.Measurement.fahrenheit.shortValue
+        return "º \(preferred)"
     }
 }

@@ -19,9 +19,10 @@ class TemperatureFormatter: NSObject {
         formatter.maximumFractionDigits = 2
     }
     
-    func format(temperature: NSNumber) -> String {
-        let tempString = formatter.string(from: temperature)!
-        return "\(tempString)º"
+    func format(temperature: Temperature) -> String {
+        let tempNumber = NSNumber(floatLiteral: temperature.value)
+        let tempString = formatter.string(from: tempNumber)!
+        return "\(tempString)º \(temperature.measurement.shortValue)"
     }
 
 }

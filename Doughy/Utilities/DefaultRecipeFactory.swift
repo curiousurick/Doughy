@@ -11,6 +11,7 @@ import UIKit
 class DefaultRecipeFactory: NSObject {
     
     private let objectFactory = ObjectFactory.shared
+    private let tempConverter = TemperatureConverter.shared
     
     static let shared = DefaultRecipeFactory()
     
@@ -27,7 +28,8 @@ class DefaultRecipeFactory: NSObject {
         
         let flour = Ingredient(name: "Bread Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
         
-        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 70, temperature: 55)
+        let waterTemp = Temperature(value: 55, measurement: .fahrenheit)
+        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 70, temperature: waterTemp)
         
         let salt = Ingredient(name: "Fine Sea Salt", isFlour: false, defaultPercentage: 3, temperature: nil)
         
@@ -81,7 +83,8 @@ class DefaultRecipeFactory: NSObject {
         
         let flour = Ingredient(name: "Bread Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
         
-        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 65, temperature: 90)
+        let waterTemp = Temperature(value: 90, measurement: .fahrenheit)
+        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 65, temperature: waterTemp)
         let salt = Ingredient(name: "Fine Sea Salt", isFlour: false, defaultPercentage: 2, temperature: nil)
         let yeast = Ingredient(name: "Instant Yeast", isFlour: false, defaultPercentage: 0.75, temperature: nil)
         let oliveOil = Ingredient(name: "Olive Oil", isFlour: false, defaultPercentage: 5, temperature: nil)
@@ -106,7 +109,8 @@ class DefaultRecipeFactory: NSObject {
     
     private func createBigaBread() -> Recipe {
         let bigaFlour = Ingredient(name: "White Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
-        let bigaWater = Ingredient(name: "Water", isFlour: false, defaultPercentage: 68, temperature: 80)
+        let bigaWaterTemp = Temperature(value: 80, measurement: .fahrenheit)
+        let bigaWater = Ingredient(name: "Water", isFlour: false, defaultPercentage: 68, temperature: bigaWaterTemp)
         let bigaYeast = Ingredient(name: "Instant Yeast", isFlour: false, defaultPercentage: 0.08, temperature: nil)
         let bigaIngredients = [bigaFlour, bigaWater, bigaYeast]
         
@@ -114,7 +118,8 @@ class DefaultRecipeFactory: NSObject {
         
         
         let flour = Ingredient(name: "White Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
-        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 75, temperature: 105)
+        let waterTemp = Temperature(value: 105, measurement: .fahrenheit)
+        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 75, temperature: waterTemp)
         let salt = Ingredient(name: "Fine Sea Salt", isFlour: false, defaultPercentage: 2.2, temperature: nil)
         let yeast = Ingredient(name: "Instant Yeast", isFlour: false, defaultPercentage: 0.264, temperature: nil)
         let ingredients = [flour, water, salt, yeast]
@@ -137,7 +142,8 @@ class DefaultRecipeFactory: NSObject {
     
     private func createfiftyPercentWholeWheatBreadWithBiga() -> Recipe {
         let bigaFlour = Ingredient(name: "White Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
-        let bigaWater = Ingredient(name: "Water", isFlour: false, defaultPercentage: 68, temperature: 80)
+        let bigaWaterTemp = Temperature(value: 80, measurement: .fahrenheit)
+        let bigaWater = Ingredient(name: "Water", isFlour: false, defaultPercentage: 68, temperature: bigaWaterTemp)
         let bigaYeast = Ingredient(name: "Instant Yeast", isFlour: false, defaultPercentage: 0.08, temperature: nil)
         let bigaIngredients = [bigaFlour, bigaWater, bigaYeast]
         
@@ -145,7 +151,8 @@ class DefaultRecipeFactory: NSObject {
         
         let flour = Ingredient(name: "White Flour", isFlour: true, defaultPercentage: 50, temperature: nil)
         let wholeWheatFlour = Ingredient(name: "Whole Wheat Flour", isFlour: true, defaultPercentage: 50, temperature: nil)
-        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 80, temperature: 100)
+        let waterTemp = Temperature(value: 100, measurement: .fahrenheit)
+        let water = Ingredient(name: "Water", isFlour: false, defaultPercentage: 80, temperature: waterTemp)
         let salt = Ingredient(name: "Fine Sea Salt", isFlour: false, defaultPercentage: 2.2, temperature: nil)
         let yeast = Ingredient(name: "Instant Yeast", isFlour: false, defaultPercentage: 0.34, temperature: nil)
         let ingredients = [flour, wholeWheatFlour, water, salt, yeast]

@@ -9,6 +9,7 @@
 import UIKit
 
 fileprivate let hasInitializedDefaultsKey = "hasInitializedDefaultsKey"
+fileprivate let preferredTempKey = "preferredTempKey"
 
 class Settings: NSObject {
     
@@ -17,6 +18,7 @@ class Settings: NSObject {
     private let recipeWriter = RecipeWriter.shared
     private let defaultRecipeFactory = DefaultRecipeFactory.shared
     private let userDefaults = UserDefaults.standard
+    private let coreDataGateway = CoreDataGateway.shared
     
     lazy var recipes = self.refreshRecipes()
     
@@ -55,12 +57,48 @@ extension Settings {
     func initializeDefaultRecipes() {
         
         if !userDefaults.bool(forKey: hasInitializedDefaultsKey) {
+            setPreferredTemp(measurement: .fahrenheit)
+            
             defaultRecipeFactory.create().forEach {
                 try! recipeWriter.writeRecipe(recipe: $0)
             }
             userDefaults.set(true, forKey: hasInitializedDefaultsKey)
         }
-        
     }
     
+}
+
+extension Settings {
+    func preferredTemp() -> Temperature.Measurement {
+        let prefersCelsius = userDefaults.bool(forKey: preferredTempKey)
+        return prefersCelsius ? .celsius : .fahrenheit
+    }
+    
+    func setPreferredTemp(measurement: Temperature.Measurement) {
+        userDefaults.set(measurement == .celsius, forKey: preferredTempKey)
+    }
+    
+    func updateRecipeTemps(original: Temperature.Measurement,
+                           target: Temperature.Measurement) throws {
+        let recipes = recipeReader.getRecipes()
+        recipes
+            .flatMap { $0.ingredients!.array as! [XCIngredient] }
+            .forEach {
+                if let currentTemp = $0.temperature {
+                    let newTemp = TemperatureConverter.shared.convert(temperature: currentTemp.doubleValue, source: original, target: target)
+                    $0.temperature = NSNumber(floatLiteral: newTemp)
+                }
+                
+        }
+        recipes
+            .compactMap { $0.preferment?.ingredients?.array as? [XCIngredient] }
+            .flatMap { $0 }
+            .forEach {
+                if let currentTemp = $0.temperature {
+                    let newTemp = TemperatureConverter.shared.convert(temperature: currentTemp.doubleValue, source: original, target: target)
+                    $0.temperature = NSNumber(floatLiteral: newTemp)
+                }
+        }
+        try self.coreDataGateway.managedObjectConext.save()
+    }
 }

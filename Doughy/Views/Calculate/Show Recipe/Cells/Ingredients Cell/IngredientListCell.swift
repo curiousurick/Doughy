@@ -55,7 +55,8 @@ class IngredientListCell: UITableViewCell, UITableViewDataSource, UITableViewDel
         let ingredient = recipe.ingredients[indexPath.row]
         let name = ingredient.name
         if let temp = ingredient.temperature {
-            cell.nameLabel.text = "\(name) (\(temp)º)"
+            let formattedTemp = TemperatureFormatter.shared.format(temperature: temp)
+            cell.nameLabel.text = "\(name) (\(formattedTemp))"
         }
         else {
             cell.nameLabel.text = name

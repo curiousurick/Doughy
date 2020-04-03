@@ -11,7 +11,7 @@ import UIKit
 class IngredientBuilderBase: NSObject {
     var name: String?
     var percent: Double?
-    var temperature: Double?
+    var temperature: Temperature?
     
     func isReady() -> Bool {
         fatalError()

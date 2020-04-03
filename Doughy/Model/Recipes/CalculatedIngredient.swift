@@ -14,12 +14,12 @@ class CalculatedIngredient: NSObject {
     let isFlour: Bool
     var percentage: Double
     var totalPercentage: Double
-    let temperature: Double?
+    let temperature: Temperature?
     let weight: Double
     
     init(name: String, isFlour: Bool,
          percentage: Double, totalPercentage: Double,
-         temperature: Double?, weight: Double) {
+         temperature: Temperature?, weight: Double) {
         self.name = name
         self.isFlour = isFlour
         self.percentage = percentage

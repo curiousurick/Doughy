@@ -10,7 +10,7 @@ import UIKit
 
 class IngredientConverter: NSObject {
     
-    let objectFactory = ObjectFactory.shared
+    private let objectFactory = ObjectFactory.shared
     
     static let shared = IngredientConverter()
     
@@ -23,7 +23,7 @@ class IngredientConverter: NSObject {
         coreData.isFlour = ingredient.isFlour
         coreData.defaultPercentage = NSNumber(floatLiteral: ingredient.defaultPercentage)
         if let temperature = ingredient.temperature {
-            coreData.temperature = NSNumber(floatLiteral: temperature)
+            coreData.temperature = NSNumber(floatLiteral: temperature.value)
         }
         
         return coreData
@@ -33,7 +33,10 @@ class IngredientConverter: NSObject {
         let name = ingredient.name!
         let defaultPercentage = ingredient.defaultPercentage!.doubleValue
         let isFlour = ingredient.isFlour
-        let temperature = ingredient.temperature?.doubleValue
+        var temperature: Temperature? = nil
+        if let temp = ingredient.temperature?.doubleValue {
+            temperature = Temperature(value: temp, measurement: Settings.shared.preferredTemp())
+        }
         
         return Ingredient(name: name, isFlour: isFlour, defaultPercentage: defaultPercentage, temperature: temperature)
     }

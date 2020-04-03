@@ -11,6 +11,8 @@ import Eureka
 
 class AddIngredientViewController: FormViewController {
     
+    private let settings = Settings.shared
+    
     var percentRowTitle: String {
         get { return "Percent (of total flour)" }
     }
@@ -58,10 +60,17 @@ class AddIngredientViewController: FormViewController {
             section <<< self.createPercentRow(builder: newBuilder)
             section <<< TemperatureRow() { row in
                 row.placeholder = "Temperature (not required)"
-                row.value = newBuilder.temperature
+                row.value = newBuilder.temperature?.value
+                row.measurement = self.settings.preferredTemp()
             }.onChange({ (row) in
                 let section = row.section as! AddIngredientSection
-                section.builder.temperature = row.value
+                if let temp = row.value {
+                    section.builder.temperature = Temperature(value: temp, measurement: self.settings.preferredTemp())
+                }
+                else {
+                    section.builder.temperature = nil
+                }
+                
             })
             // Only allow switching to weight for non flour.
             // It's mathematically impossible to calculate
@@ -94,7 +103,7 @@ class AddIngredientViewController: FormViewController {
     }
     
     func createPercentRow(builder: IngredientBuilderBase) -> PercentRow {
-        PercentRow() { row in
+        return PercentRow() { row in
             row.placeholder = percentRowTitle
             row.value = builder.percent
         }.onChange({ (row) in
@@ -104,7 +113,7 @@ class AddIngredientViewController: FormViewController {
     }
     
     func createWeightRow(builder: IngredientBuilder) -> WeightRow {
-        WeightRow() { row in
+        return WeightRow() { row in
             let weight = WeightFormatter.shared.format(weight: NSNumber(floatLiteral: recipeBuilder.defaultWeight!))
             row.placeholder = "Weight (in grams) for \(weight) dough"
             row.value = builder.weight

@@ -72,6 +72,29 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="126.5625"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="okR-rr-hYV">
+            <objects>
+                <viewController id="YEp-Zq-2pX" customClass="SettingsViewController" customModule="Doughy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J51-nW-3sY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="sCD-EF-hRE"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ccv-Ag-iEe">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="m8X-7G-YnJ">
+                            <connections>
+                                <segue destination="T9a-JG-LZL" kind="unwind" unwindAction="unwindToMainView:" id="6Rw-W8-cBE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gaS-yx-JR6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="T9a-JG-LZL" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2703" y="-528"/>
+        </scene>
         <!--All Recipes Table View Controller-->
         <scene sceneID="4sG-OZ-HGz">
             <objects>
@@ -170,7 +193,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="AEb-Pt-80y">
-                        <barButtonItem key="leftBarButtonItem" image="Settings" id="7kl-gZ-FG6"/>
+                        <barButtonItem key="leftBarButtonItem" image="Settings" id="7kl-gZ-FG6">
+                            <connections>
+                                <segue destination="aB2-lU-FKk" kind="presentation" id="6qq-bf-khJ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YUS-qK-wxB">
                             <connections>
                                 <segue destination="c9q-n8-YTh" kind="presentation" identifier="CreateRecipeSegue" id="7tJ-aY-sNW"/>
@@ -412,9 +439,27 @@
             </objects>
             <point key="canvasLocation" x="5031.884057971015" y="1526.7857142857142"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kS0-TB-rpo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aB2-lU-FKk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hfF-sa-ro4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YEp-Zq-2pX" kind="relationship" relationship="rootViewController" id="G0M-C1-pvE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Klp-iT-gqv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876.8115942028987" y="-528.34821428571422"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3Eh-kK-k0v"/>
+        <segue reference="7tJ-aY-sNW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Settings" width="32" height="32"/>

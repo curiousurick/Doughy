@@ -13,9 +13,9 @@ class Ingredient: NSObject {
     let name: String
     let isFlour: Bool
     let defaultPercentage: Double
-    let temperature: Double?
+    let temperature: Temperature?
     
-    init(name: String, isFlour: Bool, defaultPercentage: Double, temperature: Double?) {
+    init(name: String, isFlour: Bool, defaultPercentage: Double, temperature: Temperature?) {
         self.name = name
         self.isFlour = isFlour
         self.defaultPercentage = defaultPercentage

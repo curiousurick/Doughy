@@ -21,6 +21,7 @@ class CalculatorViewController: FormViewController {
     var recipe: Recipe!
     var calculatedRecipe: CalculatedRecipe?
     
+    private let settings = Settings.shared
     private let calculator = Calculator.shared
     private let weightFormatter = WeightFormatter.shared
     private let percentFormatter = PercentFormatter.shared
@@ -157,7 +158,8 @@ class CalculatorViewController: FormViewController {
                     if let temp = ingredient.temperature {
                         section <<< TemperatureRow("preferment_temps.\(index)") { row in
                             row.title = "\(preferment.name) \(ingredient.name)"
-                            row.placeholder = self.tempFormatter.format(temperature: NSNumber(floatLiteral: temp))
+                            row.placeholder = self.tempFormatter.format(temperature: temp)
+                            row.measurement = self.settings.preferredTemp()
                         }
                     }
                 }
@@ -168,7 +170,8 @@ class CalculatorViewController: FormViewController {
                 if let temp = ingredient.temperature {
                     section <<< TemperatureRow("temps.\(index)") { row in
                         row.title = "\(ingredient.name)"
-                        row.placeholder = self.tempFormatter.format(temperature: NSNumber(floatLiteral: temp))
+                        row.placeholder = self.tempFormatter.format(temperature: temp)
+                        row.measurement = self.settings.preferredTemp()
                     }
                 }
             }
@@ -195,8 +198,11 @@ class CalculatorViewController: FormViewController {
             let row = form.rowBy(tag: "scalable.\(index)") as! PercentRow
             let percent = row.value ?? ingredient.defaultPercentage
             let tempRow = form.rowBy(tag: "temps.\(index)") as? TemperatureRow
-            let temp = tempRow?.value ?? ingredient.temperature
-            measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temp))
+            var temperature: Temperature? = ingredient.temperature
+            if let tempValue = tempRow?.value {
+                temperature = Temperature(value: tempValue, measurement: settings.preferredTemp())
+            }
+            measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temperature))
         }
         var measuredPreferment: MeasuredPreferment?
         if let preferment = recipe.preferment {
@@ -207,8 +213,11 @@ class CalculatorViewController: FormViewController {
                 let row = form.rowBy(tag: "preferment_scalable.\(index)") as! PercentRow
                 let percent = row.value ?? ingredient.defaultPercentage
                 let tempRow = form.rowBy(tag: "preferment_temps.\(index)") as? TemperatureRow
-                let temp = tempRow?.value ?? ingredient.temperature
-                measuredFermentIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temp))
+                var temperature: Temperature? = ingredient.temperature
+                if let tempValue = tempRow?.value {
+                    temperature = Temperature(value: tempValue, measurement: settings.preferredTemp())
+                }
+                measuredFermentIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temperature))
             }
             let fermentPercent = (form.rowBy(tag: "preferment_total_scalable.\(preferment.name)") as! PercentRow).value ?? preferment.flourPercentage
             measuredPreferment = MeasuredPreferment(ingredients: measuredFermentIngredients,
