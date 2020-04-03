@@ -57,7 +57,7 @@ class AddIngredientViewController: FormViewController {
         
         return AddIngredientSection(builder: newBuilder, recipeBuilder: self.recipeBuilder) { section in
             let section = section as! AddIngredientSection
-            section <<< NameRow() { row in
+            section <<< TitleRow() { row in
                 row.placeholder = "Name"
                 row.value = newBuilder.name
             }.onChange({ (row) in

@@ -37,7 +37,7 @@ class CreateRecipeViewController: FormViewController {
         self.title = "Details"
         
         form +++ Section("Recipe Details") { section in
-            section <<< NameRow() { row in
+            section <<< TitleRow() { row in
                 row.placeholder = "Name"
                 row.value = self.recipeBuilder.name
             }.onChange({ row in
@@ -66,13 +66,13 @@ class CreateRecipeViewController: FormViewController {
                     self.recipeBuilder.collection = value
                 }
                 else {
-                    let newCollectionTextRow = self.form.rowBy(tag: newCollectionNameRowId) as! NameRow
+                    let newCollectionTextRow = self.form.rowBy(tag: newCollectionNameRowId) as! TitleRow
                     if let newCollectionValue = newCollectionTextRow.value {
                         self.recipeBuilder.collection = newCollectionValue
                     }
                 }
             })
-            section <<< NameRow(newCollectionNameRowId) { row in
+            section <<< TitleRow(newCollectionNameRowId) { row in
                 row.placeholder = "Collection Name"
                 row.hidden = Condition.function([collectionPickerRowId], { form in
                     return !((form.rowBy(tag: collectionPickerRowId) as! PickerInlineRow<String?>).value! == nil)

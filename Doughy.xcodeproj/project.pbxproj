@@ -76,6 +76,7 @@
 		BBE2FF3B2436F1820091A485 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF3A2436F1820091A485 /* Temperature.swift */; };
 		BBE2FF3E2436F5380091A485 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF3D2436F5380091A485 /* SettingsViewController.swift */; };
 		BBE2FF402436FADB0091A485 /* TemperatureConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF3F2436FADB0091A485 /* TemperatureConverter.swift */; };
+		BBE2FF42243709E30091A485 /* TitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF41243709E30091A485 /* TitleRow.swift */; };
 		BBEA0CA52434554C00A708C7 /* CalculatedRecipeWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA42434554C00A708C7 /* CalculatedRecipeWriter.swift */; };
 		BBEA0CA72434557300A708C7 /* CalculatedRecipeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA62434557300A708C7 /* CalculatedRecipeReader.swift */; };
 		BBEA0CAA2434576200A708C7 /* SavedRecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA92434576200A708C7 /* SavedRecipesTableViewController.swift */; };
@@ -179,6 +180,7 @@
 		BBE2FF3A2436F1820091A485 /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		BBE2FF3D2436F5380091A485 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BBE2FF3F2436FADB0091A485 /* TemperatureConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConverter.swift; sourceTree = "<group>"; };
+		BBE2FF41243709E30091A485 /* TitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleRow.swift; sourceTree = "<group>"; };
 		BBEA0CA42434554C00A708C7 /* CalculatedRecipeWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeWriter.swift; sourceTree = "<group>"; };
 		BBEA0CA62434557300A708C7 /* CalculatedRecipeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeReader.swift; sourceTree = "<group>"; };
 		BBEA0CA92434576200A708C7 /* SavedRecipesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesTableViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				BB30DEF92425C05B00BFD472 /* PercentRow.swift */,
 				BBD26425243139C600DF8987 /* WeightRow.swift */,
 				BBD2642724313A9E00DF8987 /* TemperatureRow.swift */,
+				BBE2FF41243709E30091A485 /* TitleRow.swift */,
 			);
 			path = "Custom Rows";
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				BBD264202430822D00DF8987 /* IngredientWithPrefermentCellTableViewCell.swift in Sources */,
 				BB30DEFA2425C05B00BFD472 /* PercentRow.swift in Sources */,
 				BB4AA1A0242821FB002BB9A8 /* InstructionListCell.swift in Sources */,
+				BBE2FF42243709E30091A485 /* TitleRow.swift in Sources */,
 				BB30DEFF2425E1B700BFD472 /* Measurements.swift in Sources */,
 				BBD2643F2431619D00DF8987 /* AddInstructionsViewController.swift in Sources */,
 				BBD2642D2431487700DF8987 /* CreateRecipeViewController.swift in Sources */,
