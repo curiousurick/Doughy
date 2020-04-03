@@ -11,6 +11,10 @@ import Eureka
 
 class AddIngredientViewController: FormViewController {
     
+    var percentRowTitle: String {
+        get { return "Percent (of total flour)" }
+    }
+    
     var recipeBuilder: RecipeBuilder!
     
     override func viewDidLoad() {
@@ -91,7 +95,7 @@ class AddIngredientViewController: FormViewController {
     
     func createPercentRow(builder: IngredientBuilderBase) -> PercentRow {
         PercentRow() { row in
-            row.placeholder = "Percent (of total flour)"
+            row.placeholder = percentRowTitle
             row.value = builder.percent
         }.onChange({ (row) in
             let section = row.section as! AddIngredientSection

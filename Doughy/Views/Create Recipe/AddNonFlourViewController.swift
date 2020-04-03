@@ -13,6 +13,10 @@ fileprivate let errorMessage = "Please fill out the ingredient details and try a
 
 class AddNonFlourViewController: AddIngredientViewController {
     
+    override var percentRowTitle: String {
+        get { return "Percent (compared to total flour)" }
+    }
+    
     @IBOutlet weak var nextButton: UIBarButtonItem!
 
     override func initializeBuilders() {
