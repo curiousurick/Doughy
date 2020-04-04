@@ -8,36 +8,60 @@
 
 import UIKit
 import Eureka
+import MessageUI
 
 class SettingsViewController: FormViewController {
     
-    let settings = Settings.shared
+    private let settings = Settings.shared
+    private let tempToggleFactory = TemperatureToggleFactory.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         form +++ Section("Toggles") { section in
-            section <<< SegmentedRow<Temperature.Measurement>() { row in
-                row.title  = "Temperature"
-                row.options = Temperature.Measurement.allValues()
-                row.value = self.settings.preferredTemp()
-                row.displayValueFor = { (rowValue: Temperature.Measurement?) in
-                    return rowValue!.longValue
-                }
-            }.onChange({ (row) in
-                let currentPreference = self.settings.preferredTemp()
-                do {
-                    try self.settings.updateRecipeTemps(original: currentPreference, target: row.value!)
-                }
-                catch {
-                    let alert = AlertViewHelper.createErrorAlert(title: "Error", message: "Could not update preferred temperature", completion: nil)
-                    self.present(alert, animated: true, completion: nil)
-                    return
-                }
-                self.settings.setPreferredTemp(measurement: row.value!)
+            section <<< self.tempToggleFactory.create(viewController: self)
+        }
+        
+        form +++ Section("App") { section in
+            section <<< ButtonRow() { row in
+                row.title = "Open Source Libraries"
+                row.cellStyle = .value1
+            }.onCellSelection({ (cell, row) in
+                self.performSegue(withIdentifier: "ShowOpenSourceLibraries", sender: nil)
+            }).cellSetup({ (cell, row) in
+                cell.tintColor = .darkText
             })
+            section <<< ButtonRow() { row in
+                row.title = "Feedback or questions?"
+                row.cellStyle = .value1
+            }.onCellSelection({ (cell, row) in
+                if MFMailComposeViewController.canSendMail() {
+                    let mail = MFMailComposeViewController()
+                    mail.setSubject("Feedback for Doughy")
+                    mail.setToRecipients(["curiousurick@icloud.com"])
+                    self.present(mail, animated: true, completion: nil)
+                }
+                else {
+                    let alert = AlertViewHelper.createErrorAlert(title: "Sorry, I'm unable to send email right now.", message: "Please email curiousurick@icloud.com if you have feedback or questions", completion: nil)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }).cellSetup({ (cell, row) in
+                cell.tintColor = .darkText
+            })
+            section <<< LabelRow() { row in
+                row.title = "Version"
+                row.value = UIApplication.appVersion
+            }
         }
         
     }
 
+}
+
+// SelectorRow conforms to PresenterRowType
+public final class CustomPushRow: SelectorRow<PushSelectorCell<Bool>>, RowType {
+
+    public required init(tag: String?) {
+        super.init(tag: tag)
+    }
 }

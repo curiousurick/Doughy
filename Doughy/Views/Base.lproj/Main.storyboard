@@ -89,11 +89,30 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="xeI-f0-Se8" kind="show" identifier="ShowOpenSourceLibraries" id="2Vm-cF-CLc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaS-yx-JR6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="T9a-JG-LZL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2703" y="-528"/>
+        </scene>
+        <!--Libraries View Controller-->
+        <scene sceneID="eAd-JO-E3f">
+            <objects>
+                <viewController id="xeI-f0-Se8" customClass="LibrariesViewController" customModule="Doughy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hJ4-uW-ffX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="nly-QN-eik"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CbD-ni-anp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0fF-Fn-99A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3534.7826086956525" y="-528.34821428571422"/>
         </scene>
         <!--All Recipes Table View Controller-->
         <scene sceneID="4sG-OZ-HGz">

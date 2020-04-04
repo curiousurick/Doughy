@@ -77,6 +77,10 @@
 		BBE2FF3E2436F5380091A485 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF3D2436F5380091A485 /* SettingsViewController.swift */; };
 		BBE2FF402436FADB0091A485 /* TemperatureConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF3F2436FADB0091A485 /* TemperatureConverter.swift */; };
 		BBE2FF42243709E30091A485 /* TitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF41243709E30091A485 /* TitleRow.swift */; };
+		BBE2FF4424370B920091A485 /* EmailFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF4324370B920091A485 /* EmailFeedbackController.swift */; };
+		BBE2FF4624370BF00091A485 /* TemperatureToggleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF4524370BF00091A485 /* TemperatureToggleFactory.swift */; };
+		BBE2FF4824370C780091A485 /* LibrariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF4724370C780091A485 /* LibrariesViewController.swift */; };
+		BBE2FF4A2439497D0091A485 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF492439497D0091A485 /* AppInfo.swift */; };
 		BBEA0CA52434554C00A708C7 /* CalculatedRecipeWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA42434554C00A708C7 /* CalculatedRecipeWriter.swift */; };
 		BBEA0CA72434557300A708C7 /* CalculatedRecipeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA62434557300A708C7 /* CalculatedRecipeReader.swift */; };
 		BBEA0CAA2434576200A708C7 /* SavedRecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA92434576200A708C7 /* SavedRecipesTableViewController.swift */; };
@@ -181,6 +185,10 @@
 		BBE2FF3D2436F5380091A485 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BBE2FF3F2436FADB0091A485 /* TemperatureConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConverter.swift; sourceTree = "<group>"; };
 		BBE2FF41243709E30091A485 /* TitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleRow.swift; sourceTree = "<group>"; };
+		BBE2FF4324370B920091A485 /* EmailFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFeedbackController.swift; sourceTree = "<group>"; };
+		BBE2FF4524370BF00091A485 /* TemperatureToggleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureToggleFactory.swift; sourceTree = "<group>"; };
+		BBE2FF4724370C780091A485 /* LibrariesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrariesViewController.swift; sourceTree = "<group>"; };
+		BBE2FF492439497D0091A485 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		BBEA0CA42434554C00A708C7 /* CalculatedRecipeWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeWriter.swift; sourceTree = "<group>"; };
 		BBEA0CA62434557300A708C7 /* CalculatedRecipeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeReader.swift; sourceTree = "<group>"; };
 		BBEA0CA92434576200A708C7 /* SavedRecipesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesTableViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +343,7 @@
 				BBD2642924313B6E00DF8987 /* TemperatureFormatter.swift */,
 				BBD2643224314D6500DF8987 /* AlertViewHelper.swift */,
 				BBD264342431520500DF8987 /* RecipePredicates.swift */,
+				BBE2FF492439497D0091A485 /* AppInfo.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -461,6 +470,9 @@
 			isa = PBXGroup;
 			children = (
 				BBE2FF3D2436F5380091A485 /* SettingsViewController.swift */,
+				BBE2FF4324370B920091A485 /* EmailFeedbackController.swift */,
+				BBE2FF4524370BF00091A485 /* TemperatureToggleFactory.swift */,
+				BBE2FF4724370C780091A485 /* LibrariesViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -700,6 +712,7 @@
 				BBD264602432EADA00DF8987 /* IngredientConverter.swift in Sources */,
 				BB30DF012425EBA000BFD472 /* AllRecipesTableViewController.swift in Sources */,
 				BB6152122425FD06006CB854 /* DefaultRecipeFactory.swift in Sources */,
+				BBE2FF4824370C780091A485 /* LibrariesViewController.swift in Sources */,
 				BBD264682432F08200DF8987 /* CalculatedPrefermentConverter.swift in Sources */,
 				BB30DEFD2425D24900BFD472 /* Calculator.swift in Sources */,
 				BBD264202430822D00DF8987 /* IngredientWithPrefermentCellTableViewCell.swift in Sources */,
@@ -742,6 +755,7 @@
 				BBD2646D24330E0800DF8987 /* DoughyNotifications.swift in Sources */,
 				BBD2645C2432E90700DF8987 /* RecipeConverter.swift in Sources */,
 				BBE2FF3B2436F1820091A485 /* Temperature.swift in Sources */,
+				BBE2FF4A2439497D0091A485 /* AppInfo.swift in Sources */,
 				BBD264642432EB5700DF8987 /* PrefermentConverter.swift in Sources */,
 				BBD2641C2430704000DF8987 /* IngredientCell.swift in Sources */,
 				BBD264622432EB4F00DF8987 /* InstructionConverter.swift in Sources */,
@@ -754,8 +768,10 @@
 				BBD2643324314D6500DF8987 /* AlertViewHelper.swift in Sources */,
 				BB30DED02425B83E00BFD472 /* AppDelegate.swift in Sources */,
 				BBD2642824313A9E00DF8987 /* TemperatureRow.swift in Sources */,
+				BBE2FF4424370B920091A485 /* EmailFeedbackController.swift in Sources */,
 				BBD2646A2432F1E400DF8987 /* CalculatedRecipeConverter.swift in Sources */,
 				BB30DED22425B83E00BFD472 /* SceneDelegate.swift in Sources */,
+				BBE2FF4624370BF00091A485 /* TemperatureToggleFactory.swift in Sources */,
 				BBD2643B2431574200DF8987 /* IngredientsBuilder.swift in Sources */,
 				BB30DEF72425BD2900BFD472 /* RecipeWriter.swift in Sources */,
 			);

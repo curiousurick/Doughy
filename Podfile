@@ -6,7 +6,6 @@ target 'Doughy' do
   use_frameworks!
   
   pod 'Eureka', '~> 5.2.1'
-  pod 'HandyJSON', '~> 5.0.1'
 
   # Pods for Doughy
 
