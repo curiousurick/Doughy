@@ -23,6 +23,16 @@ class SettingsViewController: FormViewController {
         }
         
         form +++ Section("App") { section in
+            section <<< LabelRow() { row in
+                row.title = "Donate to your local food bank"
+                row.value = "Go to feedingamerica.org"
+                row.cellStyle = .subtitle
+            }.onCellSelection({ (cell, row) in
+                UIApplication.shared.open(URL(string: "https://www.feedingamerica.org/find-your-local-foodbank")!, completionHandler: nil)
+            }).cellSetup({ (cell, row) in
+                cell.tintColor = .darkText
+                
+            })
             section <<< ButtonRow() { row in
                 row.title = "Open Source Libraries"
                 row.cellStyle = .value1
