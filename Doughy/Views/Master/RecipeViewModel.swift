@@ -24,7 +24,7 @@ struct RecipeViewModel {
         return items[row].name
     }
     
-    func recipeForRow(section: Int, row: Int) -> Recipe {
+    func recipeForRow(section: Int, row: Int) -> RecipeProtocol {
         return items[section].recipes[row]
     }
     

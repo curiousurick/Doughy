@@ -24,8 +24,8 @@ class AddInstructionsViewController: FormViewController {
     
     var recipeBuilder: RecipeBuilder!
     
-    var recipe: Recipe?
-    var calculatedRecipe: CalculatedRecipe?
+    var recipe: RecipeProtocol?
+    var calculatedRecipe: CalculatedRecipeProtocol?
 
     @IBOutlet weak var previewButton: UIBarButtonItem!
     

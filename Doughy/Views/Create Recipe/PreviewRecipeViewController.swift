@@ -20,7 +20,7 @@ class PreviewRecipeViewController: ShowCalculatedRecipeBaseViewController {
     private let recipeWriter = RecipeWriter.shared
     private var recipeNav: CreateRecipeNavigationController!
     
-    var recipe: Recipe!
+    var recipe: RecipeProtocol!
     var recipeBuilder: RecipeBuilder!
 
     var saveButton: UIBarButtonItem!

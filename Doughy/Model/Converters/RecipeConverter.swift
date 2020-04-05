@@ -20,7 +20,7 @@ class RecipeConverter: NSObject {
     
     private override init() { }
     
-    func convertToCoreData(recipe: Recipe) -> XCRecipe {
+    func convertToCoreData(recipe: RecipeProtocol) -> XCRecipe {
         let coreData = objectFactory.createRecipe()
         
         coreData.name = recipe.name
@@ -32,14 +32,15 @@ class RecipeConverter: NSObject {
         recipe.instructions.forEach {
             coreData.addToInstructions(instructionConverter.convertToCoreData(instruction: $0))
         }
-        if let preferment = recipe.preferment {
+        if recipe is PrefermentRecipe {
+            let preferment = (recipe as! PrefermentRecipe).preferment
             coreData.preferment = prefermentConverter.convertToCoreData(preferment: preferment)
         }
         
         return coreData
     }
     
-    func overWriteCoreData(recipe: Recipe, existing: XCRecipe) -> XCRecipe {
+    func overWriteCoreData(recipe: RecipeProtocol, existing: XCRecipe) -> XCRecipe {
         
         existing.name = recipe.name
         existing.collection = recipe.collection
@@ -47,7 +48,8 @@ class RecipeConverter: NSObject {
         self.replaceIngredients(recipe: recipe, existing: existing)
         self.replaceInstructions(recipe: recipe, existing: existing)
         
-        if let preferment = recipe.preferment {
+        if recipe is PrefermentRecipe {
+            let preferment = (recipe as! PrefermentRecipe).preferment
             if let existingPreferment = existing.preferment {
                 self.coreDataGateway.managedObjectConext.delete(existingPreferment)
             }
@@ -57,7 +59,7 @@ class RecipeConverter: NSObject {
         return existing
     }
     
-    private func replaceIngredients(recipe: Recipe, existing: XCRecipe) {
+    private func replaceIngredients(recipe: RecipeProtocol, existing: XCRecipe) {
         let ingredients = existing.ingredients!.array as! [XCIngredient]
         existing.removeFromIngredients(existing.ingredients!)
         ingredients.forEach {
@@ -68,7 +70,7 @@ class RecipeConverter: NSObject {
         }
     }
     
-    private func replaceInstructions(recipe: Recipe, existing: XCRecipe) {
+    private func replaceInstructions(recipe: RecipeProtocol, existing: XCRecipe) {
         let instructions = existing.instructions!.array as! [XCInstruction]
         existing.removeFromInstructions(existing.instructions!)
         instructions.forEach {
@@ -79,7 +81,7 @@ class RecipeConverter: NSObject {
         }
     }
     
-    func convertToExternal(recipe: XCRecipe) -> Recipe {
+    func convertToExternal(recipe: XCRecipe) -> RecipeProtocol {
         let name = recipe.name!
         let collection = recipe.collection!
         let defaultWeight = recipe.defaultWeight!.doubleValue
@@ -89,12 +91,14 @@ class RecipeConverter: NSObject {
         let instructions = (recipe.instructions!.array as! [XCInstruction]).map {
             instructionConverter.convertToExternal(instruction: $0)
         }
-        var preferment: Preferment? = nil
         if let xcPreferment = recipe.preferment {
-             preferment = prefermentConverter.convertToExternal(preferment: xcPreferment)
+            let preferment = prefermentConverter.convertToExternal(preferment: xcPreferment)
+            return PrefermentRecipe(name: name, collection: collection,
+                                    defaultWeight: defaultWeight, ingredients: ingredients,
+                                    preferment: preferment, instructions: instructions)
         }
         
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: preferment, instructions: instructions)
+        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, instructions: instructions)
         
     }
 }

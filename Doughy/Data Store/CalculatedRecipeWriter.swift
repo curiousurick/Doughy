@@ -20,7 +20,7 @@ class CalculatedRecipeWriter: NSObject {
     
     private override init() { }
     
-    func writeRecipe(recipe: CalculatedRecipe) throws {
+    func writeRecipe(recipe: CalculatedRecipeProtocol) throws {
         print("Writing Recipe \(recipe)")
         
         // Update if there exists a recipe by this name already
@@ -39,7 +39,7 @@ class CalculatedRecipeWriter: NSObject {
         }
     }
     
-    func deleteRecipe(recipe: Recipe) throws {
+    func deleteRecipe(recipe: RecipeProtocol) throws {
         print("Deleting Recipe \(recipe)")
         
         guard let coreDataRecipe = recipeReader.getRecipe(collection: recipe.collection, name: recipe.name) else {

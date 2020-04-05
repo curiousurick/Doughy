@@ -16,7 +16,7 @@ class IngredientWithPrefermentListCell: UITableViewCell, UITableViewDataSource, 
     @IBOutlet weak var tableView: UITableView!
     var ingredientWithPrefermentCellNib: UINib!
     
-    var recipe: CalculatedRecipe!
+    var recipe: CalculatedPrefermentRecipe!
     
     let numberFormatter = NumberFormatter()
     
@@ -61,7 +61,7 @@ class IngredientWithPrefermentListCell: UITableViewCell, UITableViewDataSource, 
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientWithPrefermentCell") as! IngredientWithPrefermentCell
         
         // The preferment row
-        let preferment = recipe.preferment!
+        let preferment = recipe.preferment
         let prefermentIngredients = preferment.ingredients
         if indexPath.row == recipe.ingredients.count {
             cell.nameLabel.text = preferment.name

@@ -10,7 +10,7 @@ import UIKit
 
 class RecipeCollection {
     let name: String
-    var recipes: [Recipe] = []
+    var recipes: [RecipeProtocol] = []
     
     init(name: String) {
         self.name = name

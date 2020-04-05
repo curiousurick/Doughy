@@ -129,7 +129,7 @@ extension AllRecipesTableViewController: RecipeDetailTableViewDelegate {
         self.tableView.endUpdates()
     }
     
-    func recipeCell(recipeCell: RecipeDetailCell, failedToRemove recipe: Recipe, row: Int, for section: Int) {
+    func recipeCell(recipeCell: RecipeDetailCell, failedToRemove recipe: RecipeProtocol, row: Int, for section: Int) {
         let title = "Error"
         let message = "Could not delete the recipe"
         let alert = AlertViewHelper.createErrorAlert(title: title, message: message, completion: nil)

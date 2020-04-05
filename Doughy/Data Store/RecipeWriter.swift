@@ -20,7 +20,7 @@ class RecipeWriter: NSObject {
     
     private override init() { }
     
-    func writeRecipe(recipe: Recipe) throws {
+    func writeRecipe(recipe: RecipeProtocol) throws {
         print("Writing Recipe \(recipe)")
         
         // Update if there exists a recipe by this name already
@@ -39,7 +39,7 @@ class RecipeWriter: NSObject {
         }
     }
     
-    func updateRecipe(recipe: Recipe, existingName: String, existingCollection: String) throws {
+    func updateRecipe(recipe: RecipeProtocol, existingName: String, existingCollection: String) throws {
         print("Updating Recipe \(recipe)")
 
         // Update if there exists a recipe by this name already
@@ -58,7 +58,7 @@ class RecipeWriter: NSObject {
         }
     }
     
-    func deleteRecipe(recipe: Recipe) throws {
+    func deleteRecipe(recipe: RecipeProtocol) throws {
         print("Deleting Recipe \(recipe)")
         
         guard let coreDataRecipe = recipeReader.getRecipe(collection: recipe.collection, name: recipe.name) else {

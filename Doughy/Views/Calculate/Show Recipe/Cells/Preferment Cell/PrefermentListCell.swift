@@ -15,7 +15,7 @@ class PrefermentListCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var tableView: UITableView!
     var prefermentCellNib: UINib!
     
-    var recipe: CalculatedRecipe!
+    var recipe: CalculatedPrefermentRecipe!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -44,13 +44,13 @@ class PrefermentListCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipe.preferment!.ingredients.count
+        return recipe.preferment.ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrefermentCell") as! PrefermentCell
         
-        let ingredient = recipe.preferment!.ingredients[indexPath.row]
+        let ingredient = recipe.preferment.ingredients[indexPath.row]
         let name = ingredient.name
         if let temp = ingredient.temperature {
             let formattedTemp = TemperatureFormatter.shared.format(temperature: temp)

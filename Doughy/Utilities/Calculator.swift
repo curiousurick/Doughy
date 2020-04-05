@@ -18,8 +18,8 @@ class Calculator: NSObject {
     
     func calculate(ingredients: [MeasuredIngredient],
                    preferment: MeasuredPreferment?,
-                   recipe: Recipe,
-                   totalWeight: Double) throws -> CalculatedRecipe {
+                   recipe: RecipeProtocol,
+                   totalWeight: Double) throws -> CalculatedRecipeProtocol {
         let totalPercent = ingredients.map { $0.percent }.reduce(0, +)
         var doughIngredients = [CalculatedIngredient]()
         ingredients.forEach { ingredient in
@@ -71,14 +71,20 @@ class Calculator: NSObject {
             }
         }
         
-        let calculatedRecipe = CalculatedRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
+        let calculatedRecipe: CalculatedRecipeProtocol
+        if let calculatedPreferment = calculatedPreferment {
+            calculatedRecipe = CalculatedPrefermentRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
+        }
+        else {
+            calculatedRecipe = CalculatedRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, instructions: recipe.instructions)
+        }
         
         try validateCalculation(calculatedRecipe: calculatedRecipe)
         
         return calculatedRecipe
     }
     
-    func calculate(recipe: Recipe) throws -> CalculatedRecipe {
+    func calculate(recipe: RecipeProtocol) throws -> CalculatedRecipeProtocol {
         let totalWeight = recipe.defaultWeight
         
         let ingredients = recipe.ingredients
@@ -99,7 +105,8 @@ class Calculator: NSObject {
             .reduce(0, +)
         
         var calculatedPreferment: CalculatedPreferment? = nil
-        if let preferment = recipe.preferment {
+        if recipe is PrefermentRecipe {
+            let preferment = (recipe as! PrefermentRecipe).preferment
             let prefermentIngredients = preferment.ingredients
             let prefermentFlourWeight = (preferment.flourPercentage / 100) * totalFlourWeight
             let prefermentTotalPercent = prefermentIngredients
@@ -137,7 +144,13 @@ class Calculator: NSObject {
             }
         }
         
-        let calculatedRecipe = CalculatedRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
+        let calculatedRecipe: CalculatedRecipeProtocol
+        if let calculatedPreferment = calculatedPreferment {
+            calculatedRecipe = CalculatedPrefermentRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, preferment: calculatedPreferment, instructions: recipe.instructions)
+        }
+        else {
+            calculatedRecipe = CalculatedRecipe(name: recipe.name, collection: recipe.collection, weight: totalWeight, ingredients: doughIngredients, instructions: recipe.instructions)
+        }
         
         try validateCalculation(calculatedRecipe: calculatedRecipe)
         
@@ -145,11 +158,12 @@ class Calculator: NSObject {
         
     }
     
-    private func validateCalculation(calculatedRecipe: CalculatedRecipe) throws {
+    private func validateCalculation(calculatedRecipe: CalculatedRecipeProtocol) throws {
         
         // Check that no weights are negative
-        let prefermentIngredients = calculatedRecipe.preferment?.ingredients
-        if prefermentIngredients != nil {
+        var prefermentIngredients: [CalculatedIngredient]? = nil
+        if calculatedRecipe is CalculatedPrefermentRecipe {
+            prefermentIngredients = (calculatedRecipe as! CalculatedPrefermentRecipe).preferment.ingredients
             for ingredient in prefermentIngredients! {
                 let weight = ingredient.weight
                 if ingredient.weight < 0 {

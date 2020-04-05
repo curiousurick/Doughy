@@ -17,7 +17,7 @@ class DefaultRecipeFactory: NSObject {
     
     private override init() { }
     
-    func create() -> [Recipe] {
+    func create() -> [RecipeProtocol] {
         return [createNeopolitan(),
                 createNewYorkPizza(),
                 createBigaBread(),
@@ -76,7 +76,7 @@ class DefaultRecipeFactory: NSObject {
         let name = "Neopolitan Pizza"
         let collection = "Pizza"
         let defaultWeight = 270.0
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: nil, instructions: instructions)
+        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, instructions: instructions)
     }
     
     private func createNewYorkPizza() -> Recipe {
@@ -104,10 +104,10 @@ class DefaultRecipeFactory: NSObject {
         let collection = "Pizza"
         let defaultWeight = 305.0
         
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: nil, instructions: instructions)
+        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, instructions: instructions)
     }
     
-    private func createBigaBread() -> Recipe {
+    private func createBigaBread() -> PrefermentRecipe {
         let bigaFlour = Ingredient(name: "White Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
         let bigaWaterTemp = Temperature(value: 80, measurement: .fahrenheit)
         let bigaWater = Ingredient(name: "Water", isFlour: false, defaultPercentage: 68, temperature: bigaWaterTemp)
@@ -137,10 +137,10 @@ class DefaultRecipeFactory: NSObject {
         let collection = "Bread"
         let defaultWeight = 887.32
         
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: biga, instructions: instructions)
+        return PrefermentRecipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: biga, instructions: instructions)
     }
     
-    private func createfiftyPercentWholeWheatBreadWithBiga() -> Recipe {
+    private func createfiftyPercentWholeWheatBreadWithBiga() -> PrefermentRecipe {
         let bigaFlour = Ingredient(name: "White Flour", isFlour: true, defaultPercentage: 100, temperature: nil)
         let bigaWaterTemp = Temperature(value: 80, measurement: .fahrenheit)
         let bigaWater = Ingredient(name: "Water", isFlour: false, defaultPercentage: 68, temperature: bigaWaterTemp)
@@ -170,7 +170,7 @@ class DefaultRecipeFactory: NSObject {
         let collection = "Bread"
         let defaultWeight = 912.7
         
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: biga, instructions: instructions)
+        return PrefermentRecipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: biga, instructions: instructions)
     }
 
 }

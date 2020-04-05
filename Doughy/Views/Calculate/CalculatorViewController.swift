@@ -18,8 +18,8 @@ fileprivate let tempSwitchTag = "tempSwitchTag"
 class CalculatorViewController: FormViewController {
     
     var ingredientSection: Section!
-    var recipe: Recipe!
-    var calculatedRecipe: CalculatedRecipe?
+    var recipe: RecipeProtocol!
+    var calculatedRecipe: CalculatedRecipeProtocol?
     
     private let settings = Settings.shared
     private let calculator = Calculator.shared
@@ -81,7 +81,7 @@ class CalculatorViewController: FormViewController {
             section <<< SwitchRow(prefermentPercentSwitchTag) { row in
                 row.title = "Adjust Preferment Ingredients"
                 row.value = false
-                row.hidden = Condition(booleanLiteral: self.recipe.preferment == nil)
+                row.hidden = Condition(booleanLiteral: self.recipe is Recipe)
             }
             
             section <<< SwitchRow(doughPercentSwitchTag) { row in
@@ -94,7 +94,8 @@ class CalculatorViewController: FormViewController {
                 row.hidden = Condition(booleanLiteral: !self.recipe.containsVariableTemps())
             }
         }
-        if let preferment = self.recipe.preferment {
+        if self.recipe is PrefermentRecipe {
+            let preferment = (self.recipe as! PrefermentRecipe).preferment
             form +++ Section("Preferment") { section in
                 
                 section.hidden = Condition.function([prefermentPercentSwitchTag], { (form) -> Bool in
@@ -151,7 +152,8 @@ class CalculatorViewController: FormViewController {
             section.hidden = Condition.function([tempSwitchTag], { (form) -> Bool in
                 return !(form.rowBy(tag: tempSwitchTag) as! SwitchRow).value!
             })
-            if let preferment = self.recipe.preferment {
+            if self.recipe is PrefermentRecipe {
+                let preferment = (self.recipe as! PrefermentRecipe).preferment
                 let prefermentIngredients = preferment.ingredients
                 for index in 0..<prefermentIngredients.count {
                     let ingredient = prefermentIngredients[index]
@@ -205,7 +207,8 @@ class CalculatorViewController: FormViewController {
             measuredIngredients.append(MeasuredIngredient(ingredient: ingredient, percent: percent, temperature: temperature))
         }
         var measuredPreferment: MeasuredPreferment?
-        if let preferment = recipe.preferment {
+        if recipe is PrefermentRecipe {
+            let preferment = (recipe as! PrefermentRecipe).preferment
             var measuredFermentIngredients = [MeasuredIngredient]()
             let fermentIngredients = preferment.ingredients
             for index in 0..<fermentIngredients.count {
@@ -226,10 +229,11 @@ class CalculatorViewController: FormViewController {
         }
         
         do {
-            try self.calculatedRecipe = self.calculator.calculate(ingredients: measuredIngredients,
-                                                                  preferment: measuredPreferment,
-                                                                  recipe: recipe,
-                                                                  totalWeight: totalWeight)
+            try self.calculatedRecipe = self.calculator.calculate(
+                ingredients: measuredIngredients,
+                preferment: measuredPreferment,
+                recipe: recipe,
+                totalWeight: totalWeight)
         }
         catch CalculationError.finalDoughNegativeValue(let name, let value) {
             self.displayCalculationError(mixName: "Final Dough", name: name, value: value)

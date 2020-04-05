@@ -12,7 +12,7 @@ protocol RecipeDetailTableViewDelegate {
     
     func recipeCell(recipeCell: RecipeDetailCell, didSelect row: Int, for section: Int)
     func recipeCell(recipeCell: RecipeDetailCell, didRemove row: Int, for section: Int)
-    func recipeCell(recipeCell: RecipeDetailCell, failedToRemove recipe: Recipe, row: Int, for section: Int)
+    func recipeCell(recipeCell: RecipeDetailCell, failedToRemove recipe: RecipeProtocol, row: Int, for section: Int)
     func recipeCell(recipeCell: RecipeDetailCell, didRunOutOfRecipesIn section: Int)
     
 }
@@ -30,7 +30,7 @@ class RecipeDetailCell: UITableViewCell {
         }
     }
     
-    private var details: [Recipe]?
+    private var details: [RecipeProtocol]?
     
     @IBOutlet private var stackView: UIStackView!
     @IBOutlet private var titleLabel: UILabel!
@@ -40,7 +40,7 @@ class RecipeDetailCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func updateDetails(details: [Recipe]) {
+    func updateDetails(details: [RecipeProtocol]) {
         self.details = details
         self.detailTableView.reloadData()
     }

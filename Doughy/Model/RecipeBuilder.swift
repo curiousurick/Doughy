@@ -40,7 +40,7 @@ class RecipeBuilder: NSObject {
     
     override init() { }
 
-    init(recipe: Recipe) {
+    init(recipe: RecipeProtocol) {
         self.existingName = recipe.name
         self.name = recipe.name
         self.existingCollection = recipe.collection
@@ -56,7 +56,7 @@ class RecipeBuilder: NSObject {
             .map { IngredientBuilder(ingredient: $0) }
     }
     
-    func build() throws -> Recipe {
+    func build() throws -> RecipeProtocol {
         guard let collection = collection else {
             throw RecipeBuilderError.missingCollection
         }
@@ -82,7 +82,7 @@ class RecipeBuilder: NSObject {
         let flourWeight = calculateDefaultFlourWeight(defaultWeight: defaultWeight, ingredientBuilders: ingredientBuilders)
         let remainingIngredients = try ingredientBuilders.map { try $0.build(totalFlourWeight: flourWeight) }
         ingredients.append(contentsOf: remainingIngredients)
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, preferment: nil, instructions: instructions)
+        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, instructions: instructions)
     }
     
     private func calculateDefaultFlourWeight(defaultWeight: Double, ingredientBuilders: [IngredientBuilder]) -> Double {

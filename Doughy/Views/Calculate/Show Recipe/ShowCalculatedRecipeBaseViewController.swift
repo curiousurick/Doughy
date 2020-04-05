@@ -22,8 +22,7 @@ class ShowCalculatedRecipeBaseViewController: UITableViewController {
     
     private let cellFactory = CalculatedRecipeCellFactory.shared
     
-    var calculatedRecipe: CalculatedRecipe!
-    var doughType: DoughType!
+    var calculatedRecipe: CalculatedRecipeProtocol!
     
     required init?(coder: NSCoder) {
         self.prefermentListCellNib = UINib(nibName: "PrefermentListCell", bundle: nil)
@@ -40,17 +39,10 @@ class ShowCalculatedRecipeBaseViewController: UITableViewController {
         tableView.register(self.ingredientListCellNib, forCellReuseIdentifier: "IngredientListCell")
         tableView.register(self.ingredientWithPrefermentListCellNib, forCellReuseIdentifier: "IngredientWithPrefermentListCell")
         tableView.register(self.instructionListCellNib, forCellReuseIdentifier: "InstructionListCell")
-        
-        if calculatedRecipe.preferment != nil {
-            doughType = .preferment
-        }
-        else {
-            doughType = .straight
-        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        let baseCount = doughType == .preferment ? 2 : 1
+        let baseCount = calculatedRecipe is CalculatedPrefermentRecipe ? 2 : 1
         let hasInstructions = !calculatedRecipe.instructions.isEmpty
         return hasInstructions ? baseCount + 1 : baseCount
     }
