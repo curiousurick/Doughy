@@ -22,8 +22,9 @@ class DefaultRecipeFactory: NSObject {
                 createNewYorkPizza(),
                 createBagel(),
                 createBagelWithPoolish(),
-                createBigaBread(),
-                createfiftyPercentWholeWheatBreadWithBiga()]
+//                createBigaBread(),
+//                createfiftyPercentWholeWheatBreadWithBiga()
+        ]
     }
     
     private func createNeopolitan() -> Recipe {
@@ -210,7 +211,7 @@ class DefaultRecipeFactory: NSObject {
         instructions.append(Instruction(step:
             "Bake the bagels.\nPlace the bagels into the oven on a baking sheet (or if you're fancy, you can bake these on a baking steel/stone). Baking at 450 for 16-18 minutes, turning the baking sheet 180º halfway through for even baking."))
         
-        let name = "George's Favorite Bagels"
+        let name = "Bagels"
         let collection = "Bagels"
         let defaultWeight = 113.0
         
@@ -249,7 +250,7 @@ class DefaultRecipeFactory: NSObject {
         instructions.append(Instruction(step:
             "Bake the bagels.\nPlace the bagels into the oven on a baking sheet (or if you're fancy, you can bake these on a baking steel/stone). Baking at 450 for 16-18 minutes, turning the baking sheet 180º halfway through for even baking."))
         
-        let name = "George's Favorite Bagels With Poolish"
+        let name = "Bagels With Poolish"
         let collection = "Bagels"
         let defaultWeight = 113.0
         
