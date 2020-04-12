@@ -29,7 +29,6 @@ class CalculatorViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = recipe.name
         
         self.reloadRecipe()
     }
@@ -69,7 +68,7 @@ class CalculatorViewController: FormViewController {
 
     private func reloadRecipe() {
         self.form.removeAll()
-        form +++ Section("Recipe Quantity") { section in
+        form +++ Section(recipe.name) { section in
             section <<< IntRow(unitCountTag) { row in
                 row.title = "Number of Doughs"
                 row.placeholder = "Default: 1"
