@@ -9,34 +9,34 @@
 import UIKit
 
 class SavedRecipesTableViewController: UITableViewController {
+    
+    private let settings = Settings.shared
+    
+    private var savedRecipes = CalculatedRecipeReader.shared.getRecipes()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        self.title = "Notes"
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return savedRecipes.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedRecipeCell", for: indexPath)
+        
+        cell.textLabel?.text = savedRecipes[indexPath.row].name
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

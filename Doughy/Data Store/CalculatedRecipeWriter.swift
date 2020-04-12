@@ -29,7 +29,8 @@ class CalculatedRecipeWriter: NSObject {
             throw RecipeWritingError.recipeExistsDuringWrite
         }
         
-        let _ = recipeConverter.convertToCoreData(recipe: recipe)
+        let coreDataRecipe = recipeConverter.convertToCoreData(recipe: recipe)
+        coreDataRecipe.creationDate = Date()
         
         do {
             try self.coreDataGateway.managedObjectConext.save()

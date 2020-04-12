@@ -19,6 +19,7 @@ class CalculatedRecipeReader: NSObject {
     
     func getRecipes() -> [XCCalculatedRecipe] {
         let fetchRequest = NSFetchRequest<XCCalculatedRecipe>(entityName: "XCCalculatedRecipe")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         do {
             return try self.coreDataGateway.managedObjectConext.fetch(fetchRequest)

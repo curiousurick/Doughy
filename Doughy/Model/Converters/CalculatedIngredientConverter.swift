@@ -10,7 +10,6 @@ import UIKit
 
 class CalculatedIngredientConverter: NSObject {
     private let objectFactory = ObjectFactory.shared
-    private let settings = Settings.shared
     
     static let shared = CalculatedIngredientConverter()
     
@@ -38,7 +37,7 @@ class CalculatedIngredientConverter: NSObject {
         let isFlour = ingredient.isFlour
         var temperature: Temperature? = nil
         if let temp = ingredient.temperature?.doubleValue {
-            temperature = Temperature(value: temp, measurement: settings.preferredTemp())
+            temperature = Temperature(value: temp, measurement: Settings.shared.preferredTemp())
         }
         let weight = ingredient.weight!.doubleValue
         

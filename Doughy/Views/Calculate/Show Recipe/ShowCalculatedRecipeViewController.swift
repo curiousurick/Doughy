@@ -11,21 +11,19 @@ import UIKit
 fileprivate let saveErrorTitle = "Error"
 fileprivate let saveErrorMessage = "Failed to save this recipe."
 fileprivate let saveSuccessTitle = "Success!"
-fileprivate let saveSuccessMessage = "Go to the history tab to see this recipe and take notes on how it turned out!"
+fileprivate let saveSuccessMessage = "Go to the notes tab to see this recipe and take notes on how it turned out!"
 
 class ShowCalculatedRecipeViewController: ShowCalculatedRecipeBaseViewController {
     
     private let recipeWriter = CalculatedRecipeWriter.shared
     
-    var saveRecipeButton: UIBarButtonItem!
+    @IBOutlet weak var saveRecipeButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        saveRecipeButton = UIBarButtonItem()
     }
     
-    func saveRecipeButtonClicked(_ sender: Any) {
+    @IBAction func saveRecipeButtonClicked(_ sender: Any) {
         
         do {
             try recipeWriter.writeRecipe(recipe: self.calculatedRecipe)

@@ -16,11 +16,14 @@ class Settings: NSObject {
     private let recipeConverter = RecipeConverter.shared
     private let recipeReader = RecipeReader.shared
     private let recipeWriter = RecipeWriter.shared
+    private let calculatedRecipeReader = CalculatedRecipeReader.shared
+    private let calculatedRecipeConverter = CalculatedRecipeConverter.shared
     private let defaultRecipeFactory = DefaultRecipeFactory.shared
     private let userDefaults = UserDefaults.standard
     private let coreDataGateway = CoreDataGateway.shared
     
     lazy var recipes = self.refreshRecipes()
+    lazy var calculatedRecipes = self.refreshCalculatedRecipes()
     
     static let shared = Settings()
     
@@ -49,6 +52,12 @@ class Settings: NSObject {
             return a.name < b.name
         }
         return collections
+    }
+    
+    func refreshCalculatedRecipes() -> [CalculatedRecipeProtocol] {
+        return calculatedRecipeReader.getRecipes().map {
+            calculatedRecipeConverter.convertToExternal(recipe: $0)
+        }
     }
 }
 
