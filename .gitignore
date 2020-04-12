@@ -1,3 +1,6 @@
+# Adding for diff handling in intellij
+.idea/
+
 # Cocoapods
 Pods/*
 Podfile.lock

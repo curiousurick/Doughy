@@ -105,10 +105,27 @@
                     <view key="view" contentMode="scaleToFill" id="hJ4-uW-ffX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sNs-jD-Azt">
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="sNs-jD-Azt" firstAttribute="top" secondItem="nly-QN-eik" secondAttribute="top" id="JIv-CO-Piw"/>
+                            <constraint firstItem="sNs-jD-Azt" firstAttribute="leading" secondItem="nly-QN-eik" secondAttribute="leading" id="OxY-Bs-6mp"/>
+                            <constraint firstItem="sNs-jD-Azt" firstAttribute="bottom" secondItem="nly-QN-eik" secondAttribute="bottom" constant="34" id="eLh-2M-lUo"/>
+                            <constraint firstItem="nly-QN-eik" firstAttribute="trailing" secondItem="sNs-jD-Azt" secondAttribute="trailing" id="lie-Jq-euR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nly-QN-eik"/>
                     </view>
                     <navigationItem key="navigationItem" id="CbD-ni-anp"/>
+                    <connections>
+                        <outlet property="textView" destination="sNs-jD-Azt" id="3H3-PS-oWd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0fF-Fn-99A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,7 +273,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nextButton" destination="1cH-zn-JkE" id="HnT-di-pJC"/>
-                        <segue destination="IsK-cy-R8Y" kind="show" identifier="PushToAddIngredientsSegue" id="HXk-aB-vGE"/>
+                        <segue destination="IsK-cy-R8Y" kind="show" identifier="AddFlourSegue" id="HXk-aB-vGE"/>
+                        <segue destination="kOQ-7H-fNa" kind="show" identifier="AddPrefermentFlourSegue" id="WP6-UX-E1T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7he-7d-lha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -282,7 +300,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nextButton" destination="dzX-YU-ugx" id="HjI-Zk-epg"/>
-                        <segue destination="WWQ-xc-aDi" kind="show" identifier="MoveToRestOfIngredientsSegue" id="zIU-vS-Gmj"/>
+                        <segue destination="WWQ-xc-aDi" kind="show" identifier="AddRemainingIngredientsSegue" id="zIU-vS-Gmj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-sH-UOt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -328,6 +346,7 @@
                         <outlet property="nextButton" destination="ZxJ-Jg-O73" id="uHZ-dQ-bdK"/>
                         <segue destination="g6j-6c-uXY" kind="show" identifier="AddInstructionsSegue" id="jF2-ts-7DX"/>
                         <segue destination="j9q-yB-MUo" kind="show" identifier="AddInstructionsSegueAlt" id="cGl-if-4rT"/>
+                        <segue destination="2nz-Qg-6qa" kind="show" identifier="AddPrefermentSegue" id="Krm-AZ-du7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XD-RQ-Qcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -358,7 +377,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSI-pu-hxa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5033" y="838"/>
+            <point key="canvasLocation" x="5032" y="838"/>
         </scene>
         <!--Preview Recipe View Controller-->
         <scene sceneID="zh0-KO-YoO">
@@ -456,7 +475,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DL9-Of-6pB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5031.884057971015" y="1526.7857142857142"/>
+            <point key="canvasLocation" x="5032" y="127"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kS0-TB-rpo">
@@ -476,9 +495,88 @@
             </objects>
             <point key="canvasLocation" x="1876.8115942028987" y="-528.34821428571422"/>
         </scene>
+        <!--Add Preferment Flour View Controller-->
+        <scene sceneID="klr-ge-Rao">
+            <objects>
+                <viewController id="kOQ-7H-fNa" customClass="AddPrefermentFlourViewController" customModule="Doughy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oiz-t4-vDc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Y61-uy-5hv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FXw-NS-UbI">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="tBc-SP-ZrI">
+                            <connections>
+                                <action selector="nextButtonClickedWithSender:" destination="kOQ-7H-fNa" id="rWC-T6-8vC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nextButton" destination="tBc-SP-ZrI" id="K34-Ub-0qR"/>
+                        <segue destination="vqN-wv-J3k" kind="show" identifier="AddPrefermentRemainingIngredientsSegue" id="kac-lv-zBV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="998-qm-fpP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3535" y="1511"/>
+        </scene>
+        <!--Add Preferment Non Flour View Controller-->
+        <scene sceneID="Ekm-9h-Uxq">
+            <objects>
+                <viewController id="vqN-wv-J3k" customClass="AddPrefermentNonFlourViewController" customModule="Doughy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kjb-c2-R8v">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="jWE-s7-qxu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9xb-gi-QIS">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="nDe-PQ-9RO">
+                            <connections>
+                                <action selector="nextButtonClickedWithSender:" destination="vqN-wv-J3k" id="zgD-A1-zEg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nextButton" destination="nDe-PQ-9RO" id="dft-v0-EoM"/>
+                        <segue destination="IsK-cy-R8Y" kind="show" identifier="AddMainFlourSegue" id="Chl-yi-uZb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7fP-cx-O1H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4267" y="1511"/>
+        </scene>
+        <!--Set Preferment View Controller-->
+        <scene sceneID="8zy-3q-4vI">
+            <objects>
+                <viewController id="2nz-Qg-6qa" customClass="SetPrefermentViewController" customModule="Doughy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iau-1O-XsD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="x4u-8P-yhm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wnF-k6-Qs3">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="LNS-eN-tCz">
+                            <connections>
+                                <action selector="nextButtonClickedWithSender:" destination="2nz-Qg-6qa" id="mfn-CN-yey"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="g6j-6c-uXY" kind="show" identifier="AddInstructionsFromPrefermentSegue" id="6QW-SO-GLW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLp-hE-bYf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5032" y="1511"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="6QW-SO-GLW"/>
         <segue reference="7tJ-aY-sNW"/>
+        <segue reference="Chl-yi-uZb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Settings" width="32" height="32"/>

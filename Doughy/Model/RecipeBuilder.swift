@@ -34,9 +34,9 @@ class RecipeBuilder: NSObject {
             isModified = true
         }
     }
-    
-    private(set) var flourBuilders: [FlourBuilder] = []
-    private(set) var ingredientBuilders: [IngredientBuilder] = []
+    var containsPreferment: Bool = false
+    var prefermentBuilder = PrefermentBuilder()
+    var mainDoughBuilder = MainDoughBuilder()
     
     override init() { }
 
@@ -47,13 +47,23 @@ class RecipeBuilder: NSObject {
         self.collection = recipe.collection
         self.defaultWeight = recipe.defaultWeight
         self.instructions = recipe.instructions
+        if recipe is PrefermentRecipe {
+            let totalPercent = recipe.ingredients
+                .map { $0.defaultPercentage }
+                .reduce(0, +)
+            let totalFlourPercent = recipe.ingredients
+                .filter { $0.isFlour }
+                .map { $0.defaultPercentage }
+                .reduce(0, +)
+            let totalFlourWeight = (totalFlourPercent / totalPercent) * recipe.defaultWeight
+            self.containsPreferment = true
+            let prefermentRecipe = recipe as! PrefermentRecipe
+            self.prefermentBuilder = PrefermentBuilder(preferment: prefermentRecipe.preferment, totalFlourWeight: totalFlourWeight)
+            let ingredients = recipe.ingredients
+            self.mainDoughBuilder = MainDoughBuilder(ingredients: ingredients)
+        }
         let ingredients = recipe.ingredients
-        self.flourBuilders = ingredients
-            .filter { $0.isFlour }
-            .map { FlourBuilder(ingredient: $0) }
-        self.ingredientBuilders = ingredients
-            .filter { !$0.isFlour }
-            .map { IngredientBuilder(ingredient: $0) }
+        self.mainDoughBuilder = MainDoughBuilder(ingredients: ingredients)
     }
     
     func build() throws -> RecipeProtocol {
@@ -69,57 +79,145 @@ class RecipeBuilder: NSObject {
         guard let instructions = instructions else {
             throw RecipeBuilderError.missingInstructions
         }
-        guard !flourBuilders.isEmpty else {
+        guard !mainDoughBuilder.flourBuilders.isEmpty else {
             throw RecipeBuilderError.invalidIngredients
         }
         var ingredients = [Ingredient]()
-        let flours = try flourBuilders.map { try $0.build() }
+        let flours = try mainDoughBuilder.flourBuilders.map { try $0.build() }
         ingredients.append(contentsOf: flours)
         
-        guard !ingredientBuilders.isEmpty else {
+        guard !mainDoughBuilder.ingredientBuilders.isEmpty else {
             throw RecipeBuilderError.invalidIngredients
         }
-        let flourWeight = calculateDefaultFlourWeight(defaultWeight: defaultWeight, ingredientBuilders: ingredientBuilders)
-        let remainingIngredients = try ingredientBuilders.map { try $0.build(totalFlourWeight: flourWeight) }
+        let flourWeight = calculateDefaultFlourWeight()
+        let remainingIngredients = try mainDoughBuilder.ingredientBuilders.map {
+            try $0.build(totalFlourWeight: flourWeight)
+        }
         ingredients.append(contentsOf: remainingIngredients)
-        return Recipe(name: name, collection: collection, defaultWeight: defaultWeight, ingredients: ingredients, instructions: instructions)
+        if containsPreferment {
+            let preferment = try prefermentBuilder.build(totalFlourWeight: flourWeight)
+            let result = PrefermentRecipe(name: name, collection: collection,
+                                    defaultWeight: defaultWeight, ingredients: ingredients,
+                                    preferment: preferment, instructions: instructions)
+            try validatePrefermentRecipe(recipe: result)
+            return result
+        }
+        
+        return Recipe(name: name, collection: collection,
+                      defaultWeight: defaultWeight, ingredients: ingredients,
+                      instructions: instructions)
     }
     
-    private func calculateDefaultFlourWeight(defaultWeight: Double, ingredientBuilders: [IngredientBuilder]) -> Double {
-        let totalUnknownWeight = ingredientBuilders
+    private func validatePrefermentRecipe(recipe: PrefermentRecipe) throws {
+        let preferment = recipe.preferment
+        let multiplier = preferment.flourPercentage / 100
+        try preferment.ingredients.forEach { prefIng in
+            guard let match = recipe.ingredients.first(where: { $0.name == prefIng.name }) else {
+                throw RecipeBuilderError.mainDoughMissingPreferment(ingredient: prefIng)
+            }
+            if prefIng.defaultPercentage * multiplier > match.defaultPercentage {
+                throw RecipeBuilderError.mainDoughLessThanPreferment(mainDough: match, prefermentIngredient: prefIng)
+            }
+        }
+    }
+    
+    func calculateDefaultFlourWeight() -> Double {
+        let totalUnknownWeight = self.mainDoughBuilder.ingredientBuilders
             .filter { $0.mode == .weight }
             .map { $0.weight ?? 0 }
             .reduce(0, +)
-        let totalKnownPercent = ingredientBuilders
+        let totalKnownPercent = self.mainDoughBuilder.ingredientBuilders
             .filter { $0.mode == .percent }
             .map { $0.percent ?? 0 }
             // Start at 100 because flour equals 100
             .reduce(100, +)
-        let totalKnownWeight = defaultWeight - totalUnknownWeight
+        let totalKnownWeight = defaultWeight! - totalUnknownWeight
         return (100 / totalKnownPercent) * totalKnownWeight
+    }
+    
+    func calculateWeight(ingredientBuilder: IngredientBuilder) -> Double {
+        if ingredientBuilder.weight != nil { return ingredientBuilder.weight! }
+        let flourWeight = calculateDefaultFlourWeight()
+        return (ingredientBuilder.percent! / 100) * flourWeight
+    }
+    
+    func calculateWeight(flourBuilder: FlourBuilder) -> Double {
+        let flourWeight = calculateDefaultFlourWeight()
+        return (flourBuilder.percent! / 100) * flourWeight
     }
 }
 
 /// Extension to add support for adding and removing ingredient builders.
 extension RecipeBuilder {
-    
+    func prepareForTransitionToMainDough() {
+        if !containsPreferment { return }
+        if !prefermentBuilder.isReady() {
+            print("Preparing for transition although preferment not ready")
+            return
+        }
+        for prefFlour in prefermentBuilder.flourBuilders {
+            let needsToAddToMainDough = !self.mainDoughBuilder.flourBuilders.contains(where: {
+                if $0.name == nil { return false }
+                return prefFlour.name! == $0.name!
+            })
+            if needsToAddToMainDough {
+                let flourCopy = prefFlour.copy() as! FlourBuilder
+                flourCopy.percent = flourCopy.percent! * (prefermentBuilder.totalFlourPercent! / 100)
+                self.mainDoughBuilder.flourBuilders.append(flourCopy)
+            }
+        }
+        
+        for prefIngredient in prefermentBuilder.ingredientBuilders {
+            if prefIngredient.name == nil { continue }
+            let needsToAddToMainDough = !self.mainDoughBuilder.ingredientBuilders.contains(where: {
+                if $0.name == nil { return false }
+                return prefIngredient.name! == $0.name!
+            })
+            if needsToAddToMainDough {
+                let ingredientCopy = prefIngredient.copy() as! IngredientBuilder
+                ingredientCopy.percent = ingredientCopy.percent! * (prefermentBuilder.totalFlourPercent! / 100)
+                self.mainDoughBuilder.ingredientBuilders.append(ingredientCopy)
+            }
+        }
+    }
+
     func addFlour(flourBuilder: FlourBuilder) {
-        self.flourBuilders.append(flourBuilder)
+        self.mainDoughBuilder.flourBuilders.append(flourBuilder)
         self.isModified = true
     }
     
+    func addPrefermentIngredient(ingredientBuilder: PrefermentIngredientBuilder) {
+        if ingredientBuilder.isFlour {
+            self.prefermentBuilder.flourBuilders.append(ingredientBuilder)
+        }
+        else {
+            self.prefermentBuilder.ingredientBuilders.append(ingredientBuilder)
+        }
+        self.isModified = true
+    }
+
     func addIngredient(ingredientBuilder: IngredientBuilder) {
-        self.ingredientBuilders.append(ingredientBuilder)
+        self.mainDoughBuilder.ingredientBuilders.append(ingredientBuilder)
         self.isModified = true
     }
     
     func removeFlour(flourBuilder: FlourBuilder) {
-        self.flourBuilders.removeAll { $0 == flourBuilder }
+        self.mainDoughBuilder.flourBuilders.removeAll { $0 == flourBuilder }
         self.isModified = true
     }
     
     func removeIngredient(ingredientBuilder: IngredientBuilder) {
-        self.ingredientBuilders.removeAll { $0 == ingredientBuilder }
+        self.mainDoughBuilder.ingredientBuilders.removeAll { $0 == ingredientBuilder }
+        self.isModified = true
+    }
+
+    func removePrefermentIngredient(ingredientBuilder: PrefermentIngredientBuilder) {
+        if ingredientBuilder.isFlour {
+            self.prefermentBuilder.flourBuilders.removeAll { $0 == ingredientBuilder }
+        }
+        else {
+            self.prefermentBuilder.ingredientBuilders.removeAll { $0 == ingredientBuilder }
+        }
         self.isModified = true
     }
 }
@@ -132,7 +230,7 @@ extension RecipeBuilder {
     
     func isFlourReady() -> Bool {
         var totalPercent = 0.0
-        for flour in flourBuilders {
+        for flour in mainDoughBuilder.flourBuilders {
             if !flour.isReady() {
                 return false
             }
@@ -142,7 +240,16 @@ extension RecipeBuilder {
     }
     
     func isIngredientsReady() -> Bool {
-        for ingredient in ingredientBuilders {
+        for ingredient in mainDoughBuilder.ingredientBuilders {
+            if !ingredient.isReady() {
+                return false
+            }
+        }
+        return true
+    }
+
+    func isPrefermentIngredientsReady() -> Bool {
+        for ingredient in prefermentBuilder.ingredientBuilders {
             if !ingredient.isReady() {
                 return false
             }
@@ -157,4 +264,6 @@ enum RecipeBuilderError: Error {
     case missingDefaultWeight
     case missingInstructions
     case invalidIngredients
+    case mainDoughLessThanPreferment(mainDough: Ingredient, prefermentIngredient: Ingredient)
+    case mainDoughMissingPreferment(ingredient: Ingredient)
 }

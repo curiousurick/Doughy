@@ -10,28 +10,35 @@ import UIKit
 
 class WeightFormatter: NSObject {
     
-    private let formatter = NumberFormatter()
-    
     static let shared = WeightFormatter()
     
     private override init() {
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
+}
+    
+    func format(weight: Double, minimumFraction: Int = 0) -> String {
+        let minFraction = minimumFraction >= 0 ? minimumFraction : 0
+        let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true
         formatter.groupingSize = 3
-    }
-    
-    func format(weight: NSNumber) -> String {
-        if abs(weight.doubleValue) > 100 {
+        if abs(weight) > 100 {
             formatter.maximumFractionDigits = 0
         }
-        else if abs(weight.doubleValue) > 10 {
+        else if abs(weight) > 10 {
             formatter.maximumFractionDigits = 1
         }
         else {
             formatter.maximumFractionDigits = 2
         }
-        return "\(formatter.string(from: weight)!)g"
+        formatter.minimumFractionDigits = minFraction
+        return "\(formatter.string(from: NSNumber(floatLiteral: weight))!)g"
     }
+}
 
+extension NumberFormatter {
+    func number(from number: NSNumber) -> NSNumber? {
+        let stringValue = string(from: number)
+        if stringValue == nil { return nil }
+        return self.number(from: stringValue!)
+    }
+    
 }

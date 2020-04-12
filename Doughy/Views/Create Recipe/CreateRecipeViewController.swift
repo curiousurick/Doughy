@@ -15,6 +15,10 @@ fileprivate let collectionPickerRowId = "collectionPickerRowId"
 fileprivate let percentOrWeightSwitcherRowId = "percentOrWeightSwitcherRowId"
 fileprivate let weightSwitcherId = "weightSwitcherId"
 fileprivate let weightRowId = "weightRowId"
+fileprivate let containsPrefermentRowId = "containsPrefermentRowId"
+
+fileprivate let prefermentNameRowId = "prefermentNameRowId"
+fileprivate let prefermentPercentRowId = "prefermentPercentRowId"
 
 fileprivate let errorMessage = "Please fill out the flour details and try again."
 
@@ -29,6 +33,8 @@ class CreateRecipeViewController: FormViewController {
             (self.navigationController as! CreateRecipeNavigationController).editingRecipe
         }
     }
+    
+    var originalWeight: Double?
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
 
@@ -87,7 +93,39 @@ class CreateRecipeViewController: FormViewController {
             }.onChange({ row in
                 self.recipeBuilder.defaultWeight = row.value
             })
+            section <<< SwitchRow(containsPrefermentRowId) { row in
+                row.title = "Preferment?"
+                row.value = self.recipeBuilder.containsPreferment
+            }.onChange({ (row) in
+                self.recipeBuilder.containsPreferment = row.value!
+            })
         }
+        
+        form +++ Section("Preferment Details") { section in
+            section.hidden = Condition.function([containsPrefermentRowId], { (form) -> Bool in
+                let prefermentRow = form.rowBy(tag: containsPrefermentRowId) as! SwitchRow
+                return prefermentRow.value ?? false == false
+            })
+            section <<< TitleRow(prefermentNameRowId) { row in
+                row.placeholder = "Name"
+                row.value = self.recipeBuilder.prefermentBuilder.name
+            }.onChange({ (row) in
+                let prefermentName = row.value
+                self.recipeBuilder.prefermentBuilder.name = prefermentName
+            })
+            section <<< PercentRow(prefermentPercentRowId) { row in
+                row.placeholder = "Percent of total flour"
+                row.value = self.recipeBuilder.prefermentBuilder.totalFlourPercent
+            }.onChange({ (row) in
+                let percentOfFlour = row.value
+                self.recipeBuilder.prefermentBuilder.totalFlourPercent = percentOfFlour
+            })
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.originalWeight = recipeBuilder.defaultWeight
     }
     
     @IBAction func nextButtonClicked(sender: UIBarButtonItem) {
@@ -103,8 +141,29 @@ class CreateRecipeViewController: FormViewController {
             self.present(nameTakenAlert, animated: true, completion: nil)
         }
         else {
-            self.performSegue(withIdentifier: "PushToAddIngredientsSegue", sender: sender)
+            self.handleWeightChange()
+            self.performSegue(withIdentifier: "AddFlourSegue", sender: nil)
         }
+    }
+    
+    private func handleWeightChange() {
+        guard let originalWeight = originalWeight,
+            let newWeight = recipeBuilder.defaultWeight,
+            originalWeight != newWeight else {
+                return
+        }
+        let multiplier = newWeight / originalWeight
+        
+        // Update all ingredients that are using weight
+        recipeBuilder.mainDoughBuilder.ingredientBuilders
+            .filter { $0.weight != nil }
+            .forEach { $0.weight = $0.weight! * multiplier }
+        recipeBuilder.prefermentBuilder.flourBuilders
+            .filter { $0.weight != nil }
+            .forEach { $0.weight = $0.weight! * multiplier }
+        recipeBuilder.prefermentBuilder.ingredientBuilders
+            .filter { $0.weight != nil }
+            .forEach { $0.weight = $0.weight! * multiplier }
     }
     
     @IBAction func cancelButtonClicked(sender: UIBarButtonItem) {
@@ -123,7 +182,7 @@ class CreateRecipeViewController: FormViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PushToAddIngredientsSegue" {
+        if segue.identifier == "AddFlourSegue" {
             let vc = segue.destination as! AddFlourViewController
             vc.recipeBuilder = recipeBuilder
         }

@@ -59,8 +59,7 @@ class PrefermentListCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
         else {
             cell.nameLabel.text = name
         }
-        let weight = ingredient.weight
-        cell.weightLabel.text = weightFormatter.format(weight: NSNumber(floatLiteral: weight))
+        cell.weightLabel.text = weightFormatter.format(weight: ingredient.weight)
         return cell
     }
 

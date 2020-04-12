@@ -155,7 +155,6 @@ class Calculator: NSObject {
         try validateCalculation(calculatedRecipe: calculatedRecipe)
         
         return calculatedRecipe
-        
     }
     
     private func validateCalculation(calculatedRecipe: CalculatedRecipeProtocol) throws {

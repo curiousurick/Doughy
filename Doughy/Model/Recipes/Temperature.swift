@@ -48,4 +48,8 @@ public class Temperature: NSObject {
             }
         }
     }
+    
+    public override func copy() -> Any {
+        return Temperature(value: value, measurement: measurement)
+    }
 }

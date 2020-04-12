@@ -65,11 +65,9 @@ class IngredientWithPrefermentListCell: UITableViewCell, UITableViewDataSource, 
         let prefermentIngredients = preferment.ingredients
         if indexPath.row == recipe.ingredients.count {
             cell.nameLabel.text = preferment.name
-            let weight = NSNumber(floatLiteral: preferment.weight)
-            let percent = NSNumber(floatLiteral: preferment.flourPercentage)
-            cell.weightLabel.text = weightFormatter.format(weight: weight)
-            cell.doughWeightLabel.text = weightFormatter.format(weight: weight)
-            cell.percentageLabel.text = "\(percentFormatter.format(percent: percent))*"
+            cell.weightLabel.text = weightFormatter.format(weight: preferment.weight)
+            cell.doughWeightLabel.text = weightFormatter.format(weight: preferment.weight)
+            cell.percentageLabel.text = "\(percentFormatter.format(percent: preferment.flourPercentage))*"
             return cell
         }
         let ingredient = recipe.ingredients[indexPath.row]
@@ -85,11 +83,11 @@ class IngredientWithPrefermentListCell: UITableViewCell, UITableViewDataSource, 
         let matchingPreferment = prefermentIngredients
             .first { $0.name == ingredient.name }
         let prefermentWeight = matchingPreferment?.weight ?? 0.0
-        let doughtWeight = NSNumber(floatLiteral: totalWeight - prefermentWeight)
+        let doughtWeight = totalWeight - prefermentWeight
         let percent = ingredient.totalPercentage
-        cell.weightLabel.text = weightFormatter.format(weight: NSNumber(floatLiteral: totalWeight))
+        cell.weightLabel.text = weightFormatter.format(weight: totalWeight)
         cell.doughWeightLabel.text = weightFormatter.format(weight: doughtWeight)
-        cell.percentageLabel.text = percentFormatter.format(percent: NSNumber(floatLiteral: percent))
+        cell.percentageLabel.text = percentFormatter.format(percent: percent)
         return cell
     }
 

@@ -59,7 +59,7 @@ class CalculatorViewController: FormViewController {
     }
 
     private func displayCalculationError(mixName: String, name: String, value: Double) {
-        let badWeight = WeightFormatter.shared.format(weight: NSNumber(floatLiteral: value))
+        let badWeight = weightFormatter.format(weight: value)
         let message = "Calculated \(mixName) \(name) weight is \(badWeight). Please adjust input."
         let alert = UIAlertController(title: "Calculation Error", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -76,7 +76,7 @@ class CalculatorViewController: FormViewController {
             }
             section <<< WeightRow(singleUnitWeightTag) { row in
                 row.title = "Single Dough Weight"
-                row.placeholder = self.weightFormatter.format(weight: NSNumber(floatLiteral: self.recipe.defaultWeight))
+                row.placeholder = self.weightFormatter.format(weight: self.recipe.defaultWeight)
             }
             section <<< SwitchRow(prefermentPercentSwitchTag) { row in
                 row.title = "Adjust Preferment Ingredients"
@@ -104,7 +104,7 @@ class CalculatorViewController: FormViewController {
                 section <<< PercentRow("preferment_total_scalable.\(preferment.name)") { row in
                     row.title = "\(preferment.name) Flour Of Total"
                     let defaultPercent = preferment.flourPercentage
-                    let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
+                    let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
                     row.placeholder = "Default: \(placeholderPercent)"
                 }
                 let ingredients = preferment.ingredients
@@ -113,7 +113,7 @@ class CalculatorViewController: FormViewController {
                     section <<< PercentRow("preferment_scalable.\(index)") { row in
                         row.title = "\(ingredient.name)"
                         let defaultPercent = ingredient.defaultPercentage
-                        let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
+                        let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
                         if ingredient.isFlour {
                             row.disabled = Condition(booleanLiteral: true)
                             row.placeholder = "\(placeholderPercent)"
@@ -136,7 +136,7 @@ class CalculatorViewController: FormViewController {
                 section <<< PercentRow("scalable.\(index)") { row in
                     row.title = "\(ingredient.name)"
                     let defaultPercent = ingredient.defaultPercentage
-                    let placeholderPercent = self.percentFormatter.format(percent: NSNumber(floatLiteral: defaultPercent))
+                    let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
                     if ingredient.isFlour {
                         row.disabled = Condition(booleanLiteral: true)
                         row.placeholder = "\(placeholderPercent)"

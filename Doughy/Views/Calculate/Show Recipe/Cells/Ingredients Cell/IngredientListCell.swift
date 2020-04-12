@@ -61,10 +61,8 @@ class IngredientListCell: UITableViewCell, UITableViewDataSource, UITableViewDel
         else {
             cell.nameLabel.text = name
         }
-        let weight = NSNumber(floatLiteral: ingredient.weight)
-        let percent = NSNumber(floatLiteral: ingredient.totalPercentage)
-        cell.weightLabel.text = weightFormatter.format(weight: weight)
-        cell.percentageLabel.text = percentFormatter.format(percent: percent)
+        cell.weightLabel.text = weightFormatter.format(weight: ingredient.weight)
+        cell.percentageLabel.text = percentFormatter.format(percent: ingredient.totalPercentage)
         return cell
     }
 

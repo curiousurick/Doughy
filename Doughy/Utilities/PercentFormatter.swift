@@ -19,8 +19,8 @@ class PercentFormatter: NSObject {
         formatter.maximumFractionDigits = 2
     }
     
-    func format(percent: NSNumber) -> String {
-        let percentString = formatter.string(from: percent)!
+    func format(percent: Double) -> String {
+        let percentString = formatter.string(from: NSNumber(floatLiteral: percent))!
         return "\(percentString)%"
     }
 

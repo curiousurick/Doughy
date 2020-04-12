@@ -9,18 +9,11 @@
 import UIKit
 import Eureka
 
-fileprivate let errorMessageMap = [
-    RecipeBuilderError.invalidIngredients : "Please go back and fix the recipe ingredients.",
-    RecipeBuilderError.missingCollection : "Please go back and add the collection for this recipe.",
-    RecipeBuilderError.missingName : "Please go back and add the name for this recipe.",
-    RecipeBuilderError.missingDefaultWeight : "Please go back and add a default weight for this recipe.",
-    RecipeBuilderError.missingInstructions : "Please go back and add instructions for this recipe."
-]
-
 class AddInstructionsViewController: FormViewController {
     
     private let objectFactory = ObjectFactory.shared
     private let calculator = Calculator.shared
+    private let percentFormatter = PercentFormatter.shared
     
     var recipeBuilder: RecipeBuilder!
     
@@ -79,12 +72,13 @@ class AddInstructionsViewController: FormViewController {
         }
         catch where error is RecipeBuilderError {
             let recipeError = error as! RecipeBuilderError
-            let message = errorMessageMap[recipeError]!
+            let message = getMessageForError(error: recipeError)
             let title = "Error creating recipe"
             let alert = AlertViewHelper.createErrorAlert(title: title, message: message, completion: nil)
             self.present(alert, animated: true, completion: nil)
         }
         catch where error is CalculationError {
+            print(error)
             fatalError("Error calculating recipe should never happen in recipe creation")
         }
         catch {
@@ -92,6 +86,28 @@ class AddInstructionsViewController: FormViewController {
         }
         
         self.performSegue(withIdentifier: "PreviewRecipeSegue", sender: button)
+    }
+    
+    private func getMessageForError(error: RecipeBuilderError) -> String {
+        switch error {
+        case .invalidIngredients:
+            return "Please go back and fix the recipe"
+        case .missingCollection:
+            return "Please go back and add the collection for this recipe."
+        case .missingName:
+            return "Please go back and add the name for this recipe."
+        case .missingDefaultWeight:
+            return "Please go back and add a default weight for this recipe."
+        case .missingInstructions:
+            return "Please go back and add instructions for this recipe."
+        case .mainDoughMissingPreferment(let ingredient):
+            return "Preferment contains \(ingredient.name) which is not included in the final dough"
+        case .mainDoughLessThanPreferment(let mainDough, let prefermentIngredient):
+            let prefermentPercent = percentFormatter.format(percent: prefermentIngredient.defaultPercentage)
+            let mainDoughPercent = percentFormatter.format(percent: mainDough.defaultPercentage)
+            let name = mainDough.name
+            return "Preferment contains \(prefermentPercent) \(name) and final dough has \(mainDoughPercent)"
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -11,36 +11,41 @@ import Eureka
 
 fileprivate let errorMessage = "Please fill out flour details and get total to 100%"
 
-class AddFlourViewController: AddIngredientViewController {
+class AddFlourViewController: AddIngredientViewController<FlourBuilder> {
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
+    override var percentRowTitle: String {
+        get { return "Percent (of total flour)" }
+    }
     override var addAnotherIngredientTitle: String {
         get { return "Add another flour" }
     }
     
     override var viewTitle: String {
-        get { return "Add Flours" }
+        get {
+            return "Add Flour"
+        }
     }
     
     override func initializeBuilders() {
-        if recipeBuilder.flourBuilders.isEmpty {
+        //  recipeBuilder.prepareForTransitionToMainDough()
+        if recipeBuilder.mainDoughBuilder.flourBuilders.isEmpty {
             recipeBuilder.addFlour(flourBuilder: FlourBuilder())
         }
     }
     
-    override func getBuilders() -> [IngredientBuilderBase] {
-        return recipeBuilder.flourBuilders
+    override func getBuilders() -> [FlourBuilder] {
+        return recipeBuilder.mainDoughBuilder.flourBuilders
     }
     
-    override func addBuilder() -> IngredientBuilderBase {
+    override func addBuilder() -> FlourBuilder {
         recipeBuilder.addFlour(flourBuilder: FlourBuilder())
-        return recipeBuilder.flourBuilders.last!
+        return recipeBuilder.mainDoughBuilder.flourBuilders.last!
     }
     
-    override func removeBuilder(builder: IngredientBuilderBase) {
-        let flourBuilder = builder as! FlourBuilder
-        self.recipeBuilder.removeFlour(flourBuilder: flourBuilder)
+    override func removeBuilder(builder: FlourBuilder) {
+        self.recipeBuilder.removeFlour(flourBuilder: builder)
     }
     
     override func isReady() -> Bool {
@@ -55,14 +60,24 @@ class AddFlourViewController: AddIngredientViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        self.performSegue(withIdentifier: "MoveToRestOfIngredientsSegue", sender: sender)
+        self.performSegue(withIdentifier: "AddRemainingIngredientsSegue", sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MoveToRestOfIngredientsSegue" {
+        if segue.identifier == "AddRemainingIngredientsSegue" {
             let vc = segue.destination as! AddNonFlourViewController
             vc.recipeBuilder = recipeBuilder
         }
     }
     
+    override func addAmountRow(section: inout AddIngredientSection<FlourBuilder>) {
+        let builder = section.builder!
+        section <<< PercentRow() { row in
+            row.placeholder = percentRowTitle
+            row.value = builder.percent
+        }.onChange({ (row) in
+            let section = row.section as! AddIngredientSection<FlourBuilder>
+            section.builder.percent = row.value
+        })
+    }
 }

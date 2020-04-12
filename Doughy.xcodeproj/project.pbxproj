@@ -81,6 +81,9 @@
 		BBE2FF4624370BF00091A485 /* TemperatureToggleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF4524370BF00091A485 /* TemperatureToggleFactory.swift */; };
 		BBE2FF4824370C780091A485 /* LibrariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF4724370C780091A485 /* LibrariesViewController.swift */; };
 		BBE2FF4A2439497D0091A485 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF492439497D0091A485 /* AppInfo.swift */; };
+		BBE2FF52243A694B0091A485 /* SetPrefermentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF51243A694B0091A485 /* SetPrefermentViewController.swift */; };
+		BBE2FF55243AB76D0091A485 /* WeightSliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBE2FF54243AB76D0091A485 /* WeightSliderCell.xib */; };
+		BBE2FF57243ABFA00091A485 /* WeightSliderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2FF56243ABFA00091A485 /* WeightSliderRow.swift */; };
 		BBEA0CA52434554C00A708C7 /* CalculatedRecipeWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA42434554C00A708C7 /* CalculatedRecipeWriter.swift */; };
 		BBEA0CA72434557300A708C7 /* CalculatedRecipeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA62434557300A708C7 /* CalculatedRecipeReader.swift */; };
 		BBEA0CAA2434576200A708C7 /* SavedRecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEA0CA92434576200A708C7 /* SavedRecipesTableViewController.swift */; };
@@ -189,6 +192,9 @@
 		BBE2FF4524370BF00091A485 /* TemperatureToggleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureToggleFactory.swift; sourceTree = "<group>"; };
 		BBE2FF4724370C780091A485 /* LibrariesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrariesViewController.swift; sourceTree = "<group>"; };
 		BBE2FF492439497D0091A485 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		BBE2FF51243A694B0091A485 /* SetPrefermentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPrefermentViewController.swift; sourceTree = "<group>"; };
+		BBE2FF54243AB76D0091A485 /* WeightSliderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightSliderCell.xib; sourceTree = "<group>"; };
+		BBE2FF56243ABFA00091A485 /* WeightSliderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightSliderRow.swift; sourceTree = "<group>"; };
 		BBEA0CA42434554C00A708C7 /* CalculatedRecipeWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeWriter.swift; sourceTree = "<group>"; };
 		BBEA0CA62434557300A708C7 /* CalculatedRecipeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeReader.swift; sourceTree = "<group>"; };
 		BBEA0CA92434576200A708C7 /* SavedRecipesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesTableViewController.swift; sourceTree = "<group>"; };
@@ -415,12 +421,11 @@
 		BBD2642B2431484500DF8987 /* Create Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				BBE2FF4C24394F0E0091A485 /* Preferment */,
+				BBE2FF4B24394F080091A485 /* Ingredients */,
 				BB45FCF2243444800077C3F8 /* Alt Instructions */,
 				BBD2643024314CD500DF8987 /* CreateRecipeNavigationController.swift */,
 				BBD2642C2431487700DF8987 /* CreateRecipeViewController.swift */,
-				BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */,
-				BBD264362431536000DF8987 /* AddFlourViewController.swift */,
-				BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */,
 				BBD2643E2431619D00DF8987 /* AddInstructionsViewController.swift */,
 				BBD264422431815600DF8987 /* PreviewRecipeViewController.swift */,
 			);
@@ -475,6 +480,26 @@
 				BBE2FF4724370C780091A485 /* LibrariesViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		BBE2FF4B24394F080091A485 /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				BBD2643C24315E2900DF8987 /* AddIngredientViewController.swift */,
+				BBD264362431536000DF8987 /* AddFlourViewController.swift */,
+				BBD264382431536D00DF8987 /* AddNonFlourViewController.swift */,
+			);
+			path = Ingredients;
+			sourceTree = "<group>";
+		};
+		BBE2FF4C24394F0E0091A485 /* Preferment */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2FF51243A694B0091A485 /* SetPrefermentViewController.swift */,
+				BBE2FF54243AB76D0091A485 /* WeightSliderCell.xib */,
+				BBE2FF56243ABFA00091A485 /* WeightSliderRow.swift */,
+			);
+			path = Preferment;
 			sourceTree = "<group>";
 		};
 		BBEA0CA82434574000A708C7 /* Saved Recipes */ = {
@@ -618,6 +643,7 @@
 				BBEA0CB424345A6F00A708C7 /* PrefermentListCell.xib in Resources */,
 				BBEA0CBC24345DA400A708C7 /* IngredientWithPrefermentCell.xib in Resources */,
 				BBEA0CBA24345D8A00A708C7 /* IngredientCell.xib in Resources */,
+				BBE2FF55243AB76D0091A485 /* WeightSliderCell.xib in Resources */,
 				BBEA0CB024345A0800A708C7 /* IngredientWithPrefermentListCell.xib in Resources */,
 				BBEA0CAE243458E100A708C7 /* InstructionListCell.xib in Resources */,
 				BB30DED72425B83E00BFD472 /* Main.storyboard in Resources */,
@@ -704,6 +730,7 @@
 			files = (
 				BBD2641E2430820E00DF8987 /* IngredientWithPrefermentListCell.swift in Sources */,
 				BBD264352431520500DF8987 /* RecipePredicates.swift in Sources */,
+				BBE2FF52243A694B0091A485 /* SetPrefermentViewController.swift in Sources */,
 				BB30DED42425B83E00BFD472 /* CalculatorViewController.swift in Sources */,
 				BBD264572432E86400DF8987 /* Preferment.swift in Sources */,
 				BBC6847C24305A5000CE2157 /* PrefermentListCell.swift in Sources */,
@@ -758,6 +785,7 @@
 				BBE2FF4A2439497D0091A485 /* AppInfo.swift in Sources */,
 				BBD264642432EB5700DF8987 /* PrefermentConverter.swift in Sources */,
 				BBD2641C2430704000DF8987 /* IngredientCell.swift in Sources */,
+				BBE2FF57243ABFA00091A485 /* WeightSliderRow.swift in Sources */,
 				BBD264622432EB4F00DF8987 /* InstructionConverter.swift in Sources */,
 				BBD2644F2432E70500DF8987 /* Ingredient.swift in Sources */,
 				BBD2642A24313B6E00DF8987 /* TemperatureFormatter.swift in Sources */,
