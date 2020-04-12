@@ -73,11 +73,15 @@ class CalculatorViewController: FormViewController {
             section <<< IntRow(unitCountTag) { row in
                 row.title = "Number of Doughs"
                 row.placeholder = "Default: 1"
-            }
+            }.onCellHighlightChanged({ (cell, row) in
+                self.moveCursorToEnd(textField: cell.textField)
+            })
             section <<< WeightRow(singleUnitWeightTag) { row in
                 row.title = "Single Dough Weight"
                 row.placeholder = self.weightFormatter.format(weight: self.recipe.defaultWeight)
-            }
+            }.onCellHighlightChanged({ (cell, row) in
+                self.moveCursorToEnd(textField: cell.textField)
+            })
             section <<< SwitchRow(prefermentPercentSwitchTag) { row in
                 row.title = "Adjust Preferment Ingredients"
                 row.value = false
@@ -106,7 +110,9 @@ class CalculatorViewController: FormViewController {
                     let defaultPercent = preferment.flourPercentage
                     let placeholderPercent = self.percentFormatter.format(percent: defaultPercent)
                     row.placeholder = "Default: \(placeholderPercent)"
-                }
+                }.onCellHighlightChanged({ (cell, row) in
+                    self.moveCursorToEnd(textField: cell.textField)
+                })
                 let ingredients = preferment.ingredients
                 for index in 0..<ingredients.count {
                     let ingredient = ingredients[index]
@@ -144,7 +150,9 @@ class CalculatorViewController: FormViewController {
                     else {
                         row.placeholder = "Default: \(placeholderPercent)"
                     }
-                }
+                }.onCellHighlightChanged({ (cell, row) in
+                    self.moveCursorToEnd(textField: cell.textField)
+                })
             }
         }
         
@@ -162,7 +170,9 @@ class CalculatorViewController: FormViewController {
                             row.title = "\(preferment.name) \(ingredient.name)"
                             row.placeholder = self.tempFormatter.format(temperature: temp)
                             row.measurement = self.settings.preferredTemp()
-                        }
+                        }.onCellHighlightChanged({ (cell, row) in
+                            self.moveCursorToEnd(textField: cell.textField)
+                        })
                     }
                 }
             }
@@ -174,7 +184,9 @@ class CalculatorViewController: FormViewController {
                         row.title = "\(ingredient.name)"
                         row.placeholder = self.tempFormatter.format(temperature: temp)
                         row.measurement = self.settings.preferredTemp()
-                    }
+                    }.onCellHighlightChanged({ (cell, row) in
+                        self.moveCursorToEnd(textField: cell.textField)
+                    })
                 }
             }
         }
@@ -246,6 +258,16 @@ class CalculatorViewController: FormViewController {
         catch { fatalError("Unexpected Error thrown by calculator") }
         
         self.performSegue(withIdentifier: "ShowCalculatedRecipe", sender: nil)
+    }
+    
+    private func moveCursorToEnd(textField: UITextField) {
+        if textField.isFirstResponder {
+            let end = textField.endOfDocument
+            let textRange = textField.textRange(from: end, to: end)
+            DispatchQueue.main.async {
+                textField.selectedTextRange = textRange
+            }
+        }
     }
 }
 
