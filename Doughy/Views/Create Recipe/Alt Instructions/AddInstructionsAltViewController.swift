@@ -79,10 +79,14 @@ class AddInstructionsAltViewController: UITableViewController, AddStepCellDelega
         instructions.insert(toMove, at: destinationIndexPath.row)
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return [UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            self.deleteRow(tableView: self.tableView, at: indexPath)
-        })]
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            self.deleteRow(tableView: tableView, at: indexPath)
+            completion(true)
+        }
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        config.performsFirstActionWithFullSwipe = true
+        return config
     }
     
     func deleteRow(tableView: UITableView, at indexPath: IndexPath) {

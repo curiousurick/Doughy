@@ -34,6 +34,7 @@
 		BB4AA19E24275659002BB9A8 /* CalculatedRecipeCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AA19D24275659002BB9A8 /* CalculatedRecipeCellFactory.swift */; };
 		BB4AA1A0242821FB002BB9A8 /* InstructionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AA19F242821FB002BB9A8 /* InstructionListCell.swift */; };
 		BB4AA1A224282A66002BB9A8 /* IngredientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4AA1A124282A66002BB9A8 /* IngredientListCell.swift */; };
+		BB59156E2979247A00903D14 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB59156D2979247A00903D14 /* Color.swift */; };
 		BB6152122425FD06006CB854 /* DefaultRecipeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6152112425FD06006CB854 /* DefaultRecipeFactory.swift */; };
 		BB61521424274B50006CB854 /* ShowCalculatedRecipeBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB61521324274B50006CB854 /* ShowCalculatedRecipeBaseViewController.swift */; };
 		BB70410524344C9500933C08 /* AddStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB70410424344C9500933C08 /* AddStepCell.swift */; };
@@ -145,6 +146,7 @@
 		BB4AA19D24275659002BB9A8 /* CalculatedRecipeCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedRecipeCellFactory.swift; sourceTree = "<group>"; };
 		BB4AA19F242821FB002BB9A8 /* InstructionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionListCell.swift; sourceTree = "<group>"; };
 		BB4AA1A124282A66002BB9A8 /* IngredientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListCell.swift; sourceTree = "<group>"; };
+		BB59156D2979247A00903D14 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BB6152112425FD06006CB854 /* DefaultRecipeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecipeFactory.swift; sourceTree = "<group>"; };
 		BB61521324274B50006CB854 /* ShowCalculatedRecipeBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCalculatedRecipeBaseViewController.swift; sourceTree = "<group>"; };
 		BB70410424344C9500933C08 /* AddStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepCell.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				BB30DED52425B83E00BFD472 /* Main.storyboard */,
+				BB59156C2979245700903D14 /* Colors */,
 				BB30DF072425EC1400BFD472 /* Master */,
 				BB61521624274DC3006CB854 /* Calculate */,
 				BBEA0CA82434574000A708C7 /* Saved Recipes */,
@@ -385,6 +388,14 @@
 				BB70410424344C9500933C08 /* AddStepCell.swift */,
 			);
 			path = "Alt Instructions";
+			sourceTree = "<group>";
+		};
+		BB59156C2979245700903D14 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				BB59156D2979247A00903D14 /* Color.swift */,
+			);
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		BB61521524274DB2006CB854 /* Show Recipe */ = {
@@ -600,7 +611,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "George Urick";
 				TargetAttributes = {
 					BB30DECB2425B83D00BFD472 = {
@@ -796,6 +807,7 @@
 				BBD2643324314D6500DF8987 /* AlertViewHelper.swift in Sources */,
 				BB30DED02425B83E00BFD472 /* AppDelegate.swift in Sources */,
 				BBD2642824313A9E00DF8987 /* TemperatureRow.swift in Sources */,
+				BB59156E2979247A00903D14 /* Color.swift in Sources */,
 				BBE2FF4424370B920091A485 /* EmailFeedbackController.swift in Sources */,
 				BBD2646A2432F1E400DF8987 /* CalculatedRecipeConverter.swift in Sources */,
 				BB30DED22425B83E00BFD472 /* SceneDelegate.swift in Sources */,
@@ -869,6 +881,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -893,7 +906,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -929,6 +942,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -947,7 +961,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -965,6 +979,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 66KJD3WYAH;
 				INFOPLIST_FILE = Doughy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -984,6 +999,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 66KJD3WYAH;
 				INFOPLIST_FILE = Doughy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

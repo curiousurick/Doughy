@@ -30,7 +30,7 @@ class SettingsViewController: FormViewController {
             }.onCellSelection({ (cell, row) in
                 UIApplication.shared.open(URL(string: "https://www.feedingamerica.org/find-your-local-foodbank")!, completionHandler: nil)
             }).cellSetup({ (cell, row) in
-                cell.tintColor = .darkText
+                cell.textLabel?.textColor = .label
                 
             })
             section <<< ButtonRow() { row in
@@ -39,7 +39,7 @@ class SettingsViewController: FormViewController {
             }.onCellSelection({ (cell, row) in
                 self.performSegue(withIdentifier: "ShowOpenSourceLibraries", sender: nil)
             }).cellSetup({ (cell, row) in
-                cell.tintColor = .darkText
+                cell.textLabel?.textColor = .label
             })
             section <<< ButtonRow() { row in
                 row.title = "Feedback or questions?"
@@ -56,7 +56,7 @@ class SettingsViewController: FormViewController {
                     self.present(alert, animated: true, completion: nil)
                 }
             }).cellSetup({ (cell, row) in
-                cell.tintColor = .darkText
+                cell.textLabel?.textColor = .label
             })
             section <<< LabelRow() { row in
                 row.title = "Version"

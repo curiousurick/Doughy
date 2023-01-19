@@ -84,11 +84,14 @@ class CalculatorViewController: FormViewController {
             section <<< SwitchRow(prefermentPercentSwitchTag) { row in
                 row.title = "Adjust Preferment Ingredients"
                 row.value = false
+                row.baseCell.backgroundColor = .blue
                 row.hidden = Condition(booleanLiteral: self.recipe is Recipe)
             }
             
             section <<< SwitchRow(doughPercentSwitchTag) { row in
                 row.title = "Adjust Dough Ingredients"
+                row.baseCell.tintColor = .blue
+                row.cell.switchControl = .blue
                 row.value = false
             }
             section <<< SwitchRow(tempSwitchTag) { row in
